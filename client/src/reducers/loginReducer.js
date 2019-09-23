@@ -1,3 +1,4 @@
+// This object initializes login data
 export const initialLoginState = {
   username: '',
   password: '',
@@ -9,6 +10,7 @@ export const initialLoginState = {
   isLoggedIn: false,
 };
 
+// This reducer handles dispatches to update global login/user state
 export const loginReducer = (state = initialLoginState, action) => {
   switch (action.type) {
     case 'FIELD':
