@@ -41,7 +41,6 @@ export default function Child() {
 }
 
 const ChildWrapper = styled.div`
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
 
