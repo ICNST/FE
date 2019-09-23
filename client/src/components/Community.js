@@ -28,6 +28,10 @@ export default function Community() {
             </TR>
           </Link>
         ))}
+        <AddChild>
+          <button type='submit'>➕</button>
+          <input type='text' placeholder='Add Child' />
+        </AddChild>
       </RecordsWrapper>
     </section>
   );
@@ -48,4 +52,25 @@ justify-content: space-between;
 text-align: left;
 padding: 10px;
 border: 1px solid grey;
+`;
+
+const AddChild = styled.div`
+  border: 1px solid silver;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+
+  input {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    border: none;
+    margin: 18.72px 0px;
+  }
+
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
 `;
