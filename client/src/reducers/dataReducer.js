@@ -1,6 +1,6 @@
 // This object initializes the child nutrition records
 export const initialState = {
-  countries: [],
+  countries: ['Brazil', 'Bolivia', 'Cambodia', 'Ecuador'],
   country: '',
   communities: [],
   community: '',
