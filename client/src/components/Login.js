@@ -2,25 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function Login() {
-  
-
   return (
-  <Form>
-    <span>
+    <Form>
+      <span>
+        User
+        <input type='radio' name='User' value='user' />
+        Admin
+        <input type='radio' name='Admin' value='admin' />
+      </span>
 
-    User<input type='radio' name='User' value='user'/>
-    Admin<input type='radio' name='Admin' value='admin'/>
-    </span>
+      <label>Username</label>
+      <input type='text' id='username' name='username' />
 
-    <label>Username</label>
-    <input type='text' id='username' name='username' />
+      <label>Password</label>
+      <input type='text' id='password' name='password' />
 
-    <label>Password</label>
-    <input type='text' id='password' name='password'/>
-
-    <Button type='submit'>Login</Button>
-  </Form>
-  )
+      <Button type='submit'>Login</Button>
+    </Form>
+  );
 }
 
 // Styles
@@ -41,8 +40,8 @@ const Button = styled.button`
   border: none;
   align-self: center;
   margin: 10px auto;
-  :hover{
+  :hover {
     background: #83c441;
-    color: white
+    color: white;
   }
 `;

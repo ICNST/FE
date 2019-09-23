@@ -2,6 +2,9 @@ import React, { useReducer } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
 
+// Styles
+import GlobalStyle from './styled-components/GlobalStyle';
+
 // Contexts and Reducers to manage state
 import { UserContext } from './contexts/UserContext';
 import { DataContext } from './contexts/DataContext';
@@ -25,6 +28,7 @@ function App() {
   // Wrap components in Context Providers so nested components can access state
   return (
     <div className='App'>
+      <GlobalStyle />
       <UserContext.Provider value={{ user, dispatch }}>
         <DataContext.Provider value={{ data, dispatchData }}>
           <TempNav />

@@ -1,10 +1,156 @@
 // This object initializes the child nutrition records
 export const initialState = {
-  countries: [],
-  country: '',
-  communities: [],
-  community: '',
-  children: [],
+  countries: ['Brazil', 'Bolivia', 'Cambodia', 'Ecuador'],
+  country: 'Brazil',
+  communities: ['Belem', 'Fortaleza', 'Manaus'],
+  community: 'Belem',
+  children: [
+    {
+      name: 'Jane Doe',
+      parentname: 'Mrs. Doe',
+      parentcontact: 'mrs.doe@gmail.com',
+      dob: '09/28/2010',
+      gender: 'F',
+      screenings: [
+        {
+          date: '11/11/19',
+          weight: 13,
+          height: 72,
+        },
+        {
+          date: '11/11/18',
+          weight: 11,
+          height: 56,
+        },
+        {
+          date: '5/11/18',
+          weight: 10,
+          height: 44,
+        },
+        {
+          date: '11/11/17',
+          weight: 9,
+          height: 43,
+        },
+      ],
+    },
+    {
+      name: 'Maria Martinez',
+      parentname: 'Mr. Martinez',
+      parentcontact: 'mr.martinez@gmail.com',
+      dob: '09/28/2010',
+      gender: 'F',
+      screenings: [
+        {
+          date: '11/11/19',
+          weight: 13,
+          height: 72,
+        },
+        {
+          date: '11/11/18',
+          weight: 11,
+          height: 56,
+        },
+        {
+          date: '5/11/18',
+          weight: 10,
+          height: 44,
+        },
+        {
+          date: '11/11/17',
+          weight: 9,
+          height: 43,
+        },
+      ],
+    },
+    {
+      name: 'John Smith',
+      parentname: 'Mrs. Smith',
+      parentcontact: 'mrs.smith@gmail.com',
+      dob: '09/28/2010',
+      gender: 'M',
+      screenings: [
+        {
+          date: '11/11/19',
+          weight: 13,
+          height: 72,
+        },
+        {
+          date: '11/11/18',
+          weight: 11,
+          height: 56,
+        },
+        {
+          date: '5/11/18',
+          weight: 10,
+          height: 44,
+        },
+        {
+          date: '11/11/17',
+          weight: 9,
+          height: 43,
+        },
+      ],
+    },
+    {
+      name: 'Joe Chan',
+      parentname: 'Mrs. Chan',
+      parentcontact: 'mrs.chan@gmail.com',
+      dob: '09/28/2010',
+      gender: 'M',
+      screenings: [
+        {
+          date: '11/11/19',
+          weight: 13,
+          height: 72,
+        },
+        {
+          date: '11/11/18',
+          weight: 11,
+          height: 56,
+        },
+        {
+          date: '5/11/18',
+          weight: 10,
+          height: 44,
+        },
+        {
+          date: '11/11/17',
+          weight: 9,
+          height: 43,
+        },
+      ],
+    },
+    {
+      name: 'Mike Moo',
+      parentname: 'Mr. Moo',
+      parentcontact: 'mr.moo@gmail.com',
+      dob: '09/28/2010',
+      gender: 'M',
+      screenings: [
+        {
+          date: '11/11/19',
+          weight: 13,
+          height: 72,
+        },
+        {
+          date: '11/11/18',
+          weight: 11,
+          height: 56,
+        },
+        {
+          date: '5/11/18',
+          weight: 10,
+          height: 44,
+        },
+        {
+          date: '11/11/17',
+          weight: 9,
+          height: 43,
+        },
+      ],
+    },
+  ],
   child: '',
   isGetting: false,
   error: '',
