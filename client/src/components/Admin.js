@@ -1,13 +1,13 @@
-import React, { useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import styled from 'styled-components';
+import React, { useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import styled from "styled-components";
 
 // Context
-import { DataContext } from '../contexts/DataContext';
+import { DataContext } from "../contexts/DataContext";
 
 // Components
-import RegisterAdmin from './RegisterAdmin';
+import RegisterAdmin from "./RegisterAdmin";
 
 export default function Admin() {
   const { data, dispatchData } = useContext(DataContext);
@@ -27,7 +27,7 @@ export default function Admin() {
       <Countries>
         {data.countries.map(el => (
           <Country>
-            <Link key={el} to={`/${el.split(' ').join('-')}`}>
+            <Link key={el} to={`/${el.split(" ").join("-")}`}>
               <h3>{el}</h3>
             </Link>
             <button>X</button>
@@ -35,7 +35,7 @@ export default function Admin() {
         ))}
         <AddCountry>
           <button>➕</button>
-          <input placeholder='Add a new country' />
+          <input placeholder="Add a new country" />
         </AddCountry>
       </Countries>
       <RegisterAdmin />
