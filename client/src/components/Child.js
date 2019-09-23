@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { DataContext } from '../contexts/DataContext';
-
+ import AddRecord from "./AddRecord";
 export default function Child() {
   const { data, dispatchData } = useContext(DataContext);
 
@@ -36,6 +36,8 @@ export default function Child() {
           ))}
         </tbody>
       </table>
+      <h2>Add New Record</h2>
+      <AddRecord />
     </ChildWrapper>
   );
 }
