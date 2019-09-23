@@ -8,7 +8,7 @@ const Image = styled.img `
 export default function Child() {
   return(
   <div>
-    <Image src="../src/"/>
+    {/* <Image src="../src/"/> */}
     Child
     
     
