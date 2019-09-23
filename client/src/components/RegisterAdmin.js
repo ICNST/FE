@@ -9,9 +9,9 @@ export default function RegisterAdmin() {
       <Form>
         <span>
           User
-          <input type='radio' name='User' value='user' />
+          <input type='radio' id='User' name='usertype' value='user' />
           Admin
-          <input type='radio' name='Admin' value='admin' />
+          <input type='radio' id='Admin' name='usertype' value='admin' />
         </span>
 
         <label>Username</label>
