@@ -6,9 +6,9 @@ export default function Login() {
     <Form>
       <span>
         User
-        <input type='radio' name='User' value='user' />
+        <input type='radio' id='User' name='useType' value='user' />
         Admin
-        <input type='radio' name='Admin' value='admin' />
+        <input type='radio' id='Admin' name='useType' value='admin' />
       </span>
 
       <label>Username</label>
@@ -22,6 +22,7 @@ export default function Login() {
   );
 }
 
+// Styles
 const Form = styled.form`
   height: 300px;
   width: 250px;
