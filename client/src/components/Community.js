@@ -10,21 +10,22 @@ export default function Community() {
 
   return (
     <section className='child-data-wrapper'>
-      <h1>the Village</h1>
+      <h1>{data.community}</h1>
       <RecordsWrapper>
-        <td>Name</td>
-        <td>DOB</td>
-        <td>Gender</td>
-        <td>Parent</td>
+        <TR>
+          <th>Name</th>
+          <th>DOB</th>
+          <th>Gender</th>
+          <th>Parent</th>
+        </TR>
         {data.children.map(el=> (
           <Link>
-            <KidsRecords>
+            <TR>
               <td>{el.name}</td>
               <td>{el.dob}</td>
               <td>{el.gender}</td>
               <td>{el.parentname}</td>
-              <td>View Record</td>
-            </KidsRecords>
+            </TR>
           </Link>
         ))}
       </RecordsWrapper>
@@ -41,9 +42,10 @@ const RecordsWrapper = styled.table`
   box-shadow: 1px 2px 3px #000;
 `;
 
-const KidsRecords = styled.table`
-  padding: 10px;
-  text-align: left;
-  display: flex;
-  justify-content: space-between;
+const TR = styled.tr`
+display: flex;
+justify-content: space-between;
+text-align: left;
+padding: 10px;
+border: 1px solid grey;
 `;
