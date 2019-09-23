@@ -151,7 +151,35 @@ export const initialState = {
       ],
     },
   ],
-  child: '',
+  child: {
+    name: 'Jane Doe',
+    parentname: 'Mrs. Doe',
+    parentcontact: 'mrs.doe@gmail.com',
+    dob: '09/28/2010',
+    gender: 'F',
+    screenings: [
+      {
+        date: '11/11/19',
+        weight: 13,
+        height: 72,
+      },
+      {
+        date: '11/11/18',
+        weight: 11,
+        height: 56,
+      },
+      {
+        date: '5/11/18',
+        weight: 10,
+        height: 44,
+      },
+      {
+        date: '11/11/17',
+        weight: 9,
+        height: 43,
+      },
+    ],
+  },
   isGetting: false,
   error: '',
 };
