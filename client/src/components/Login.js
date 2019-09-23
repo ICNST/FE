@@ -23,6 +23,7 @@ export default function Login() {
   )
 }
 
+// Styles
 const Form = styled.form`
   height: 300px;
   width: 250px;
