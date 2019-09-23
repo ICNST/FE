@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
 
 import { UserContext } from './contexts/UserContext';
 import { DataContext } from './contexts/DataContext';
+import { initialLoginState, loginReducer } from './reducers/loginReducer';
+import { initialState, dataReducer } from './reducers/dataReducer';
 
 import TempNav from './components/TempNav';
 import Login from './components/Login';
@@ -14,10 +16,13 @@ import Community from './components/Community';
 import Child from './components/Child';
 
 function App() {
+  const [user, dispatch] = useReducer(loginReducer, initialLoginState);
+  const [data, dispatchData] = useReducer(dataReducer, initialState);
+
   return (
     <div className='App'>
-      <UserContext.Provider>
-        <DataContext.Provider>
+      <UserContext.Provider value={{ user, dispatch }}>
+        <DataContext.Provider value={{ data, dispatchData }}>
           <TempNav />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
