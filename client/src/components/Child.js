@@ -1,14 +1,21 @@
 import React, { useContext, useEffect } from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-
 import { DataContext } from '../contexts/DataContext';
- import AddRecord from "./AddRecord";
-export default function Child() {
+import AddRecord from "./AddRecord";
+
+export default function Child(props) {
   const { data, dispatchData } = useContext(DataContext);
+
+  useEffect(()=>{
+    const childId=props.match.params.id;
+    console.log(childId);
+    // dispatchData({type:'SET_CHILD', payload: childId})
+  },[]);
 
   return (
     <ChildWrapper>
-      <h2>{data.child.name}</h2>
+      <h2><Link to={`/country/${data.country.split(" ").join("-")}`}>{data.country}</Link> - <Link to={`/community/${data.community.split(" ").join("-")}`}>{data.community}</Link> - {data.child.name}</h2>
       <div>
         <p>Parent: {data.child.parentname}</p>
         <p>Parent Contact: {data.child.parentcontact}</p>

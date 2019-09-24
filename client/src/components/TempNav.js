@@ -7,9 +7,9 @@ export default function TempNav() {
       <NavLink to='/login'>Login</NavLink>
       <NavLink to='/register'>Register</NavLink>
       <NavLink to='/admin'>Admin</NavLink>
-      <NavLink to='/country'>Country</NavLink>
+      {/* <NavLink to='/country'>Country</NavLink>
       <NavLink to='/community'>Community</NavLink>
-      <NavLink to='/child'>Child</NavLink>
+      <NavLink to='/child'>Child</NavLink> */}
     </div>
   );
 }

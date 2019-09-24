@@ -35,9 +35,12 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/admin' component={Admin} />
-          <Route path='/country' component={Country} />
-          <Route path='/community' component={Community} />
-          <Route path='/child' component={Child} />
+          {/* <Route path="/country" component={Country} /> */}
+          {/* <Route path="/community" component={Community} /> */}
+          {/* <Route path="/child" component={Child} /> */}
+          <Route path='/country/:id' component={Country} />
+          <Route path='/community/:id' component={Community} />
+          <Route path='/child/:id' component={Child} />
         </DataContext.Provider>
       </UserContext.Provider>
     </div>
