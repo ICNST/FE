@@ -1,16 +1,23 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DataContext } from '../contexts/DataContext';
 
-export default function Community() {
+export default function Community(props) {
   const { data, dispatchData } = useContext(DataContext);
   console.log(data);
 
+  useEffect(()=>{
+    const communityName=props.match.params.id;
+    console.log(communityName);
+    dispatchData({type:'SET_COMMUNITY', payload: communityName})
+
+  },[])
+
   return (
     <section className='child-data-wrapper'>
-      <h1>{data.community}</h1>
+      <h1><Link to={`/country/${data.country.split(" ").join("-")}`}>{data.country}</Link> - {data.community}</h1>
       <RecordsWrapper>
         <TR>
           <th>Name</th>
@@ -19,7 +26,7 @@ export default function Community() {
           <th>Parent</th>
         </TR>
         {data.children.map(el=> (
-          <Link>
+          <Link to={`/child/${el.id}`}>
             <TR>
               <td>{el.name}</td>
               <td>{el.dob}</td>

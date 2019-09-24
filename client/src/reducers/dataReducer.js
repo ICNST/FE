@@ -6,6 +6,7 @@ export const initialState = {
   community: 'Belem',
   children: [
     {
+      id: 1,
       name: 'Jane Doe',
       parentname: 'Mrs. Doe',
       parentcontact: 'mrs.doe@gmail.com',
@@ -35,6 +36,7 @@ export const initialState = {
       ],
     },
     {
+      id: 2,
       name: 'Maria Martinez',
       parentname: 'Mr. Martinez',
       parentcontact: 'mr.martinez@gmail.com',
@@ -64,6 +66,7 @@ export const initialState = {
       ],
     },
     {
+      id: 3,
       name: 'John Smith',
       parentname: 'Mrs. Smith',
       parentcontact: 'mrs.smith@gmail.com',
@@ -93,6 +96,7 @@ export const initialState = {
       ],
     },
     {
+      id: 4,
       name: 'Joe Chan',
       parentname: 'Mrs. Chan',
       parentcontact: 'mrs.chan@gmail.com',
@@ -122,6 +126,7 @@ export const initialState = {
       ],
     },
     {
+      id: 5,
       name: 'Mike Moo',
       parentname: 'Mr. Moo',
       parentcontact: 'mr.moo@gmail.com',
@@ -152,6 +157,7 @@ export const initialState = {
     },
   ],
   child: {
+    id: 6,
     name: 'Jane Doe',
     parentname: 'Mrs. Doe',
     parentcontact: 'mrs.doe@gmail.com',
@@ -224,6 +230,11 @@ export const dataReducer = (state = initialState, action) => {
         ...state,
         children: action.payload,
       };
+      case 'SET_CHILD':
+        return {
+          ...state,
+          child: action.payload,
+        };
     default:
       return state;
   }

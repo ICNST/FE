@@ -1,13 +1,19 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DataContext } from '../contexts/DataContext';
 
-export default function Country() {
+export default function Country(props) {
   const { data, dispatchData } = useContext(DataContext);
   console.log(data);
-
+  console.log(props);
+  
+  useEffect(()=>{
+    const countryName=props.match.params.id;
+    console.log(countryName);
+    dispatchData({type:'SET_COUNTRY', payload: countryName})
+  },[]);
   
   return( 
     <section className = 'country-communities'>
@@ -16,7 +22,7 @@ export default function Country() {
       <CommunitiesWrapper>
         {data.communities.map(el => (
           <CommunityDiv>
-            <Link key={el} to={`/${el.split(' ').join('-')}`}>
+            <Link key={el} to={`/community/${el.split(' ').join('-')}`}>
               <h3>{el}</h3>
               <p>Check Local Health Records</p>
             </Link>

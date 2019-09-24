@@ -27,7 +27,7 @@ export default function Admin() {
       <Countries>
         {data.countries.map(el => (
           <Country>
-            <Link key={el} to={`/${el.split(" ").join("-")}`}>
+            <Link key={el} to={`/country/${el.split(" ").join("-")}`}>
               <h3>{el}</h3>
             </Link>
             <button>X</button>
