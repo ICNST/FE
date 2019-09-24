@@ -7,8 +7,9 @@ export default function RegisterAdmin() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <h3>Register New User</h3>
         <Form>
+          <h3>Register New User</h3>
+
           <span>
             User
             <input type='radio' id='User' name='usertype' value='user' />

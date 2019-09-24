@@ -31,7 +31,7 @@ export default function Admin() {
                 <Link key={el} to={`/country/${el.split(' ').join('-')}`}>
                   <h3>{el}</h3>
                 </Link>
-                <button>X</button>
+                <button>✖️</button>
               </Country>
             ))}
             <AddCountry>
@@ -52,7 +52,7 @@ const AdminWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 const CountriesWrapper = styled.div`
