@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 // Context
 import { DataContext } from '../contexts/DataContext';
