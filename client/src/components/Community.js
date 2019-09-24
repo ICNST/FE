@@ -57,6 +57,18 @@ const RecordsWrapper = styled.table`
   display: flex;
   flex-direction: column;
   box-shadow: 1px 2px 3px #000;
+  align: center;
+  a:nth-child(even) {
+    background: #e6e6e6;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+  th{
+    width: 25%;
+  }
+  
 `;
 
 const TR = styled.tr`
@@ -64,7 +76,12 @@ const TR = styled.tr`
   justify-content: space-between;
   text-align: left;
   padding: 10px;
+  box-styling: border-box;
   border: 1px solid grey;
+  td{
+    width: 25%;
+  }
+  
 `;
 
 const AddChild = styled.div`
