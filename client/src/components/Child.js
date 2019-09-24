@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { DataContext } from '../contexts/DataContext';
@@ -6,11 +6,16 @@ import AddRecord from './AddRecord';
 
 export default function Child(props) {
   const { data, dispatchData } = useContext(DataContext);
+  const [age, setAge] = useState();
 
   useEffect(() => {
     const childId = Number(props.match.params.id);
     const childData = data.children.find(el => el.id === childId);
     dispatchData({ type: 'SET_CHILD', payload: childData });
+    const dobString = new Date(data.child.dob);
+    const age =
+      (Date.now() - dobString.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
+    setAge(Math.floor(age));
   }, []);
 
   return (
@@ -26,10 +31,11 @@ export default function Child(props) {
         - {data.child.name}
       </h2>
       <div>
-        <p>Parent: {data.child.parentname}</p>
-        <p>Parent Contact: {data.child.parentcontact}</p>
+        <p>Age: {age}</p>
         <p>Date of Birth: {data.child.dob}</p>
         <p>Gender: {data.child.gender}</p>
+        <p>Parent: {data.child.parentname}</p>
+        <p>Parent Contact: {data.child.parentcontact}</p>
       </div>
       <table>
         <caption>
@@ -44,7 +50,7 @@ export default function Child(props) {
         </thead>
         <tbody>
           {data.child.screenings.map(el => (
-            <tr>
+            <tr key={el.date}>
               <th>{el.date}</th>
               <th>{el.weight}</th>
               <th>{el.height}</th>

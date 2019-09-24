@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import { Route } from 'react-router-dom';
+import styled from 'styled-components';
 import './App.css';
 
 // Styles
@@ -31,16 +32,21 @@ function App() {
       <GlobalStyle />
       <UserContext.Provider value={{ user, dispatch }}>
         <DataContext.Provider value={{ data, dispatchData }}>
-          <TempNav />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
-          <Route path='/admin' component={Admin} />
-          {/* <Route path="/country" component={Country} /> */}
-          {/* <Route path="/community" component={Community} /> */}
-          {/* <Route path="/child" component={Child} /> */}
-          <Route path='/country/:id' component={Country} />
-          <Route path='/community/:id' component={Community} />
-          <Route path='/child/:id' component={Child} />
+          <Container>
+            <HeaderBar />
+            <Logo src={require('./image/ICN_Secondary_Alt.png')} />
+            <TempNav />
+            <Route path='/login' component={Login} />
+            <Route path='/register' component={Register} />
+            <Route path='/admin' component={Admin} />
+            {/* <Route path="/country" component={Country} /> */}
+            {/* <Route path="/community" component={Community} /> */}
+            {/* <Route path="/child" component={Child} /> */}
+            <Route path='/country/:id' component={Country} />
+            <Route path='/community/:id' component={Community} />
+            <Route path='/child/:id' component={Child} />
+            <Footer src={require('./image/ICN_blue_waves_double.png')} />
+          </Container>
         </DataContext.Provider>
       </UserContext.Provider>
     </div>
@@ -48,3 +54,28 @@ function App() {
 }
 
 export default App;
+
+const Container = styled.div`
+  height: 100%;
+  position: relative;
+`;
+
+const HeaderBar = styled.div`
+  width: 100%;
+  height: 20px;
+  background-color: #0d71ba;
+`;
+
+const Logo = styled.img`
+  width: 90%;
+  max-width: 500px;
+  margin: 25px 0;
+`;
+
+const Footer = styled.img`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
+`;
