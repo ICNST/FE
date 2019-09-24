@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import { Route } from 'react-router-dom';
+import styled from 'styled-components';
 import './App.css';
 
 // Styles
@@ -31,6 +32,7 @@ function App() {
       <GlobalStyle />
       <UserContext.Provider value={{ user, dispatch }}>
         <DataContext.Provider value={{ data, dispatchData }}>
+          <Logo src={require('./image/ICN_Secondary_Alt.png')} />
           <TempNav />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
@@ -48,3 +50,11 @@ function App() {
 }
 
 export default App;
+
+const Logo = styled.img`
+   {
+    width: 90%;
+    max-width: 500px;
+    margin: 25px 0;
+  }
+`;

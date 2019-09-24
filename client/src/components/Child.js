@@ -50,7 +50,7 @@ export default function Child(props) {
         </thead>
         <tbody>
           {data.child.screenings.map(el => (
-            <tr>
+            <tr key={el.date}>
               <th>{el.date}</th>
               <th>{el.weight}</th>
               <th>{el.height}</th>
