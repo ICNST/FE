@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DataContext } from '../contexts/DataContext';
@@ -8,15 +8,15 @@ export default function Country(props) {
   const { data, dispatchData } = useContext(DataContext);
   console.log(data);
   console.log(props);
-  
-  useEffect(()=>{
-    const countryName=props.match.params.id;
+
+  useEffect(() => {
+    const countryName = props.match.params.id;
     console.log(countryName);
-    dispatchData({type:'SET_COUNTRY', payload: countryName})
-  },[]);
-  
-  return( 
-    <section className = 'country-communities'>
+    dispatchData({ type: 'SET_COUNTRY', payload: countryName });
+  }, []);
+
+  return (
+    <section className='country-communities'>
       <h1>{data.country}</h1>
       <CommunitiesWrapper>
         {data.communities.map(el => (
@@ -24,7 +24,7 @@ export default function Country(props) {
             <Link key={el} to={`/community/${el.split(' ').join('-')}`}>
               <h3>{el}</h3>
             </Link>
-            <button>X</button>
+            <button>✖️</button>
           </CommunityDiv>
         ))}
         <AddCommunity>
@@ -35,7 +35,6 @@ export default function Country(props) {
     </section>
   );
 }
-
 
 // Styles
 const CommunitiesWrapper = styled.div`
@@ -52,14 +51,16 @@ const CommunityDiv = styled.div`
   align-items: center;
   padding: 10px;
   text-align: left;
-   a{
+  a {
     text-decoration: none;
     color: black;
-   }
-   :hover {
+  }
+  :hover {
     background: #0d71ba;
-    a{color: white;}
-   }
+    a {
+      color: white;
+    }
+  }
 
   button {
     cursor: pointer;
@@ -95,9 +96,8 @@ const AddCommunity = styled.div`
   }
 `;
 
-
-
-{/* <CommunityWrapper>
+{
+  /* <CommunityWrapper>
 <section className='all-communities'>
   {props.communities.map(community=>{ return(
     <div className='community-card' key={community.id}>
@@ -109,4 +109,5 @@ const AddCommunity = styled.div`
   )})}
 
 </section>    
-</CommunityWrapper>  */}
+</CommunityWrapper>  */
+}

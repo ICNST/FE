@@ -31,7 +31,7 @@ export default function Admin() {
                 <Link key={el} to={`/country/${el.split(' ').join('-')}`}>
                   <h3>{el}</h3>
                 </Link>
-                <button>X</button>
+                <button>✖️</button>
               </Country>
             ))}
             <AddCountry>

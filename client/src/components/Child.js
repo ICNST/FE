@@ -78,7 +78,6 @@ export default function Child(props) {
           ))}
         </tbody>
       </table>
-      <h2>Add New Record</h2>
       <AddRecord />
     </ChildWrapper>
   );
@@ -96,6 +95,10 @@ const ChildWrapper = styled.div`
     table-layout: fixed;
     border-collapse: collapse;
     box-shadow: 1px 2px 3px #000;
+
+    tr:nth-child(even) {
+      background: #e6e6e6;
+    }
 
     thead {
       background-color: #0d71ba;
