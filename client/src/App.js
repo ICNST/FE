@@ -45,8 +45,8 @@ function App() {
             <Route path='/country/:id' component={Country} />
             <Route path='/community/:id' component={Community} />
             <Route path='/child/:id' component={Child} />
-            <Footer src={require('./image/ICN_blue_waves_double.png')} />
           </Container>
+          <Footer src={require('./image/ICN_blue_waves_double.png')} />
         </DataContext.Provider>
       </UserContext.Provider>
     </div>
@@ -56,8 +56,7 @@ function App() {
 export default App;
 
 const Container = styled.div`
-  height: 100%;
-  position: relative;
+  flex: 1 0 auto;
 `;
 
 const HeaderBar = styled.div`
@@ -73,9 +72,6 @@ const Logo = styled.img`
 `;
 
 const Footer = styled.img`
-  position: fixed;
-  left: 0;
-  bottom: 0;
   width: 100%;
-  z-index: -1;
+  flex-shrink: 0;
 `;
