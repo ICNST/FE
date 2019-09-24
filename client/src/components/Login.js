@@ -1,28 +1,48 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider} from "styled-components";
 
 export default function Login() {
+  
   return (
-    <Form>
-      <span>
-        User
-        <input type='radio' id='User' name='useType' value='user' />
-        Admin
-        <input type='radio' id='Admin' name='useType' value='admin' />
-      </span>
+    <ThemeProvider theme={theme}>
+     
+      
+      <Form>
+        <span>
+          User
+          <input type="radio" id="User" name="useType" value="user" />
+          Admin
+          <input type="radio" id="Admin" name="useType" value="admin" />
+        </span>
 
-      <label>Username</label>
-      <input type='text' id='username' name='username' />
+        <label>Username</label>
+        <input type="text" id="username" name="username" />
 
-      <label>Password</label>
-      <input type='text' id='password' name='password' />
+        <label>Password</label>
+        <input type="text" id="password" name="password" />
 
-      <Button type='submit'>Login</Button>
-    </Form>
+        <Button type="submit">Login</Button>
+      </Form>
+     
+    </ThemeProvider>
   );
 }
 
 // Styles
+
+// const GlobalStyle =createGlobalStyle`
+// body {
+//   background-color: ${props =>
+//     props.theme.mode === 'dark'? '#111': '#EEE'}
+//     color:${props =>
+//       props.theme.mode === 'dark' ? '#EEE': '#111'}
+// }
+// `
+
+const theme = {
+  primary: "green",
+  secondery: "blue"
+};
 const Form = styled.form`
   height: 300px;
   width: 250px;
@@ -32,7 +52,9 @@ const Form = styled.form`
   margin: 50px auto;
   box-sizing: border-box;
   box-shadow: 1px 2px 3px #000;
+  background: ${props => props.theme.secondery};
 `;
+
 
 const Button = styled.button`
   width: 100px;
