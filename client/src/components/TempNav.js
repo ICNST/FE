@@ -8,6 +8,7 @@ export default function TempNav() {
       <NavLink to='/login'>Login</NavLink>
       <NavLink to='/register'>Register</NavLink>
       <NavLink to='/admin'>Admin</NavLink>
+      <NavLink to='/login'>Sign Out</NavLink>
       {/* <NavLink to='/country'>Country</NavLink>
       <NavLink to='/community'>Community</NavLink>
       <NavLink to='/child'>Child</NavLink> */}
@@ -17,7 +18,7 @@ export default function TempNav() {
 
 const NavBar = styled.div`
   width: 280px;
-  margin: 0 auto 25px;
+  margin: 0 auto 50px;
   display: flex;
   justify-content: space-between;
 

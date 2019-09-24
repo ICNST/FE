@@ -8,14 +8,11 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     max-width: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
   }
 
   h1, h2, h3, h4 {
     font-family: 'Open Sans', sans-serif;
-  }
-
-  p {
-    font-family: 'Source Sans Pro', sans-serif;
   }
 `;
 
