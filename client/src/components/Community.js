@@ -52,7 +52,7 @@ const RecordsWrapper = styled.table`
   max-width: 800px;
   margin: 0 auto;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
   box-shadow: 1px 2px 3px #000;
 `;
 
