@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { DataContext } from '../contexts/DataContext';
 
+import AddChildForm from './AddChildForm';
+
 export default function Community(props) {
   const { data, dispatchData } = useContext(DataContext);
   // console.log(data);
@@ -43,6 +45,7 @@ export default function Community(props) {
           <input type='text' placeholder='Add Child' />
         </AddChild>
       </RecordsWrapper>
+      <AddChildForm />
     </section>
   );
 }

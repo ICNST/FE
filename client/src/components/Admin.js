@@ -52,7 +52,7 @@ const AdminWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 const CountriesWrapper = styled.div`

@@ -7,15 +7,22 @@ import AddRecord from './AddRecord';
 export default function Child(props) {
   const { data, dispatchData } = useContext(DataContext);
   const [age, setAge] = useState();
+  const [avatar, setAvatar] = useState('');
+
+  const avatars = ['🧒', '🧒🏻', '🧒🏼', '🧒🏽', '🧒🏾', '🧒🏿'];
 
   useEffect(() => {
     const childId = Number(props.match.params.id);
     const childData = data.children.find(el => el.id === childId);
     dispatchData({ type: 'SET_CHILD', payload: childData });
+
     const dobString = new Date(data.child.dob);
     const age =
       (Date.now() - dobString.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
     setAge(Math.floor(age));
+
+    const random = Math.floor(Math.random() * 5);
+    setAvatar(avatars[random]);
   }, []);
 
   return (
@@ -30,13 +37,26 @@ export default function Child(props) {
         </Link>{' '}
         - {data.child.name}
       </h2>
-      <div>
-        <p>Age: {age}</p>
-        <p>Date of Birth: {data.child.dob}</p>
-        <p>Gender: {data.child.gender}</p>
-        <p>Parent: {data.child.parentname}</p>
-        <p>Parent Contact: {data.child.parentcontact}</p>
-      </div>
+      <ChildInfo>
+        <ChildText>
+          <p>
+            <strong>Age:</strong> {age}
+          </p>
+          <p>
+            <strong>Date of Birth:</strong> {data.child.dob}
+          </p>
+          <p>
+            <strong>Gender:</strong> {data.child.gender}
+          </p>
+          <p>
+            <strong>Parent:</strong> {data.child.parentname}
+          </p>
+          <p>
+            <strong>Parent Contact:</strong> {data.child.parentcontact}
+          </p>
+        </ChildText>
+        <Avatar>{avatar}</Avatar>
+      </ChildInfo>
       <table>
         <caption>
           <h3>Screenings:</h3>
@@ -44,16 +64,16 @@ export default function Child(props) {
         <thead>
           <tr>
             <th>Date</th>
-            <th>Weight</th>
-            <th>Height</th>
+            <th>Weight (kg)</th>
+            <th>Height (cm)</th>
           </tr>
         </thead>
         <tbody>
           {data.child.screenings.map(el => (
             <tr key={el.date}>
-              <th>{el.date}</th>
-              <th>{el.weight}</th>
-              <th>{el.height}</th>
+              <td>{el.date}</td>
+              <td>{el.weight}</td>
+              <td>{el.height}</td>
             </tr>
           ))}
         </tbody>
@@ -71,10 +91,47 @@ const ChildWrapper = styled.div`
   table {
     font-family: inherit;
     width: 90%;
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
     table-layout: fixed;
     border-collapse: collapse;
-    border: 3px solid purple;
+    box-shadow: 1px 2px 3px #000;
+
+    thead {
+      background-color: #0d71ba;
+      color: white;
+
+      th {
+        padding: 10px 0;
+      }
+    }
+
+    tbody {
+      td {
+        padding: 10px 0;
+      }
+    }
   }
+`;
+
+const ChildInfo = styled.div`
+  display: flex;
+  width: 95%;
+  justify-content: space-evenly;
+  margin: 0 auto;
+`;
+
+const ChildText = styled.div`
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 1px 2px 3px #000;
+  padding: 10px 20px;
+`;
+
+const Avatar = styled.div`
+  font-size: 200px;
+  background-color: #e6e6e6;
+  border-radius: 20px;
 `;
