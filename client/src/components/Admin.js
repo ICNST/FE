@@ -12,8 +12,6 @@ import RegisterAdmin from './RegisterAdmin';
 export default function Admin() {
   const { data, dispatchData } = useContext(DataContext);
 
-  // console.log(data);
-
   useEffect(() => {
     // axiosWithAuth()
     //   .get()
@@ -24,30 +22,47 @@ export default function Admin() {
   return (
     <div>
       <h2>Admin Page</h2>
-      <Countries>
-        {data.countries.map(el => (
-          <Country>
-            <Link key={el} to={`/country/${el.split(' ').join('-')}`}>
-              <h3>{el}</h3>
-            </Link>
-            <button>X</button>
-          </Country>
-        ))}
-        <AddCountry>
-          <button>➕</button>
-          <input placeholder='Add a new country' />
-        </AddCountry>
-      </Countries>
-      <RegisterAdmin />
+      <AdminWrapper>
+        <CountriesWrapper>
+          <h3>Countries:</h3>
+          <Countries>
+            {data.countries.map(el => (
+              <Country>
+                <Link key={el} to={`/country/${el.split(' ').join('-')}`}>
+                  <h3>{el}</h3>
+                </Link>
+                <button>X</button>
+              </Country>
+            ))}
+            <AddCountry>
+              <button>➕</button>
+              <input placeholder='Add a new country' />
+            </AddCountry>
+          </Countries>
+        </CountriesWrapper>
+        <RegisterAdmin />
+      </AdminWrapper>
     </div>
   );
 }
 
-const Countries = styled.div`
-  width: 90%;
-  max-width: 800px;
+const AdminWrapper = styled.div`
+  width: 95%;
+  max-width: 1000px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+`;
+
+const CountriesWrapper = styled.div`
+  width: 60%;
+`;
+
+const Countries = styled.div`
   box-shadow: 1px 2px 3px #000;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Country = styled.div`
@@ -56,6 +71,18 @@ const Country = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  height: 50px;
+  :hover {
+    background: #0d71ba;
+    a {
+      color: white;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 
   button {
     cursor: pointer;
@@ -74,6 +101,7 @@ const AddCountry = styled.div`
   display: flex;
   align-items: center;
   padding: 10px;
+  height: 50px;
 
   input {
     font-family: inherit;
