@@ -53,7 +53,7 @@ export default function AddRecord() {
         <Input
           type="text"
           id="height"
-          name="conteryrname"
+          name="countryname"
           placeholder="Height"
         />
 
