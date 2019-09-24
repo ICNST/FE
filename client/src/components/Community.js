@@ -38,10 +38,10 @@ export default function Community(props) {
             </TR>
           </Link>
         ))}
-        {/* <AddChild>
+        <AddChild>
           <button type='submit'>➕</button>
           <input type='text' placeholder='Add Child' />
-        </AddChild> */}
+        </AddChild>
       </RecordsWrapper>
     </section>
   );
