@@ -45,6 +45,7 @@ export default function Community(props) {
           <input type='text' placeholder='Add Child' />
         </AddChild>
       </RecordsWrapper>
+      <h3>Add New Patient:</h3>
       <AddChildForm />
     </section>
   );
@@ -65,9 +66,11 @@ const RecordsWrapper = styled.table`
     text-decoration: none;
     color: black;
   }
-  th{
-    width: 25%;
-  }
+  // th{
+  //   width: 25%;
+  //   color: white;
+  //   background: #0d71ba;
+  // }
   
 `;
 
@@ -77,7 +80,6 @@ const TR = styled.tr`
   text-align: left;
   padding: 10px;
   box-styling: border-box;
-  border: 1px solid grey;
   td{
     width: 25%;
   }
