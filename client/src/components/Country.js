@@ -17,14 +17,12 @@ export default function Country(props) {
   
   return( 
     <section className = 'country-communities'>
-      {/* <img className='flag-icon' src={country.imageURL} alt={country.name}/> */}
       <h1>{data.country}</h1>
       <CommunitiesWrapper>
         {data.communities.map(el => (
           <CommunityDiv>
             <Link key={el} to={`/community/${el.split(' ').join('-')}`}>
               <h3>{el}</h3>
-              <p>Check Local Health Records</p>
             </Link>
             <button>X</button>
           </CommunityDiv>
@@ -41,7 +39,7 @@ export default function Country(props) {
 
 // Styles
 const CommunitiesWrapper = styled.div`
-  width: 90%;
+  width: 60%;
   max-width: 800px;
   margin: 0 auto;
   box-shadow: 1px 2px 3px #000;
@@ -54,6 +52,14 @@ const CommunityDiv = styled.div`
   align-items: center;
   padding: 10px;
   text-align: left;
+   a{
+    text-decoration: none;
+    color: black;
+   }
+   :hover {
+    background: #0d71ba;
+    a{color: white;}
+   }
 
   button {
     cursor: pointer;
@@ -72,6 +78,7 @@ const AddCommunity = styled.div`
   display: flex;
   align-items: center;
   padding: 10px;
+  height: 50px;
 
   input {
     font-family: inherit;
