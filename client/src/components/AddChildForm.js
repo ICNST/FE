@@ -4,27 +4,25 @@ import styled from 'styled-components';
 export default function AddChildForm() {
   return (
     <Form>
-        <label>Full Name</label>
-        <input type='text' id='child_name' name='child_name' />
+        <button type='submit'>➕</button>
+        
+        <input type='text' id='child_name' name='child_name' placeholder='Full Name'/>
 
-        <label>Date of Birth</label>
-        <input type='text' id='child_dob' name='child_dob' />
+        <input type='text' id='child_dob' name='child_dob' placeholder='Date of Birth'/>
+        
 
         <span>
             Male
             <input type='radio' id='male' name='gender' value='male' />
             Female
             <input type='radio' id='female' name='gender' value='female' />
-      </span>
+        </span>
         
+        <input type='text' id='parent_name' name='parent_name' placeholder='Parent Name'/>
 
-        <label>Parent Name</label>
-        <input type='text' id='parent_name' name='parent_name' />
-
-        <label>Parent Contact</label>
-        <input type='text' id='parent_contact' name='parent_contact' />
-
-      {/* <Button type='submit'>➕ Add Child</Button> */}
+        <input type='text' id='parent_contact' name='parent_contact' placeholder='Parent Contact'/>
+        
+        
     </Form>
   );
 }
@@ -33,20 +31,27 @@ export default function AddChildForm() {
 const Form = styled.form`
 width: 90%;
 max-width: 800px;
-margin: 0 auto;
+margin: 5px auto;
 display: flex;
-flex-direction: column
+flex-direction: column;
+
+background: white;
 box-shadow: 1px 2px 3px #000;
+text-align: left;
+
+
+input {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 5px;
+  }
+
+button {
+    cursor: pointer;
+    font-size: 20px;
+    background: none;
+    border: none;
+  }
 `;
 
-// const Button = styled.button`
-//   width: 100px;
-//   padding: 5px 10px;
-//   border: none;
-//   align-self: center;
-//   margin: 10px auto;
-//   :hover {
-//     background: #83c441;
-//     color: white;
-//   }
-// `;

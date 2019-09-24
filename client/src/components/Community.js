@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
 import { DataContext } from '../contexts/DataContext';
 
 export default function Community(props) {
@@ -39,10 +38,10 @@ export default function Community(props) {
             </TR>
           </Link>
         ))}
-        <AddChild>
+        {/* <AddChild>
           <button type='submit'>➕</button>
           <input type='text' placeholder='Add Child' />
-        </AddChild>
+        </AddChild> */}
       </RecordsWrapper>
     </section>
   );
