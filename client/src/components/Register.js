@@ -1,8 +1,12 @@
 import React from 'react';
-import styled from "styled-components";
+import styled,{ThemeProvider} from "styled-components";
 
+const theme={
+  primary:'green',
+  secondery:'blue'
+}
 const Component = styled.div`
-  background: #83c441;
+  background: 0d71ba;
   color: red;
 `;
 const Form = styled.form`
@@ -14,6 +18,7 @@ const Form = styled.form`
   margin: 50px auto;
   box-sizing: border-box;
   box-shadow: 1px 2px 3px #000;
+  background: ${props => props.theme.secondery};
 `;
 
 const Button = styled.button`
@@ -42,6 +47,7 @@ const Input = styled.input`
 
 export default function Register() {
   return (
+    <ThemeProvider theme={theme}>
     <Component>
       <Form>
         <label>Username</label>
@@ -51,7 +57,7 @@ export default function Register() {
           name="username"
           placeholder="UsreName"
         />
-
+     
         <label>Password</label>
         <Input
           type="text"
@@ -65,12 +71,13 @@ export default function Register() {
         <Input
           type="text"
           id="conteryname"
-          name="conteryrname"
+          name="countryname"
           placeholder="Country"
         />
 
         <Button type="submit">Register</Button>
       </Form>
     </Component>
+    </ThemeProvider>
   );
 }
