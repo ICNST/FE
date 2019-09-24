@@ -55,6 +55,9 @@ button {
     font-size: 15px;
     background: none;
     border: none;
+    :hover{
+        transform: scale(1.1);
+    }
   }
 `;
 
