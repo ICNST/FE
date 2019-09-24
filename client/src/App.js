@@ -38,12 +38,6 @@ function App() {
           <Route path='/country' component={Country} />
           <Route path='/community' component={Community} />
           <Route path='/child' component={Child} />
-          {data.countries.map(el => (
-            <Route
-              path={`/${el.split(' ').join('-')}`}
-              render={props => <Country {...props} key={el} country={el} />}
-            />
-          ))}
         </DataContext.Provider>
       </UserContext.Provider>
     </div>

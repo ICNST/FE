@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const Component = styled.div`
@@ -39,37 +39,25 @@ const Input = styled.input`
   border-radius: 3px;
 `;
 
-
-export default function Register() {
+export default function AddRecord() {
   return (
     <Component>
       <Form>
-        <label>Username</label>
-        <Input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="UsreName"
-        />
+        <label>Date</label>
+        <Input type="Date" id="date" name="date" />
 
-        <label>Password</label>
-        <Input
-          type="text"
-          id="password"
-          name="password"
-          placeholder="PassWord"
-            
-          />
+        <label>Weight</label>
+        <Input type="text" id="weight" name="weight" placeholder="Weight" />
 
-        <label>Country</label>
+        <label>Height</label>
         <Input
           type="text"
-          id="conteryname"
+          id="height"
           name="conteryrname"
-          placeholder="Country"
+          placeholder="Height"
         />
 
-        <Button type="submit">Register</Button>
+        <Button type="submit">Add Record</Button>
       </Form>
     </Component>
   );
