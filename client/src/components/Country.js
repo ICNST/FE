@@ -1,6 +1,15 @@
 import React, {useContext, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+import {
+  Form,
+  Button,
+  Input,
+  theme,
+  CommunitiesWrapper,
+  CommunityDiv,
+  AddCommunity
+} from "../styled-components/index";
 
 import { DataContext } from '../contexts/DataContext';
 
@@ -30,8 +39,8 @@ export default function Country(props) {
           </CommunityDiv>
         ))}
         <AddCommunity>
-          <button type='submit'>➕</button>
-          <input type='text' placeholder='Add a New Community' />
+          <Button type='submit'>➕</Button>
+          <Input type='text' placeholder='Add a New Community' />
         </AddCommunity>
       </CommunitiesWrapper>
     </section>
@@ -40,53 +49,53 @@ export default function Country(props) {
 
 
 // Styles
-const CommunitiesWrapper = styled.div`
-  width: 90%;
-  max-width: 800px;
-  margin: 0 auto;
-  box-shadow: 1px 2px 3px #000;
-`;
+// const CommunitiesWrapper = styled.div`
+//   width: 90%;
+//   max-width: 800px;
+//   margin: 0 auto;
+//   box-shadow: 1px 2px 3px #000;
+// `;
 
-const CommunityDiv = styled.div`
-  border: 1px solid silver;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  text-align: left;
+// const CommunityDiv = styled.div`
+//   border: 1px solid silver;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 10px;
+//   text-align: left;
 
-  button {
-    cursor: pointer;
-    padding: 5px 10px;
-    border: none;
+//   button {
+//     cursor: pointer;
+//     padding: 5px 10px;
+//     border: none;
 
-    :hover {
-      background: #83c441;
-      color: white;
-    }
-  }
-`;
+//     :hover {
+//       background: #83c441;
+//       color: white;
+//     }
+//   }
+// `;
 
-const AddCommunity = styled.div`
-  border: 1px solid silver;
-  display: flex;
-  align-items: center;
-  padding: 10px;
+// const AddCommunity = styled.div`
+//   border: 1px solid silver;
+//   display: flex;
+//   align-items: center;
+//   padding: 10px;
 
-  input {
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    border: none;
-    margin: 18.72px 0px;
-  }
+//   input {
+//     font-family: inherit;
+//     font-size: inherit;
+//     font-weight: inherit;
+//     border: none;
+//     margin: 18.72px 0px;
+//   }
 
-  button {
-    cursor: pointer;
-    background: none;
-    border: none;
-  }
-`;
+//   button {
+//     cursor: pointer;
+//     background: none;
+//     border: none;
+//   }
+// `;
 
 
 
