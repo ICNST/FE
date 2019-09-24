@@ -1,4 +1,17 @@
 // This object initializes the child nutrition records
+
+// export const initialState = {
+//   serverData: [],
+//   countries: [],
+//   country: '',
+//   communities: [],
+//   community: '',
+//   children: [],
+//   child: {},
+//   isGetting: false,
+//   error: '',
+// };
+
 export const initialState = {
   countries: ['Brazil', 'Bolivia', 'Cambodia', 'Ecuador'],
   country: 'Brazil',
@@ -158,7 +171,7 @@ export const initialState = {
   ],
   child: {
     id: 6,
-    name: 'Jane Doe',
+    name: 'Initial Child',
     parentname: 'Mrs. Doe',
     parentcontact: 'mrs.doe@gmail.com',
     dob: '09/28/2010',
@@ -230,11 +243,11 @@ export const dataReducer = (state = initialState, action) => {
         ...state,
         children: action.payload,
       };
-      case 'SET_CHILD':
-        return {
-          ...state,
-          child: action.payload,
-        };
+    case 'SET_CHILD':
+      return {
+        ...state,
+        child: action.payload,
+      };
     default:
       return state;
   }

@@ -1,23 +1,27 @@
-import React, {useContext, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DataContext } from '../contexts/DataContext';
 
 export default function Community(props) {
   const { data, dispatchData } = useContext(DataContext);
-  console.log(data);
+  // console.log(data);
 
-  useEffect(()=>{
-    const communityName=props.match.params.id;
-    console.log(communityName);
-    dispatchData({type:'SET_COMMUNITY', payload: communityName})
-
-  },[])
+  useEffect(() => {
+    const communityName = props.match.params.id;
+    // console.log(communityName);
+    dispatchData({ type: 'SET_COMMUNITY', payload: communityName });
+  }, []);
 
   return (
     <section className='child-data-wrapper'>
-      <h1><Link to={`/country/${data.country.split(" ").join("-")}`}>{data.country}</Link> - {data.community}</h1>
+      <h1>
+        <Link to={`/country/${data.country.split(' ').join('-')}`}>
+          {data.country}
+        </Link>{' '}
+        - {data.community}
+      </h1>
       <RecordsWrapper>
         <TR>
           <th>Name</th>
@@ -25,7 +29,7 @@ export default function Community(props) {
           <th>Gender</th>
           <th>Parent</th>
         </TR>
-        {data.children.map(el=> (
+        {data.children.map(el => (
           <Link to={`/child/${el.id}`}>
             <TR>
               <td>{el.name}</td>
@@ -54,11 +58,11 @@ const RecordsWrapper = styled.table`
 `;
 
 const TR = styled.tr`
-display: flex;
-justify-content: space-between;
-text-align: left;
-padding: 10px;
-border: 1px solid grey;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  padding: 10px;
+  border: 1px solid grey;
 `;
 
 const AddChild = styled.div`
