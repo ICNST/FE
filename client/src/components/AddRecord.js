@@ -81,12 +81,11 @@ const Form = styled.form`
 `;
 
 const Button = styled.button`
-  font-size: 15px;
-  margin: 10px auto;
-  padding: 5px 15px;
+  font-size: 1em;
+  margin: 0.5em;
+  padding: 0.25em 1em;
   border: none;
   border-radius: 3px;
-  // display: block;
   cursor: pointer;
   :hover {
     background: #83c441;
