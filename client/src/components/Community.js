@@ -25,26 +25,23 @@ export default function Community(props) {
       </h1>
       <RecordsWrapper>
         <table>
-          <thead>
             <tr>
               <th>Name</th>
               <th>Gender</th>
               <th>Parent</th>
               <th>Contact</th>
             </tr>
-          </thead>
-          <tbody>
             {data.children.map(el => (
-            <tr>
               <Link to={`/child/${el.id}`}>
+                <tr>
                   <td>{el.name}</td>
                   <td>{el.gender}</td>
                   <td>{el.parentname}</td>
                   <td>{el.parentcontact}</td>
+                </tr>
               </Link>
-            </tr>
+           
         ))}
-          </tbody>
         </table>
       </RecordsWrapper>
       <h3>Add New Patient:</h3>
@@ -75,29 +72,23 @@ table{
   border-collapse: collapse;
   
   tr{
-    width: 100%;
     border: 1px solid green;
   }
   tr:nth-child(even) {
     background: #e6e6e6;
   }
 
-  thead{
+  th{
     background-color: #0d71ba;
     color: white;
-    th {
-      border: 1px solid yellow;
-        padding: 10px 0;
-    }
+    border: 1px solid yellow;
+    padding: 10px 0;
   }
 
- tbody{
-   width: 100%;
   td{
      padding: 10px 0;
      width: 25%
      border: 1px solid pink;
-    }
   }
 }  
 `;
