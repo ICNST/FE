@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import './App.css';
@@ -6,11 +6,9 @@ import './App.css';
 // Styles
 import GlobalStyle from './styled-components/GlobalStyle';
 
-// Contexts and Reducers to manage state
-import { UserContext } from './contexts/UserContext';
-import { DataContext } from './contexts/DataContext';
-import { initialLoginState, loginReducer } from './reducers/loginReducer';
-import { initialState, dataReducer } from './reducers/dataReducer';
+// Contexts to manage state
+import UserProvider from './contexts/UserContext';
+import DataProvider from './contexts/DataContext';
 
 // Components
 import TempNav from './components/TempNav';
@@ -22,17 +20,12 @@ import Community from './components/Community';
 import Child from './components/Child';
 
 function App() {
-  // This uses the useReducer hook to allow access to state and provide functions to dispatch actions to update state. Login state and child nutrition records are managed separately
-  const [user, dispatch] = useReducer(loginReducer, initialLoginState);
-  const [data, dispatchData] = useReducer(dataReducer, initialState);
-
   // Wrap components in Context Providers so nested components can access state
   return (
     <div className='App'>
       <GlobalStyle />
-      <UserContext.Provider value={{ user, dispatch }}>
-        <DataContext.Provider value={{ data, dispatchData }}>
-          {/* <HeaderBar /> */}
+      <UserProvider>
+        <DataProvider>
           <Logo src={require('./image/ICN_Secondary_Alt.png')} />
           <TempNav />
           <Route path='/login' component={Login} />
@@ -45,8 +38,8 @@ function App() {
           <Route path='/community/:id' component={Community} />
           <Route path='/child/:id' component={Child} />
           <Footer src={require('./image/ICN_blue_waves_double.png')} />
-        </DataContext.Provider>
-      </UserContext.Provider>
+        </DataProvider>
+      </UserProvider>
     </div>
   );
 }

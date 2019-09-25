@@ -1,16 +1,16 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled, { ThemeProvider } from 'styled-components';
 
 // Context
-import { DataContext } from '../contexts/DataContext';
+import { useDataContext } from '../contexts/DataContext';
 
 // Components
 import RegisterAdmin from './RegisterAdmin';
 
 export default function Admin() {
-  const { data, dispatchData } = useContext(DataContext);
+  const { data, dispatchData } = useDataContext();
 
   useEffect(() => {
     // axiosWithAuth()

@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { DataContext } from '../contexts/DataContext';
+import { useDataContext } from '../contexts/DataContext';
 
 export default function Country(props) {
-  const { data, dispatchData } = useContext(DataContext);
+  const { data, dispatchData } = useDataContext();
   console.log(data);
   console.log(props);
 
