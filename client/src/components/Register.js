@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { ThemeProvider } from 'styled-components';
 import { Form, Button, Input, theme } from '../styled-components/index';
 
+import { useUserContext } from '../contexts/UserContext';
+
 export default function Register() {
+  const { user, dispatch } = useUserContext();
   const [registrationInfo, setRegistrationInfo] = useState({
     username: '',
     password: '',
-    countryname: '',
+    country: '',
   });
 
   const handleChange = e =>
@@ -44,13 +48,13 @@ export default function Register() {
           onChange={handleChange}
         />
 
-        <label htmlFor='countryname'>Country</label>
+        <label htmlFor='country'>Country</label>
         <Input
           type='text'
-          id='countryname'
-          name='countryname'
+          id='country'
+          name='country'
           placeholder='Country'
-          value={registrationInfo.countryname}
+          value={registrationInfo.country}
           onChange={handleChange}
         />
 
