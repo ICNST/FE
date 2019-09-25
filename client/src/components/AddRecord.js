@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
-
 import { Input } from '../styled-components';
 
+import { useDataContext } from '../contexts/DataContext';
+
 export default function AddRecord() {
+  const { data, dispatchData } = useDataContext();
+
   const [addNewRecord, setAddNewRecord] = useState({
     date: '',
     weight: '',

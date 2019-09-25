@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
+
 import { useDataContext } from '../contexts/DataContext';
+
 import AddRecord from './AddRecord';
 
 export default function Child(props) {
@@ -87,12 +90,12 @@ const ChildWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  a{
+  a {
     text-decoration: none;
     color: black;
     :hover {
       color: #0d71ba;
-      }
+    }
   }
   table {
     font-family: inherit;
