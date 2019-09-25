@@ -68,7 +68,7 @@ export default function Login() {
 
         <label htmlFor='password'>Password</label>
         <Input
-          type='text'
+          type='password'
           id='password'
           name='password'
           placeholder='Password'
