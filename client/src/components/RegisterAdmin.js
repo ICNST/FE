@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { theme, Form, Button,Input } from '../styled-components';
+import { theme, Form, Button, Input } from '../styled-components';
 
 export default function RegisterAdmin() {
   return (
@@ -17,11 +17,21 @@ export default function RegisterAdmin() {
             <Input type='radio' id='Admin' name='usertype' value='admin' />
           </span>
 
-          <label>Username</label>
-          <Input type='text' id='username' name='username' />
+          <label htmlFor='username'>Username</label>
+          <Input
+            type='text'
+            id='username'
+            name='username'
+            placeholder='Username'
+          />
 
-          <label>Password</label>
-          <Input type='text' id='password' name='password' />
+          <label htmlFor='password'>Password</label>
+          <Input
+            type='text'
+            id='password'
+            name='password'
+            placeholder='Password'
+          />
 
           <Button type='submit'>Register</Button>
         </Form>

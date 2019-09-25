@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
 import { DataContext } from '../contexts/DataContext';
 
 import AddChildForm from './AddChildForm';
@@ -43,7 +42,7 @@ export default function Community(props) {
         ))}
         <AddChild>
           <button type='submit'>➕</button>
-          <Input type='text' placeholder='Add Child' />
+          <input type='text' placeholder='Add Child' />
         </AddChild>
       </RecordsWrapper>
       <AddChildForm />
@@ -62,14 +61,13 @@ const RecordsWrapper = styled.table`
   a:nth-child(even) {
     background: #e6e6e6;
   }
-  a{
+  a {
     text-decoration: none;
     color: black;
   }
-  th{
+  th {
     width: 25%;
   }
-  
 `;
 
 const TR = styled.tr`
@@ -79,29 +77,28 @@ const TR = styled.tr`
   padding: 10px;
   box-styling: border-box;
   border: 1px solid grey;
-  td{
+  td {
     width: 25%;
   }
-  
 `;
 
-// const AddChild = styled.div`
-//   border: 1px solid silver;
-//   display: flex;
-//   align-items: center;
-//   padding: 10px;
+const AddChild = styled.div`
+  border: 1px solid silver;
+  display: flex;
+  align-items: center;
+  padding: 10px;
 
-//   input {
-//     font-family: inherit;
-//     font-size: inherit;
-//     font-weight: inherit;
-//     border: none;
-//     margin: 18.72px 0px;
-//   }
+  input {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    border: none;
+    margin: 18.72px 0px;
+  }
 
-//   button {
-//     cursor: pointer;
-//     background: none;
-//     border: none;
-//   }
-// `;
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+`;

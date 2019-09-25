@@ -56,7 +56,7 @@ function App() {
 export default App;
 
 const Container = styled.div`
-  flex: 1 0 auto;
+  // flex: 1 0 auto;
 `;
 
 const HeaderBar = styled.div`
@@ -73,5 +73,9 @@ const Logo = styled.img`
 
 const Footer = styled.img`
   width: 100%;
-  flex-shrink: 0;
+  // flex-shrink: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 210px;
 `;
