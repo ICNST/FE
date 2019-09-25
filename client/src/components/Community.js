@@ -65,13 +65,7 @@ const RecordsWrapper = styled.table`
   a{
     text-decoration: none;
     color: black;
-  }
-  // th{
-  //   width: 25%;
-  //   color: white;
-  //   background: #0d71ba;
-  // }
-  
+  } 
 `;
 
 const TR = styled.tr`
