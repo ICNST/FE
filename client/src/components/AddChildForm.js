@@ -31,13 +31,19 @@ export default function AddChildForm() {
         onChange={handleChange}
       />
 
-      {/* <input type='text' id='child_dob' name='child_dob' placeholder='Date of Birth' onChange={handleChange}/> */}
-
       <input
         type='text'
         id='parentName'
         name='parentName'
         placeholder='Parent Name'
+        onChange={handleChange}
+      />
+
+      <input
+        type='text'
+        id='parentContact'
+        name='parentContact'
+        placeholder='Contact'
         onChange={handleChange}
       />
 
