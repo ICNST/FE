@@ -87,6 +87,13 @@ const ChildWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+  a{
+    text-decoration: none;
+    color: black;
+    :hover {
+      color: #0d71ba;
+      }
+  }
   table {
     font-family: inherit;
     width: 90%;
@@ -103,7 +110,6 @@ const ChildWrapper = styled.div`
     thead {
       background-color: #0d71ba;
       color: white;
-
       th {
         padding: 10px 0;
       }

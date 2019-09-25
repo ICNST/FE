@@ -24,26 +24,28 @@ export default function Community(props) {
         - {data.community}
       </h1>
       <RecordsWrapper>
-        <TR>
-          <th>Name</th>
-          <th>Gender</th>
-          <th>Parent</th>
-          <th>Contact</th>
-        </TR>
-        {data.children.map(el => (
-          <Link to={`/child/${el.id}`}>
-            <TR>
-              <td>{el.name}</td>
-              <td>{el.gender}</td>
-              <td>{el.parentname}</td>
-              <td>{el.parentcontact}</td>
-            </TR>
-          </Link>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Parent</th>
+              <th>Contact</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.children.map(el => (
+            <tr>
+              <Link to={`/child/${el.id}`}>
+                  <td>{el.name}</td>
+                  <td>{el.gender}</td>
+                  <td>{el.parentname}</td>
+                  <td>{el.parentcontact}</td>
+              </Link>
+            </tr>
         ))}
-        {/* <AddChild>
-          <button type='submit'>➕</button>
-          <input type='text' placeholder='Add Child' />
-        </AddChild> */}
+          </tbody>
+        </table>
       </RecordsWrapper>
       <h3>Add New Patient:</h3>
       <AddChildForm />
@@ -52,60 +54,50 @@ export default function Community(props) {
 }
 
 const ChildDataWrapper = styled.section`
-  a {
-    text-decoration: none;
-    color: black;
+a {
+  text-decoration: none; 
+  color: black;
+  :hover {
+    color: #0d71ba;
+    }
   }
 `;
 
-const RecordsWrapper = styled.table`
+const RecordsWrapper = styled.div`
+  display: flex;
+  flex-direction: column; 
+
+table{
   width: 90%;
   max-width: 800px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
   box-shadow: 1px 2px 3px #000;
-  a:nth-child(even) {
+  border-collapse: collapse;
+  
+  tr{
+    width: 100%;
+    border: 1px solid green;
+  }
+  tr:nth-child(even) {
     background: #e6e6e6;
   }
-  a {
-    text-decoration: none;
-    color: black;
-  }
-`;
 
-const TR = styled.tr`
-  display: flex;
-  justify-content: space-between;
-  text-align: left;
-  padding: 10px;
-  box-styling: border-box;
-  th {
-    width: 25%;
-    text-align: left;
-  }
-  td {
-    width: 25%;
-  }
-`;
-
-const AddChild = styled.div`
-  border: 1px solid silver;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-
-  input {
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    border: none;
-    margin: 18.72px 0px;
+  thead{
+    background-color: #0d71ba;
+    color: white;
+    th {
+      border: 1px solid yellow;
+        padding: 10px 0;
+    }
   }
 
-  button {
-    cursor: pointer;
-    background: none;
-    border: none;
+ tbody{
+   width: 100%;
+  td{
+     padding: 10px 0;
+     width: 25%
+     border: 1px solid pink;
+    }
   }
+}  
 `;
