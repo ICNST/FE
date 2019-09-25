@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -6,14 +6,24 @@ import { useDataContext } from '../contexts/DataContext';
 
 export default function Country(props) {
   const { data, dispatchData } = useDataContext();
-  console.log(data);
-  console.log(props);
+  const [newCommunity, setNewCommunity] = useState('');
+  // console.log(data);
+  // console.log(props);
 
   useEffect(() => {
     const countryName = props.match.params.id;
-    console.log(countryName);
+    // console.log(countryName);
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
   }, []);
+
+  const handleChange = e => setNewCommunity(e.target.value);
+
+  // console.log(newCommunity);
+
+  const handleClick = e => {
+    e.preventDefault();
+    console.log(newCommunity);
+  };
 
   return (
     <section className='country-communities'>
@@ -28,8 +38,15 @@ export default function Country(props) {
           </CommunityDiv>
         ))}
         <AddCommunity>
-          <button type='submit'>➕</button>
-          <input type='text' placeholder='Add a New Community' />
+          <button type='submit' onClick={handleClick}>
+            ➕
+          </button>
+          <input
+            type='text'
+            placeholder='Add a New Community'
+            value={newCommunity}
+            onChange={handleChange}
+          />
         </AddCommunity>
       </CommunitiesWrapper>
     </section>
