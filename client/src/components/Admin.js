@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled, { ThemeProvider } from 'styled-components';
@@ -11,6 +11,7 @@ import RegisterAdmin from './RegisterAdmin';
 
 export default function Admin() {
   const { data, dispatchData } = useDataContext();
+  const [newCountry, setNewCountry] = useState('');
 
   useEffect(() => {
     // axiosWithAuth()
@@ -18,6 +19,13 @@ export default function Admin() {
     //   .then(res => console.log(res))
     //   .catch(err => console.log(err));
   }, []);
+
+  const handleChange = e => setNewCountry(e.target.value);
+
+  const handleClick = e => {
+    e.preventDefault();
+    console.log(newCountry);
+  };
 
   return (
     <div>
@@ -35,8 +43,13 @@ export default function Admin() {
               </Country>
             ))}
             <AddCountry>
-              <button>➕</button>
-              <input placeholder='Add a new country' />
+              <button onClick={handleClick}>➕</button>
+              <input
+                type='text'
+                placeholder='Add a new country'
+                value={newCountry}
+                onChange={handleChange}
+              />
             </AddCountry>
           </Countries>
         </CountriesWrapper>
