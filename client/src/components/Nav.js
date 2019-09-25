@@ -2,7 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function TempNav() {
+import { useUserContext } from '../contexts/UserContext';
+
+export default function Nav() {
+  const { user, dispatch } = useUserContext();
+
   return (
     <NavBar>
       <NavLink to='/login'>Login</NavLink>

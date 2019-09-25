@@ -11,7 +11,7 @@ import UserProvider from './contexts/UserContext';
 import DataProvider from './contexts/DataContext';
 
 // Components
-import TempNav from './components/TempNav';
+import Nav from './components/Nav';
 import Login from './components/Login';
 import Register from './components/Register';
 import Admin from './components/Admin';
@@ -27,7 +27,7 @@ function App() {
       <UserProvider>
         <DataProvider>
           <Logo src={require('./image/ICN_Secondary_Alt.png')} />
-          <TempNav />
+          <Nav />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/admin' component={Admin} />
