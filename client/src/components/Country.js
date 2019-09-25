@@ -1,6 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import {
+  Form,
+  Button,
+  Input,
+  theme,
+  CommunitiesWrapper,
+  CommunityDiv,
+  AddCommunity
+} from "../styled-components/index";
 
 import { DataContext } from '../contexts/DataContext';
 
@@ -28,8 +37,8 @@ export default function Country(props) {
           </CommunityDiv>
         ))}
         <AddCommunity>
-          <button type='submit'>➕</button>
-          <input type='text' placeholder='Add a New Community' />
+          <Button type='submit'>➕</Button>
+          <Input type='text' placeholder='Add a New Community' />
         </AddCommunity>
       </CommunitiesWrapper>
     </section>
@@ -62,17 +71,17 @@ const CommunityDiv = styled.div`
     }
   }
 
-  button {
-    cursor: pointer;
-    padding: 5px 10px;
-    border: none;
+//   button {
+//     cursor: pointer;
+//     padding: 5px 10px;
+//     border: none;
 
-    :hover {
-      background: #83c441;
-      color: white;
-    }
-  }
-`;
+//     :hover {
+//       background: #83c441;
+//       color: white;
+//     }
+//   }
+// `;
 
 const AddCommunity = styled.div`
   border: 1px solid silver;
@@ -81,20 +90,20 @@ const AddCommunity = styled.div`
   padding: 10px;
   height: 50px;
 
-  input {
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    border: none;
-    margin: 18.72px 0px;
-  }
+//   input {
+//     font-family: inherit;
+//     font-size: inherit;
+//     font-weight: inherit;
+//     border: none;
+//     margin: 18.72px 0px;
+//   }
 
-  button {
-    cursor: pointer;
-    background: none;
-    border: none;
-  }
-`;
+//   button {
+//     cursor: pointer;
+//     background: none;
+//     border: none;
+//   }
+// `;
 
 {
   /* <CommunityWrapper>

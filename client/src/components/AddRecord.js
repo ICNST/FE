@@ -68,6 +68,7 @@ export default function AddRecord() {
         />
         <Button type='submit'>➕</Button>
       </Form>
-    </Component>
+    </ThemeProvider>
+    // </Component>
   );
 }
