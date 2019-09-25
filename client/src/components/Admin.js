@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled, { ThemeProvider } from 'styled-components';
 
+import {
+  Form,
+  Button,
+  Input,
+  theme,
+  Countries,
+  Country,
+  AddCountry
+} from "../styled-components/index";
 // Context
 import { DataContext } from '../contexts/DataContext';
 
