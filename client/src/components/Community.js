@@ -16,7 +16,7 @@ export default function Community(props) {
   }, []);
 
   return (
-    <section className='child-data-wrapper'>
+    <ChildDataWrapper>
       <h1>
         <Link to={`/country/${data.country.split(' ').join('-')}`}>
           {data.country}
@@ -26,31 +26,37 @@ export default function Community(props) {
       <RecordsWrapper>
         <TR>
           <th>Name</th>
-          <th>DOB</th>
           <th>Gender</th>
           <th>Parent</th>
+          <th>Contact</th>
         </TR>
         {data.children.map(el => (
           <Link to={`/child/${el.id}`}>
             <TR>
               <td>{el.name}</td>
-              <td>{el.dob}</td>
               <td>{el.gender}</td>
               <td>{el.parentname}</td>
+              <td>{el.parentcontact}</td>
             </TR>
           </Link>
         ))}
-        <AddChild>
+        {/* <AddChild>
           <button type='submit'>➕</button>
           <input type='text' placeholder='Add Child' />
-        </AddChild>
+        </AddChild> */}
       </RecordsWrapper>
       <h3>Add New Patient:</h3>
       <AddChildForm />
-    </section>
+    </ChildDataWrapper>
   );
 }
 
+const ChildDataWrapper = styled.section`
+a {
+  text-decoration: none; 
+  color: black;}
+  `;
+  
 const RecordsWrapper = styled.table`
   width: 90%;
   max-width: 800px;
@@ -58,7 +64,6 @@ const RecordsWrapper = styled.table`
   display: flex;
   flex-direction: column;
   box-shadow: 1px 2px 3px #000;
-  align: center;
   a:nth-child(even) {
     background: #e6e6e6;
   }
@@ -74,6 +79,10 @@ const TR = styled.tr`
   text-align: left;
   padding: 10px;
   box-styling: border-box;
+  th{
+    width: 25%;
+    text-align: left;
+  }
   td{
     width: 25%;
   }
