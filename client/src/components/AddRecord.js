@@ -1,38 +1,62 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 import { Input } from '../styled-components';
 
 export default function AddRecord() {
+
+  const [addNewRecord, setAddNewRecord] = useState({
+    date: '',
+    weight: '',
+    height: '',
+  });
+
+  const handleChange = e => setAddNewRecord({
+    ...addNewRecord,
+    [e.target.name]: e.target.value,
+  });
+
+  const handleClick = e => {
+    e.preventDefault();
+    console.log(addNewRecord);
+  };
+  
   return (
     <Component>
       <h3>Add New Record:</h3>
       <Form>
         <div>
-          <label htmlFor='date'>Date</label>
-          <Input type='date' id='date' name='date' />
+          {/* <label htmlFor='date'>Date</label> */}
+          <Input 
+          type='date' 
+          id='date' 
+          name='date' 
+          onChange={handleChange}/>
         </div>
 
         <div>
-          <label htmlFor='weight'>Weight</label>
+          {/* <label htmlFor='weight'>Weight</label> */}
           <Input
             type='text'
             id='weight'
             name='weight'
             placeholder='Weight (kg)'
+            onChange={handleChange}
           />
         </div>
 
         <div>
-          <label htmlFor='height'>Height</label>
+          {/* <label htmlFor='height'>Height</label> */}
           <Input
             type='text'
             id='height'
-            name='countryname'
+            name='height'
             placeholder='Height (cm)'
+            onChange={handleChange}
           />
         </div>
-        <Button type='submit'>➕</Button>
+
+        <Button type='submit' onClick={handleClick}>➕</Button>
       </Form>
     </Component>
   );
@@ -44,15 +68,16 @@ const Component = styled.div`
 `;
 
 const Form = styled.form`
-  // height: 300px;
-  // width: 250px;
+  width: 90%;
+  max-width: 800px;
   width: 75%;
   display: flex;
+  justify-content: space-between;
   padding: 10px;
   margin: 10px auto;
   box-sizing: border-box;
   box-shadow: 1px 2px 3px #000;
-  background-color: #0d71ba;
+  background: #0d71ba;
   color: white;
   font-weight: bold;
 `;
