@@ -33,11 +33,15 @@ const NavBarColor = styled.div`
 `;
 
 const NavBar = styled.div`
-  width: 50%;
+  width: 90%;
   max-width: 475px;
   margin: 5px auto;
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
 
   a {
     color: white;

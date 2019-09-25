@@ -89,6 +89,8 @@ export default function Child(props) {
 const ChildWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 1000px;
+  margin: 0 auto;
 
   a {
     text-decoration: none;

@@ -27,6 +27,7 @@ function App() {
       <UserProvider>
         <DataProvider>
           <Logo src={require('./image/ICN_Secondary_Alt.png')} />
+          <LogoSmall src={require('./image/ICN_Primary.png')} />
           <Nav />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
@@ -56,6 +57,20 @@ const Logo = styled.img`
   width: 90%;
   max-width: 700px;
   margin: 40px 0;
+
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
+`;
+
+const LogoSmall = styled.img`
+  margin-top: 20px;
+  width: 90%;
+  max-width: 500px;
+
+  @media screen and (min-width: 501px) {
+    display: none;
+  }
 `;
 
 const Footer = styled.img`
