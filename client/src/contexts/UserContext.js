@@ -1,11 +1,11 @@
 import React, { createContext, useReducer, useContext } from 'react';
-import { initialLoginState, loginReducer } from '../reducers/loginReducer';
+import { initialUserState, userReducer } from '../reducers/userReducer';
 
 // This creates a context object to store and access login and user information in state
 const UserContext = createContext();
 
 export default function UserProvider({ children }) {
-  const [user, dispatch] = useReducer(loginReducer, initialLoginState);
+  const [user, dispatch] = useReducer(userReducer, initialUserState);
   return (
     <UserContext.Provider value={{ user, dispatch }}>
       {children}

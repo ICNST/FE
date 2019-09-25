@@ -1,21 +1,20 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export default function AddChildForm() {
-
   const [addNewChild, setAddNewChild] = useState({
     childName: '',
     childDob: '',
     parentName: '',
     parentContact: '',
     gender: '',
-  })
+  });
 
   const handleChange = e =>
-  setAddNewChild({
-    ...addNewChild,
-    [e.target.name]: e.target.value,
-  });
+    setAddNewChild({
+      ...addNewChild,
+      [e.target.name]: e.target.value,
+    });
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -23,21 +22,31 @@ export default function AddChildForm() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>    
-        <input type='text' id='childName' name='childName' placeholder='Full Name' onChange={handleChange}/>
+    <Form onSubmit={handleSubmit}>
+      <input
+        type='text'
+        id='childName'
+        name='childName'
+        placeholder='Full Name'
+        onChange={handleChange}
+      />
 
-        {/* <input type='text' id='child_dob' name='child_dob' placeholder='Date of Birth' onChange={handleChange}/> */}
-        
-        <input type='text' id='parentName' name='parentName' placeholder='Parent Name' onChange={handleChange}/>
+      {/* <input type='text' id='child_dob' name='child_dob' placeholder='Date of Birth' onChange={handleChange}/> */}
 
-        <input type='text' id='parentContact' name='parentContact' placeholder='Parent Contact' onChange={handleChange}/>
+      <input
+        type='text'
+        id='parentName'
+        name='parentName'
+        placeholder='Parent Name'
+        onChange={handleChange}
+      />
 
         <select id='gender' name='gender' onChange={handleChange}>
           <option value='M'>Male</option>
           <option value='F'>Female</option>
         </select>
 
-        <button type='submit'>➕</button>
+      <button type='submit'>➕</button>
     </Form>
   );
 }
@@ -81,4 +90,3 @@ button {
     
   }
 `;
-
