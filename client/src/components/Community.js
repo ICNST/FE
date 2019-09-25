@@ -23,8 +23,7 @@ export default function Community(props) {
         </Link>{' '}
         - {data.community}
       </h1>
-      <RecordsWrapper>
-        <table>
+      <PatientsTable>
           <thead>
             <tr>
               <th>Name</th>
@@ -35,18 +34,15 @@ export default function Community(props) {
           </thead>
           <tbody>
             {data.children.map(el => (
-            <tr>
-              <Link to={`/child/${el.id}`}>
-                  <td>{el.name}</td>
+              <tr>
+              <Link to={`/child/${el.id}`}><td>{el.name}</td></Link>
                   <td>{el.gender}</td>
                   <td>{el.parentname}</td>
                   <td>{el.parentcontact}</td>
-              </Link>
-            </tr>
+              </tr>
         ))}
           </tbody>
-        </table>
-      </RecordsWrapper>
+      </PatientsTable>
       <h3>Add New Patient:</h3>
       <AddChildForm />
     </ChildDataWrapper>
@@ -63,41 +59,25 @@ a {
   }
 `;
 
-const RecordsWrapper = styled.div`
-  display: flex;
-  flex-direction: column; 
-
-table{
+const PatientsTable = styled.table`
   width: 90%;
   max-width: 800px;
   margin: 0 auto;
   box-shadow: 1px 2px 3px #000;
   border-collapse: collapse;
   
-  tr{
-    width: 100%;
-    border: 1px solid green;
-  }
   tr:nth-child(even) {
     background: #e6e6e6;
-  }
+    }
 
-  thead{
+  th{
     background-color: #0d71ba;
     color: white;
-    th {
-      border: 1px solid yellow;
-        padding: 10px 0;
-    }
+    padding: 10px 0;
   }
-
- tbody{
-   width: 100%;
+  
   td{
      padding: 10px 0;
-     width: 25%
-     border: 1px solid pink;
-    }
+     width: 25%;
   }
-}  
 `;
