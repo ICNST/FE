@@ -5,9 +5,12 @@ import { ThemeProvider } from 'styled-components';
 import { Form, Button, Input, theme } from '../styled-components/index';
 
 import { useUserContext } from '../contexts/UserContext';
+import { useDataContext } from '../contexts/DataContext';
 
 export default function Login() {
   const { user, dispatch } = useUserContext();
+  const { data, dispatchData } = useDataContext();
+
   const [credentials, setCredentials] = useState({
     username: user.username,
     password: user.password,

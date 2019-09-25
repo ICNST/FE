@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
 import { useDataContext } from '../contexts/DataContext';
 
 export default function Country(props) {
   const { data, dispatchData } = useDataContext();
+
   const [newCommunity, setNewCommunity] = useState('');
   // console.log(data);
   // console.log(props);
@@ -78,19 +80,15 @@ const CommunityDiv = styled.div`
       color: white;
     }
   }
-<<<<<<< HEAD
-
-  button {
+  <<<<<<< head button {
     cursor: pointer;
     padding: 5px 10px;
     border: none;
-<<<<<<< HEAD
-=======
->>>>>>> 631cbbc05c008a2aeea3056ba191b6f695755d33
-=======
->>>>>>> 7a71d90e314c21eea2303e0a1cf227fc0a756787
-
-    :hover {
+    <<<<<<<
+      head
+      =======>>>>>>>631cbbc05c008a2aeea3056ba191b6f695755d33
+      =======>>>>>>>7a71d90e314c21eea2303a1cf227fc0a756787
+      :hover {
       background: #83c441;
       color: white;
     }
