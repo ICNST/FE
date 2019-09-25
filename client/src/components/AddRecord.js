@@ -1,46 +1,42 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { Input } from '../styled-components';
+import { Input } from "../styled-components";
 
 export default function AddRecord() {
-
   const [addNewRecord, setAddNewRecord] = useState({
-    date: '',
-    weight: '',
-    height: '',
+    date: "",
+    weight: "",
+    height: ""
   });
 
-  const handleChange = e => setAddNewRecord({
-    ...addNewRecord,
-    [e.target.name]: e.target.value,
-  });
+  const handleChange = e =>
+    setAddNewRecord({
+      ...addNewRecord,
+      [e.target.name]: e.target.value
+    });
 
   const handleClick = e => {
     e.preventDefault();
     console.log(addNewRecord);
   };
-  
+
   return (
     <Component>
       <h3>Add New Record:</h3>
       <Form>
         <div>
           {/* <label htmlFor='date'>Date</label> */}
-          <Input 
-          type='date' 
-          id='date' 
-          name='date' 
-          onChange={handleChange}/>
+          <Input type="date" id="date" name="date" onChange={handleChange} />
         </div>
 
         <div>
           {/* <label htmlFor='weight'>Weight</label> */}
           <Input
-            type='text'
-            id='weight'
-            name='weight'
-            placeholder='Weight (kg)'
+            type="text"
+            id="weight"
+            name="weight"
+            placeholder="Weight (kg)"
             onChange={handleChange}
           />
         </div>
@@ -48,15 +44,17 @@ export default function AddRecord() {
         <div>
           {/* <label htmlFor='height'>Height</label> */}
           <Input
-            type='text'
-            id='height'
-            name='height'
-            placeholder='Height (cm)'
+            type="text"
+            id="height"
+            name="height"
+            placeholder="Height (cm)"
             onChange={handleChange}
           />
         </div>
 
-        <Button type='submit' onClick={handleClick}>➕</Button>
+        <Button type="submit" onClick={handleClick}>
+          ➕
+        </Button>
       </Form>
     </Component>
   );
