@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import './App.css';
 
@@ -29,6 +29,7 @@ function App() {
           <Logo src={require('./image/ICN_Secondary_Alt.png')} />
           <LogoSmall src={require('./image/ICN_Primary.png')} />
           <Nav />
+          <Route exact path='/' render={() => <Redirect to='/login' />} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/admin' component={Admin} />
