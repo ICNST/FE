@@ -52,11 +52,12 @@ export default function Community(props) {
 }
 
 const ChildDataWrapper = styled.section`
-a {
-  text-decoration: none; 
-  color: black;}
-  `;
-  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+`;
+
 const RecordsWrapper = styled.table`
   width: 90%;
   max-width: 800px;
@@ -70,7 +71,7 @@ const RecordsWrapper = styled.table`
   a {
     text-decoration: none;
     color: black;
-  } 
+  }
 `;
 
 const TR = styled.tr`
@@ -79,11 +80,11 @@ const TR = styled.tr`
   text-align: left;
   padding: 10px;
   box-styling: border-box;
-  th{
+  th {
     width: 25%;
     text-align: left;
   }
-  td{
+  td {
     width: 25%;
   }
 `;

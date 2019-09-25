@@ -59,7 +59,6 @@ exports.seed = function(knex) {
         { id: 52, child_id: 7, date: "04/12/2010", height: 22.5 },
         { id: 53, child_id: 7, date: "05/12/2010", height: 23.0 },
         { id: 54, child_id: 7, date: "10/05/2011", height: 25.0 }
-        
       ]);
     });
 };
