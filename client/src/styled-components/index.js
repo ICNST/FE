@@ -3,7 +3,18 @@ import styled from 'styled-components';
 export const theme = {
   primary: '#83c441',
   secondary: '#0d71ba',
+  font:'Open Sans', 
 };
+export const H1=styled.h1`
+font-family:${(props)=>props.theme.font}
+`
+export const Label=styled.label`
+font-family:${(props)=>props.theme.font}
+`
+
+export const Span=styled.label`
+font-family:${(props)=>props.theme.font}
+`
 
 export const Form = styled.form`
   width: 250px;
