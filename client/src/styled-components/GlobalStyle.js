@@ -15,7 +15,9 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Source Sans Pro', sans-serif;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 210px;
   }
 
   h1, h2, h3, h4 {

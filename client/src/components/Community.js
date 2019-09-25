@@ -1,13 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
-import { DataContext } from '../contexts/DataContext';
+import { useDataContext } from '../contexts/DataContext';
 
 import AddChildForm from './AddChildForm';
 
 export default function Community(props) {
-  const { data, dispatchData } = useContext(DataContext);
+  const { data, dispatchData } = useDataContext();
   // console.log(data);
 
   useEffect(() => {
@@ -43,7 +42,7 @@ export default function Community(props) {
         ))}
         <AddChild>
           <button type='submit'>➕</button>
-          <Input type='text' placeholder='Add Child' />
+          <input type='text' placeholder='Add Child' />
         </AddChild>
       </RecordsWrapper>
       <h3>Add New Patient:</h3>
@@ -63,7 +62,7 @@ const RecordsWrapper = styled.table`
   a:nth-child(even) {
     background: #e6e6e6;
   }
-  a{
+  a {
     text-decoration: none;
     color: black;
   } 
@@ -78,26 +77,25 @@ const TR = styled.tr`
   td{
     width: 25%;
   }
-  
 `;
 
-// const AddChild = styled.div`
-//   border: 1px solid silver;
-//   display: flex;
-//   align-items: center;
-//   padding: 10px;
+const AddChild = styled.div`
+  border: 1px solid silver;
+  display: flex;
+  align-items: center;
+  padding: 10px;
 
-//   input {
-//     font-family: inherit;
-//     font-size: inherit;
-//     font-weight: inherit;
-//     border: none;
-//     margin: 18.72px 0px;
-//   }
+  input {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    border: none;
+    margin: 18.72px 0px;
+  }
 
-//   button {
-//     cursor: pointer;
-//     background: none;
-//     border: none;
-//   }
-// `;
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+`;
