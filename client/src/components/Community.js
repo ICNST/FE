@@ -1,16 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  Form,
-  Button,
-  Input,
-  theme,
-  RecordsWrapper,
-  TR,
-  AddChild,
-} from "../styled-components/index";
+
 import { DataContext } from '../contexts/DataContext';
+
+import AddChildForm from './AddChildForm';
 
 export default function Community(props) {
   const { data, dispatchData } = useContext(DataContext);
@@ -52,26 +46,44 @@ export default function Community(props) {
           <Input type='text' placeholder='Add Child' />
         </AddChild>
       </RecordsWrapper>
+      <AddChildForm />
     </section>
   );
 }
 
-// const RecordsWrapper = styled.table`
-//   width: 90%;
-//   max-width: 800px;
-//   margin: 0 auto;
-//   display: flex;
-//   flex-direction: column;
-//   box-shadow: 1px 2px 3px #000;
-// `;
+const RecordsWrapper = styled.table`
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 2px 3px #000;
+  align: center;
+  a:nth-child(even) {
+    background: #e6e6e6;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+  th{
+    width: 25%;
+  }
+  
+`;
 
-// const TR = styled.tr`
-//   display: flex;
-//   justify-content: space-between;
-//   text-align: left;
-//   padding: 10px;
-//   border: 1px solid grey;
-// `;
+const TR = styled.tr`
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  padding: 10px;
+  box-styling: border-box;
+  border: 1px solid grey;
+  td{
+    width: 25%;
+  }
+  
+`;
 
 // const AddChild = styled.div`
 //   border: 1px solid silver;
