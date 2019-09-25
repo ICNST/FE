@@ -24,6 +24,7 @@ export const Button = styled.button`
   margin: 10px auto;
   font-family: inherit;
   font-size: 15px;
+  cursor: pointer;
   :hover {
     background: ${props => props.theme.primary};
     color: white;

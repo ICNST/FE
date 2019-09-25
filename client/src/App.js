@@ -32,20 +32,18 @@ function App() {
       <GlobalStyle />
       <UserContext.Provider value={{ user, dispatch }}>
         <DataContext.Provider value={{ data, dispatchData }}>
-          <Container>
-            {/* <HeaderBar /> */}
-            <Logo src={require('./image/ICN_Secondary_Alt.png')} />
-            <TempNav />
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Register} />
-            <Route path='/admin' component={Admin} />
-            {/* <Route path="/country" component={Country} /> */}
-            {/* <Route path="/community" component={Community} /> */}
-            {/* <Route path="/child" component={Child} /> */}
-            <Route path='/country/:id' component={Country} />
-            <Route path='/community/:id' component={Community} />
-            <Route path='/child/:id' component={Child} />
-          </Container>
+          {/* <HeaderBar /> */}
+          <Logo src={require('./image/ICN_Secondary_Alt.png')} />
+          <TempNav />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+          <Route path='/admin' component={Admin} />
+          {/* <Route path="/country" component={Country} /> */}
+          {/* <Route path="/community" component={Community} /> */}
+          {/* <Route path="/child" component={Child} /> */}
+          <Route path='/country/:id' component={Country} />
+          <Route path='/community/:id' component={Community} />
+          <Route path='/child/:id' component={Child} />
           <Footer src={require('./image/ICN_blue_waves_double.png')} />
         </DataContext.Provider>
       </UserContext.Provider>
@@ -54,10 +52,6 @@ function App() {
 }
 
 export default App;
-
-const Container = styled.div`
-  // flex: 1 0 auto;
-`;
 
 const HeaderBar = styled.div`
   width: 100%;
