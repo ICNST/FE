@@ -55,7 +55,7 @@ const HeaderBar = styled.div`
 const Logo = styled.img`
   width: 90%;
   max-width: 700px;
-  margin: 10px 0;
+  margin: 40px 0;
 `;
 
 const Footer = styled.img`
