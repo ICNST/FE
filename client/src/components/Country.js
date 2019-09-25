@@ -1,18 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  Form,
-  Button,
-  Input,
-  theme,
- 
-} from "../styled-components/index";
 
-import { DataContext } from '../contexts/DataContext';
+import { useDataContext } from '../contexts/DataContext';
 
 export default function Country(props) {
-  const { data, dispatchData } = useContext(DataContext);
+  const { data, dispatchData } = useDataContext();
   console.log(data);
   console.log(props);
 
@@ -35,7 +28,7 @@ export default function Country(props) {
           </CommunityDiv>
         ))}
         <AddCommunity>
-          <Button type='submit'>➕</Button>
+          <button type='submit'>➕</button>
           <input type='text' placeholder='Add a New Community' />
         </AddCommunity>
       </CommunitiesWrapper>
@@ -74,8 +67,11 @@ const CommunityDiv = styled.div`
     cursor: pointer;
     padding: 5px 10px;
     border: none;
+<<<<<<< HEAD
 =======
 >>>>>>> 631cbbc05c008a2aeea3056ba191b6f695755d33
+=======
+>>>>>>> 7a71d90e314c21eea2303e0a1cf227fc0a756787
 
     :hover {
       background: #83c441;

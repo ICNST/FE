@@ -17,7 +17,6 @@ font-family:${(props)=>props.theme.font}
 `
 
 export const Form = styled.form`
-  height: 300px;
   width: 250px;
   display: flex;
   flex-direction: column;
@@ -30,11 +29,13 @@ export const Form = styled.form`
 `;
 
 export const Button = styled.button`
-  width: 100px;
-  padding: 5px 10px;
+  padding: 5px 15px;
   border: none;
   align-self: center;
   margin: 10px auto;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
   :hover {
     background: ${props => props.theme.primary};
     color: white;
@@ -44,11 +45,14 @@ export const Button = styled.button`
 export const Input = styled.input`
   padding: 0.5em;
   margin: 0.5em;
-  color: ${props => props.inputColor || "white"};
+  color: black;
   background: papayawhip;
   border: none;
   border-radius: 3px;
+  font-family: inherit;
+  font-size: 15px;
 `;
+
 export const Countries = styled.div`
   width: 90%;
   max-width: 800px;

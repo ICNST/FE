@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { DataContext } from '../contexts/DataContext';
+import { useDataContext } from '../contexts/DataContext';
 import AddRecord from './AddRecord';
 
 export default function Child(props) {
-  const { data, dispatchData } = useContext(DataContext);
+  const { data, dispatchData } = useDataContext();
   const [age, setAge] = useState();
   const [avatar, setAvatar] = useState('');
 

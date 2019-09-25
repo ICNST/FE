@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { DataContext } from '../contexts/DataContext';
+import { useDataContext } from '../contexts/DataContext';
 
 import AddChildForm from './AddChildForm';
 
 export default function Community(props) {
-  const { data, dispatchData } = useContext(DataContext);
+  const { data, dispatchData } = useDataContext();
   // console.log(data);
 
   useEffect(() => {
@@ -61,14 +61,13 @@ const RecordsWrapper = styled.table`
   a:nth-child(even) {
     background: #e6e6e6;
   }
-  a{
+  a {
     text-decoration: none;
     color: black;
   }
-  th{
+  th {
     width: 25%;
   }
-  
 `;
 
 const TR = styled.tr`
@@ -78,10 +77,9 @@ const TR = styled.tr`
   padding: 10px;
   box-styling: border-box;
   border: 1px solid grey;
-  td{
+  td {
     width: 25%;
   }
-  
 `;
 
 const AddChild = styled.div`
