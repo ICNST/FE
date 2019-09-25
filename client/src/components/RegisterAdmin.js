@@ -27,6 +27,14 @@ export default function RegisterAdmin() {
 
           <label htmlFor='password'>Password</label>
           <Input
+            type='password'
+            id='password'
+            name='password'
+            placeholder='Password'
+          />
+
+          <label htmlFor='country'>Country</label>
+          <Input
             type='text'
             id='password'
             name='password'
