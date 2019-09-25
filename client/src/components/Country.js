@@ -68,11 +68,14 @@ const CommunityDiv = styled.div`
       color: white;
     }
   }
+<<<<<<< HEAD
 
   button {
     cursor: pointer;
     padding: 5px 10px;
     border: none;
+=======
+>>>>>>> 631cbbc05c008a2aeea3056ba191b6f695755d33
 
     :hover {
       background: #83c441;

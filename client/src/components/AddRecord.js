@@ -47,8 +47,7 @@ const Input = styled.input`
 
 export default function AddRecord() {
   return (
-    <ThemeProvider theme={theme}>
-      {" "}
+     <>
       <h3>Add New Record:</h3>
       <Form>
         {/* <label>Date</label> */}
@@ -71,7 +70,7 @@ export default function AddRecord() {
         />
         <Button type="submit">➕</Button>
       </Form>
-    </ThemeProvider>
-    // </Component>
+    
+    // </>
   );
 }
