@@ -33,7 +33,7 @@ function App() {
       <UserContext.Provider value={{ user, dispatch }}>
         <DataContext.Provider value={{ data, dispatchData }}>
           <Container>
-            <HeaderBar />
+            {/* <HeaderBar /> */}
             <Logo src={require('./image/ICN_Secondary_Alt.png')} />
             <TempNav />
             <Route path='/login' component={Login} />
@@ -67,8 +67,8 @@ const HeaderBar = styled.div`
 
 const Logo = styled.img`
   width: 90%;
-  max-width: 500px;
-  margin: 25px 0;
+  max-width: 700px;
+  margin: 10px 0;
 `;
 
 const Footer = styled.img`

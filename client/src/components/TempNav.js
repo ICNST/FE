@@ -17,15 +17,15 @@ export default function TempNav() {
 }
 
 const NavBar = styled.div`
-  width: 280px;
-  margin: 0 auto 50px;
+  width: 50%;
+  margin: 5px auto;
   display: flex;
   justify-content: space-between;
 
   a {
     color: black;
     text-decoration: none;
-    font-weight: 600;
+    font-size: 18px;
 
     :hover {
       color: #0d71ba;
