@@ -178,6 +178,8 @@ const DivOne = styled.div`
   @media screen and (max-width: 620px) {
     flex-direction: column-reverse;
     margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
   }
 `;
 const DivTwo = styled.div`
@@ -189,11 +191,22 @@ const DivTwo = styled.div`
       width: 100%;
     }
   }
+
   @media screen and (max-width: 930px) {
     flex-direction: column;
     margin: 0 auto;
+    max-width: 95%;
     div{
-      width: 95%;
+      max-width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 620px) {
+    flex-direction: column;
+    max-width: 95%;
+    margin: 0 auto;
+    div{
+      width: 100%;
     }
   }
   `;
@@ -208,7 +221,7 @@ const ChildText = styled.div`
   margin: 10px auto;
 
   @media screen and (max-width: 620px) {
-    width: 90%;
+    maxt-width: 100%;
     margin-top: 20px;
     p {
       margin: 0.5em 0;
@@ -231,7 +244,7 @@ const ChartsAndData = styled.div`
  
   @media screen and (max-width: 620px) {
     flex-direction: column;
-    max-width: 90%;
+    max-width: 100%;
     margin: 0 auto;
   }
 `;
