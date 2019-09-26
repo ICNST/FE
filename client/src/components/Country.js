@@ -16,8 +16,17 @@ export default function Country(props) {
     const countryName = props.match.params.id;
     // console.log(countryName);
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
-
+    // axiosWithAuth()
+    //   .get()
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
     const countryData = testData.filter(el => el.country === countryName);
+    const communities = countryData[0].communities;
+    dispatchData({ type: 'SET_COMMUNITIES', payload: communities });
   }, []);
 
   const handleChange = e => setNewCommunity(e.target.value);
@@ -28,7 +37,7 @@ export default function Country(props) {
     e.preventDefault();
     console.log(newCommunity);
     // axiosWithAuth()
-    //   .get()
+    //   .post()
     //   .then(res => {
     //     console.log(res);
     //   })
@@ -43,8 +52,10 @@ export default function Country(props) {
       <CommunitiesWrapper>
         {data.communities.map(el => (
           <CommunityDiv>
-            <Link key={el} to={`/community/${el.split(' ').join('-')}`}>
-              <h3>{el}</h3>
+            <Link
+              key={el.id}
+              to={`/community/${el.community.split(' ').join('-')}`}>
+              <h3>{el.community}</h3>
             </Link>
             <button>✖️</button>
           </CommunityDiv>
