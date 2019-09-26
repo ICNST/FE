@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useDataContext } from '../contexts/DataContext';
 
 import AddRecord from './AddRecord';
+import Graph from './Graph';
 
 export default function Child(props) {
   const { data, dispatchData } = useDataContext();
@@ -59,6 +60,7 @@ export default function Child(props) {
         </ChildText>
         <Avatar>{avatar}</Avatar>
       </ChildInfo>
+      <Graph screenings={data.child.screenings} />
       <table>
         <caption>
           <h3>Screenings:</h3>
