@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
+import { useDataContext } from '../contexts/DataContext';
 
 export default function AddChildForm() {
-  const [addNewChild, setAddNewChild] = useState({
+  const { dispatchData } = useDataContext();
+
+  const [newChild, setNewChild] = useState({
     childName: '',
     childDob: '',
     parentName: '',
@@ -12,14 +15,14 @@ export default function AddChildForm() {
   });
 
   const handleChange = e =>
-    setAddNewChild({
-      ...addNewChild,
+    setNewChild({
+      ...newChild,
       [e.target.name]: e.target.value,
     });
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(addNewChild);
+    console.log(newChild);
     // axiosWithAuth()
     //   .post()
     //   .then(res => {
@@ -28,6 +31,17 @@ export default function AddChildForm() {
     //   .catch(err => {
     //     console.log(err);
     //   });
+    dispatchData({
+      type: 'ADD_CHILD',
+      payload: newChild,
+    });
+    setNewChild({
+      childName: '',
+      childDob: '',
+      parentName: '',
+      parentContact: '',
+      gender: '',
+    });
   };
 
   return (
@@ -36,9 +50,15 @@ export default function AddChildForm() {
         type='text'
         id='childName'
         name='childName'
-        placeholder='Full Name'
+        placeholder='Name'
         onChange={handleChange}
       />
+
+      <select id='gender' name='gender' onChange={handleChange}>
+        <option>Gender</option>
+        <option value='M'>Male</option>
+        <option value='F'>Female</option>
+      </select>
 
       <input
         type='text'
@@ -55,11 +75,6 @@ export default function AddChildForm() {
         placeholder='Contact'
         onChange={handleChange}
       />
-
-      <select id='gender' name='gender' onChange={handleChange}>
-        <option value='M'>Male</option>
-        <option value='F'>Female</option>
-      </select>
 
       <button type='submit'>➕</button>
     </Form>

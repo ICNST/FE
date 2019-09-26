@@ -86,11 +86,11 @@ const Form = styled.form`
   margin: 0 auto;
   box-shadow: 1px 2px 3px #000;
   background: #0d71ba;
-  
+
   font-weight: bold;
   div {
     max-width: 25%;
-    input{
+    input {
       max-width: 90%;
     }
   }
@@ -104,7 +104,7 @@ const Form = styled.form`
     button {
       width: 40px;
     }
-    div{
+    div {
       max-width: 100%;
     }
   }

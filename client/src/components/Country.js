@@ -48,7 +48,7 @@ export default function Country(props) {
     //   });
     dispatchData({
       type: 'ADD_COMMUNITY',
-      payload: { newCommunity: newCommunity, country: data.country },
+      payload: newCommunity,
     });
     setNewCommunity('');
   };
