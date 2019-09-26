@@ -11,7 +11,9 @@ export default function Country(props) {
   const [newCommunity, setNewCommunity] = useState('');
 
   useEffect(() => {
+    dispatchData({ type: 'INITIALIZE_DATA' });
     const countryName = props.match.params.id;
+    dispatchData({ type: 'GET_DATA_SUCCESS', payload: testData });
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
     // axiosWithAuth()
     //   .get()

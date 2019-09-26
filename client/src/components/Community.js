@@ -28,7 +28,7 @@ export default function Community(props) {
     if (localStorage.getItem('usertype') === 'admin') {
       return <Redirect to='/admin' />;
     } else {
-      return <Redirect to={`/country/${data.country}`} />;
+      return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
     }
   }
 

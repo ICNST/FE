@@ -24,17 +24,19 @@ export default function Child(props) {
   }, []);
 
   useEffect(() => {
-    const dobString = new Date(data.child.dob);
-    const age =
-      (Date.now() - dobString.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
-    setAge(Math.floor(age));
-  }, [data.child.dob]);
+    if (data.child) {
+      const dobString = new Date(data.child.dob);
+      const age =
+        (Date.now() - dobString.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
+      setAge(Math.floor(age));
+    }
+  }, [data.child]);
 
   if (!data.hasData) {
     if (localStorage.getItem('usertype') === 'admin') {
       return <Redirect to='/admin' />;
     } else {
-      return <Redirect to={`/country/${data.country}`} />;
+      return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
     }
   }
 

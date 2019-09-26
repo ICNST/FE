@@ -33,7 +33,8 @@ export default function Login(props) {
         if (credentials.usertype === 'admin') {
           props.history.push('/admin');
         } else {
-          props.history.push(`/country/${data.country}`);
+          localStorage.setItem('country', user.country);
+          props.history.push(`/country/${user.country}`);
         }
       })
       .catch(err => {

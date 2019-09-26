@@ -206,6 +206,10 @@ export const initialState = {
 // This reducer handles dispatches to get data from the server and to update global child nutrition records stored in state
 export const dataReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'INITIALIZE_DATA':
+      return {
+        ...initialState,
+      };
     case 'GET_DATA_START':
       return {
         ...state,
