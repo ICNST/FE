@@ -77,8 +77,8 @@ const Component = styled.div`
 `;
 
 const Form = styled.form`
-  width: 85%;
-  max-width: 800px;
+  width: 90%;
+  // max-width: 800px;
   display: flex;
   box-sizing: border-box;
   justify-content: space-between;
@@ -95,7 +95,7 @@ const Form = styled.form`
     }
   }
 
-  @media screen and (max-width: 920px) {
+  @media screen and (max-width: 1250px) {
     flex-direction: column;
     align-items: center;
     width: 90%;
