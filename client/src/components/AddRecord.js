@@ -23,6 +23,14 @@ export default function AddRecord() {
   const handleClick = e => {
     e.preventDefault();
     console.log(addNewRecord);
+    // axiosWithAuth()
+    //   .post()
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -82,14 +90,30 @@ const Form = styled.form`
   background: #0d71ba;
   color: white;
   font-weight: bold;
+
+  @media screen and (max-width: 920px) {
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    padding-top: 10px;
+
+    input {
+      width: 230px;
+    }
+
+    button {
+      width: 40px;
+    }
+  }
 `;
 
 const Button = styled.button`
   font-size: 1em;
   margin: 0.5em;
-  padding: 0.25em 1em;
+  padding: 0.25em 0.5em;
   border: none;
   border-radius: 3px;
+  text-align: center;
   cursor: pointer;
   :hover {
     background: #83c441;

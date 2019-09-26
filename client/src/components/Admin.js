@@ -16,8 +16,8 @@ export default function Admin() {
   useEffect(() => {
     // axiosWithAuth()
     //   .get()
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err));
+    //   .then(res => {console.log(res)})
+    //   .catch(err => {console.log(err)});
   }, []);
 
   const handleChange = e => setNewCountry(e.target.value);
@@ -66,10 +66,15 @@ const AdminWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  @media screen and (max-width: 850px) {
+    flex-direction: column;
+  }
 `;
 
 const CountriesWrapper = styled.div`
-  width: 60%;
+  width: 90%;
+  max-width: 500px;
 `;
 
 const Countries = styled.div`

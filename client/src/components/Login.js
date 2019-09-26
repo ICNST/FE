@@ -7,14 +7,14 @@ import { Form, Button, Input, theme } from '../styled-components/index';
 import { useUserContext } from '../contexts/UserContext';
 import { useDataContext } from '../contexts/DataContext';
 
-export default function Login() {
+export default function Login(props) {
   const { user, dispatch } = useUserContext();
   const { data, dispatchData } = useDataContext();
 
   const [credentials, setCredentials] = useState({
-    username: user.username,
-    password: user.password,
-    usertype: user.usertype,
+    username: '',
+    password: '',
+    usertype: 'user',
   });
 
   const handleChange = e =>
@@ -22,41 +22,61 @@ export default function Login() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // axiosWithAuth()
-    //   .post('', credentials)
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => console.log(err));
+    // dispatch({ type: 'LOGIN_START' });
+    axiosWithAuth()
+      .post('https://jsonplaceholder.typicode.com/users', credentials)
+      .then(res => {
+        console.log(res);
+        localStorage.setItem('token', 'login' + res.data.id);
+        dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
+        if (credentials.usertype === 'admin') {
+          props.history.push('/admin');
+        } else {
+          props.history.push(`/country/${data.country}`);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
     console.log(credentials);
   };
 
   // Navigate to proper page given token and usertype
-  // if (localStorage.getItem('token')) return <Redirect to='/' />;
+  if (localStorage.getItem('token')) {
+    if (user.usertype === 'admin') {
+      return <Redirect to='/admin' />;
+    } else {
+      return <Redirect to={`/country/${data.country}`} />;
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Form onSubmit={handleSubmit}>
-        <h3>Login:</h3>
+        <h2>Login:</h2>
         <span>
-          <label htmlFor='user'>User</label>
-          <input
-            type='radio'
-            id='user'
-            name='usertype'
-            value='user'
-            checked={credentials.usertype === 'user'}
-            onChange={handleChange}
-          />
-          <label htmlFor='admin'>Admin</label>
-          <input
-            type='radio'
-            id='admin'
-            name='usertype'
-            value='admin'
-            checked={credentials.usertype === 'admin'}
-            onChange={handleChange}
-          />
+          <div>
+            <label htmlFor='user'>User</label>
+            <input
+              type='radio'
+              id='user'
+              name='usertype'
+              value='user'
+              checked={credentials.usertype === 'user'}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor='admin'>Admin</label>
+            <input
+              type='radio'
+              id='admin'
+              name='usertype'
+              value='admin'
+              checked={credentials.usertype === 'admin'}
+              onChange={handleChange}
+            />
+          </div>
         </span>
 
         <label htmlFor='username'>Username</label>

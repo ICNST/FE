@@ -7,9 +7,8 @@ import { useDataContext } from '../contexts/DataContext';
 
 export default function Country(props) {
   const { data, dispatchData } = useDataContext();
-
   const [newCommunity, setNewCommunity] = useState('');
-  // console.log(data);
+  console.log('Country Component:', data);
   // console.log(props);
 
   useEffect(() => {
@@ -25,11 +24,19 @@ export default function Country(props) {
   const handleClick = e => {
     e.preventDefault();
     console.log(newCommunity);
+    // axiosWithAuth()
+    //   .get()
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   return (
     <section className='country-communities'>
-      <h1>{data.country}</h1>
+      <h1>{props.match.params.id}</h1>
       <CommunitiesWrapper>
         {data.communities.map(el => (
           <CommunityDiv>
@@ -57,8 +64,8 @@ export default function Country(props) {
 
 // Styles
 const CommunitiesWrapper = styled.div`
-  width: 60%;
-  max-width: 800px;
+  width: 90%;
+  max-width: 600px;
   margin: 0 auto;
   box-shadow: 1px 2px 3px #000;
 `;
@@ -80,15 +87,13 @@ const CommunityDiv = styled.div`
       color: white;
     }
   }
-  <<<<<<< head button {
+
+  button {
     cursor: pointer;
     padding: 5px 10px;
     border: none;
-    <<<<<<<
-      head
-      =======>>>>>>>631cbbc05c008a2aeea3056ba191b6f695755d33
-      =======>>>>>>>7a71d90e314c21eea2303a1cf227fc0a756787
-      :hover {
+
+    :hover {
       background: #83c441;
       color: white;
     }

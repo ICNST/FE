@@ -2,8 +2,8 @@
 export const initialUserState = {
   username: '',
   password: '',
-  usertype: '',
-  country: '',
+  usertype: 'user',
+  country: 'Brazil',
   isAdmin: false,
   isLoading: false,
   error: '',
@@ -12,6 +12,7 @@ export const initialUserState = {
 
 // This reducer handles dispatches to update global user state
 export const userReducer = (state = initialUserState, action) => {
+  console.log('action:', action);
   switch (action.type) {
     case 'FIELD':
       return {
@@ -29,6 +30,8 @@ export const userReducer = (state = initialUserState, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
+        usertype: action.payload.usertype,
+        username: action.payload.username,
       };
     case 'LOGIN_FAILURE':
       return {
@@ -38,9 +41,20 @@ export const userReducer = (state = initialUserState, action) => {
         isLoading: false,
         username: '',
         password: '',
-        usertype: '',
+        usertype: 'user',
         country: '',
         isAdmin: false,
+      };
+    case 'LOGIN_TRUE':
+      return { ...state, isLoggedIn: true };
+    case 'REGISTRATION_SUCCESS':
+      return {
+        ...state,
+        isLoggedIn: true,
+        isLoading: false,
+        usertype: 'user',
+        username: action.payload.username,
+        country: action.payload.country,
       };
     case 'LOGOUT':
       return {

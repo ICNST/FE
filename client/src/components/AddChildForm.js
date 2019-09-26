@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
 export default function AddChildForm() {
@@ -19,6 +20,14 @@ export default function AddChildForm() {
   const handleSubmit = e => {
     e.preventDefault();
     console.log(addNewChild);
+    // axiosWithAuth()
+    //   .post()
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -47,10 +56,10 @@ export default function AddChildForm() {
         onChange={handleChange}
       />
 
-        <select id='gender' name='gender' onChange={handleChange}>
-          <option value='M'>Male</option>
-          <option value='F'>Female</option>
-        </select>
+      <select id='gender' name='gender' onChange={handleChange}>
+        <option value='M'>Male</option>
+        <option value='F'>Female</option>
+      </select>
 
       <button type='submit'>➕</button>
     </Form>
@@ -70,8 +79,14 @@ box-shadow: 1px 2px 3px #000;
 text-align: left;
 background: #0d71ba;
 
+@media screen and (max-width: 780px) {
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+}
+
 input, select {
-    max-width: 17%;
+    width: 17%;
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
@@ -80,6 +95,10 @@ input, select {
     background: papayawhip;
     border: none;
     border-radius: 3px;
+
+    @media screen and (max-width: 780px) {
+      width: 230px;
+    }
   }
 
 button {
@@ -92,7 +111,6 @@ button {
     padding: 0.25em 1em;
     :hover {
       background: #83c441;
-      color: white;
-    
+      color: white; 
   }
 `;

@@ -10,7 +10,7 @@ export default function RegisterAdmin() {
   const [registrationInfo, setRegistrationInfo] = useState({
     username: '',
     password: '',
-    usertype: '',
+    usertype: 'user',
     country: '',
   });
 
@@ -29,6 +29,14 @@ export default function RegisterAdmin() {
   const handleSubmit = e => {
     e.preventDefault();
     console.log(registrationInfo);
+    // axiosWithAuth()
+    //   .post()
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -37,24 +45,28 @@ export default function RegisterAdmin() {
         <Form onSubmit={handleSubmit}>
           <h3>Register New User:</h3>
           <span>
-            <label htmlFor='user'>User</label>
-            <input
-              type='radio'
-              id='user'
-              name='usertype'
-              value='user'
-              checked={registrationInfo.usertype === 'user'}
-              onChange={handleChange}
-            />
-            <label htmlFor='admin'>Admin</label>
-            <input
-              type='radio'
-              id='admin'
-              name='usertype'
-              value='admin'
-              checked={registrationInfo.usertype === 'admin'}
-              onChange={handleChange}
-            />
+            <div>
+              <label htmlFor='user'>User</label>
+              <input
+                type='radio'
+                id='user'
+                name='usertype'
+                value='user'
+                checked={registrationInfo.usertype === 'user'}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor='admin'>Admin</label>
+              <input
+                type='radio'
+                id='admin'
+                name='usertype'
+                value='admin'
+                checked={registrationInfo.usertype === 'admin'}
+                onChange={handleChange}
+              />
+            </div>
           </span>
 
           <label htmlFor='username'>Username</label>

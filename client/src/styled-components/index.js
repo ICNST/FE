@@ -3,21 +3,21 @@ import styled from 'styled-components';
 export const theme = {
   primary: '#83c441',
   secondary: '#0d71ba',
-  font:'Open Sans', 
+  font: 'Open Sans',
 };
-export const H1=styled.h1`
-font-family:${(props)=>props.theme.font}
-`
-export const Label=styled.label`
-font-family:${(props)=>props.theme.font}
-`
+export const H1 = styled.h1`
+  font-family: ${props => props.theme.font};
+`;
+export const Label = styled.label`
+  font-family: ${props => props.theme.font};
+`;
 
-export const Span=styled.label`
-font-family:${(props)=>props.theme.font}
-`
+export const Span = styled.label`
+  font-family: ${props => props.theme.font};
+`;
 
 export const Form = styled.form`
-  width: 250px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -26,6 +26,12 @@ export const Form = styled.form`
   box-shadow: 1px 2px 3px #000;
   background: ${props => props.theme.secondary};
   color: white;
+
+  span {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 15px;
+  }
 `;
 
 export const Button = styled.button`
