@@ -29,6 +29,14 @@ export default function RegisterAdmin() {
   const handleSubmit = e => {
     e.preventDefault();
     console.log(registrationInfo);
+    // axiosWithAuth()
+    //   .post()
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   return (

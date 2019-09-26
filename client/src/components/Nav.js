@@ -3,9 +3,11 @@ import { NavLink, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useUserContext } from '../contexts/UserContext';
+import { useDataContext } from '../contexts/DataContext';
 
 function Nav(props) {
   const { user, dispatch } = useUserContext();
+  const { data, dispatchData } = useDataContext();
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -32,6 +34,7 @@ function Nav(props) {
           <SignOutBtn
             onClick={() => {
               localStorage.removeItem('token');
+              dispatchData({ type: 'RESET_DATA' });
               dispatch({ type: 'LOGOUT' });
               props.history.push('/login');
             }}>

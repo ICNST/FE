@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
 export default function AddChildForm() {
@@ -19,6 +20,14 @@ export default function AddChildForm() {
   const handleSubmit = e => {
     e.preventDefault();
     console.log(addNewChild);
+    // axiosWithAuth()
+    //   .post()
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   return (

@@ -12,6 +12,7 @@ export const initialUserState = {
 
 // This reducer handles dispatches to update global user state
 export const userReducer = (state = initialUserState, action) => {
+  console.log('action:', action);
   switch (action.type) {
     case 'FIELD':
       return {
@@ -46,6 +47,15 @@ export const userReducer = (state = initialUserState, action) => {
       };
     case 'LOGIN_TRUE':
       return { ...state, isLoggedIn: true };
+    case 'REGISTRATION_SUCCESS':
+      return {
+        ...state,
+        isLoggedIn: true,
+        isLoading: false,
+        usertype: 'user',
+        username: action.payload.username,
+        country: action.payload.country,
+      };
     case 'LOGOUT':
       return {
         ...initialUserState,

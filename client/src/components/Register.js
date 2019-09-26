@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Form, Button, Input, theme } from '../styled-components/index';
 
 import { useUserContext } from '../contexts/UserContext';
 import { useDataContext } from '../contexts/DataContext';
 
-export default function Register() {
+export default function Register(props) {
   const { user, dispatch } = useUserContext();
   const { data, dispatchData } = useDataContext();
 
@@ -24,8 +25,27 @@ export default function Register() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(registrationInfo);
+    // console.log(registrationInfo);
+    axiosWithAuth()
+      .post('https://jsonplaceholder.typicode.com/users', registrationInfo)
+      .then(res => {
+        console.log(res);
+        localStorage.setItem('token', 'register' + res.data.id);
+        dispatch({ type: 'REGISTRATION_SUCCESS', payload: res.data });
+        props.history.push(`/country/${registrationInfo.country}`);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
+
+  if (localStorage.getItem('token')) {
+    if (user.usertype === 'admin') {
+      return <Redirect to='/admin' />;
+    } else {
+      return <Redirect to={`/country/${data.country}`} />;
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>

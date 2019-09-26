@@ -22,12 +22,12 @@ export default function Login(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch({ type: 'LOGIN_START' });
+    // dispatch({ type: 'LOGIN_START' });
     axiosWithAuth()
       .post('https://jsonplaceholder.typicode.com/users', credentials)
       .then(res => {
         console.log(res);
-        localStorage.setItem('token', res.data.id);
+        localStorage.setItem('token', 'login' + res.data.id);
         dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
         if (credentials.usertype === 'admin') {
           props.history.push('/admin');
@@ -35,13 +35,15 @@ export default function Login(props) {
           props.history.push(`/country/${data.country}`);
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+      });
     console.log(credentials);
   };
 
   // Navigate to proper page given token and usertype
   if (localStorage.getItem('token')) {
-    if (credentials.usertype === 'admin') {
+    if (user.usertype === 'admin') {
       return <Redirect to='/admin' />;
     } else {
       return <Redirect to={`/country/${data.country}`} />;

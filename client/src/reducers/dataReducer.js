@@ -248,6 +248,10 @@ export const dataReducer = (state = initialState, action) => {
         ...state,
         child: action.payload,
       };
+    case 'RESET_DATA':
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

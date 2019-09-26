@@ -23,6 +23,14 @@ export default function AddRecord() {
   const handleClick = e => {
     e.preventDefault();
     console.log(addNewRecord);
+    // axiosWithAuth()
+    //   .post()
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   return (

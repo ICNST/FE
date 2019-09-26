@@ -17,7 +17,7 @@ export default function Admin() {
     // axiosWithAuth()
     //   .get()
     //   .then(res => {console.log(res)})
-    //   .catch(err => console.log(err));
+    //   .catch(err => {console.log(err)});
   }, []);
 
   const handleChange = e => setNewCountry(e.target.value);
