@@ -12,10 +12,10 @@ export default function Country(props) {
 
   useEffect(() => {
     const countryName = props.match.params.id;
-    console.log(countryName);
-    dispatchData({ type: 'INITIALIZE_DATA' });
+    // console.log(countryName);
+    // dispatchData({ type: 'INITIALIZE_DATA' });
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
-    dispatchData({ type: 'GET_DATA_SUCCESS', payload: testData });
+
     // axiosWithAuth()
     //   .get()
     //   .then(res => {
@@ -24,6 +24,8 @@ export default function Country(props) {
     //   .catch(err => {
     //     console.log(err);
     //   });
+    dispatchData({ type: 'GET_DATA_SUCCESS', payload: testData });
+
     const countryData = testData.filter(el => el.country === countryName);
     if (countryData[0]) {
       const communities = countryData[0].communities;
@@ -44,22 +46,28 @@ export default function Country(props) {
     //   .catch(err => {
     //     console.log(err);
     //   });
+    dispatchData({
+      type: 'ADD_COMMUNITY',
+      payload: { newCommunity: newCommunity, country: data.country },
+    });
+    setNewCommunity('');
   };
 
   return (
     <section className='country-communities'>
       <h1>{props.match.params.id}</h1>
       <CommunitiesWrapper>
-        {data.communities.map(el => (
-          <CommunityDiv>
-            <Link
-              key={el.id}
-              to={`/community/${el.community.split(' ').join('-')}`}>
-              <h3>{el.community}</h3>
-            </Link>
-            <button>✖️</button>
-          </CommunityDiv>
-        ))}
+        {data.communities &&
+          data.communities.map(el => (
+            <CommunityDiv>
+              <Link
+                key={el.id}
+                to={`/community/${el.community.split(' ').join('-')}`}>
+                <h3>{el.community}</h3>
+              </Link>
+              <button>✖️</button>
+            </CommunityDiv>
+          ))}
         <AddCommunity>
           <button type='submit' onClick={handleClick}>
             ➕
