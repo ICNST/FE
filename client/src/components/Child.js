@@ -60,29 +60,35 @@ export default function Child(props) {
         </ChildText>
         <Avatar>{avatar}</Avatar>
       </ChildInfo>
-      <Graph screenings={data.child.screenings} />
-      <table>
-        <caption>
-          <h3>Screenings:</h3>
-        </caption>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Weight (kg)</th>
-            <th>Height (cm)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.child.screenings.map(el => (
-            <tr key={el.date}>
-              <td>{el.date}</td>
-              <td>{el.weight}</td>
-              <td>{el.height}</td>
+      <ChartsAndData>
+      <div>
+        <table>
+          <caption>
+            <h3>Screenings:</h3>
+          </caption>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Weight (kg)</th>
+              <th>Height (cm)</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <AddRecord />
+          </thead>
+          <tbody>
+            {data.child.screenings.map(el => (
+              <tr key={el.date}>
+                <td>{el.date}</td>
+                <td>{el.weight}</td>
+                <td>{el.height}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <AddRecord />
+      </div>
+      <div>
+        <Graph screenings={data.child.screenings} />
+      </div>
+      </ChartsAndData>
     </ChildWrapper>
   );
 }
@@ -92,6 +98,7 @@ const ChildWrapper = styled.div`
   flex-direction: column;
   max-width: 98%;
   margin: 0 auto;
+  
 
   a {
     text-decoration: none;
@@ -104,7 +111,7 @@ const ChildWrapper = styled.div`
   table {
     font-family: inherit;
     width: 90%;
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
     table-layout: fixed;
     border-collapse: collapse;
@@ -163,4 +170,15 @@ const Avatar = styled.div`
   font-size: 200px;
   background-color: #e6e6e6;
   border-radius: 20px;
+`;
+
+const ChartsAndData = styled.div`
+  display: flex;
+  margin: 0 auto;
+  align-content: space-between;
+  @media screen and (max-width: 620px) {
+    flex-direction: column;
+    max-width: 90%;
+    margin: 0 auto;
+  }
 `;

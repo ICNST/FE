@@ -72,7 +72,7 @@ const GraphWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 1px 2px 3px #000;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   height: 300px;
   width: 600px;
   h4 {
