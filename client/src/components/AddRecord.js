@@ -77,20 +77,21 @@ const Component = styled.div`
 `;
 
 const Form = styled.form`
-  width: 90%;
+  width: 85%;
   max-width: 800px;
   display: flex;
+  box-sizing: border-box;
   justify-content: space-between;
   padding: 10px;
   margin: 0 auto;
   box-shadow: 1px 2px 3px #000;
   background: #0d71ba;
-  color: white;
+  
   font-weight: bold;
   div {
     max-width: 25%;
     input{
-      max-width: 100%;
+      max-width: 90%;
     }
   }
 
