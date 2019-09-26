@@ -185,6 +185,7 @@ const DivOne = styled.div`
 const DivTwo = styled.div`
   max-width: 70%;
   display: flex;
+  justify-content: space-evenly;
   div{
     width: 45%;
     div{
