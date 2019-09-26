@@ -80,7 +80,6 @@ const Component = styled.div`
 const Form = styled.form`
   width: 90%;
   max-width: 800px;
-  width: 75%;
   display: flex;
   justify-content: space-between;
   padding: 10px;
