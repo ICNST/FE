@@ -39,21 +39,21 @@ export default function Graph(props) {
       <GraphWrapper>
         <h4>Height (cm)</h4>
         <ResponsiveContainer width='95%' height={300}>
-        <LineChart
-          data={props.screenings}
-          margin={{ top: 10, right: 40, left: 0, bottom: 10 }}>
-          <CartesianGrid stroke='#e6e6e6' strokeDasharray='5 5' />
-          <XAxis dataKey='date' />
-          <YAxis />
-          <Tooltip />
-          <Line
-            type='monotone'
-            dataKey='height'
-            stroke='#0d71ba'
-            strokeWidth='2'
-            activeDot={{ r: 6 }}
-          />
-        </LineChart>
+          <LineChart
+            data={props.screenings}
+            margin={{ top: 10, right: 40, left: 0, bottom: 10 }}>
+            <CartesianGrid stroke='#e6e6e6' strokeDasharray='5 5' />
+            <XAxis dataKey='date' />
+            <YAxis />
+            <Tooltip />
+            <Line
+              type='monotone'
+              dataKey='height'
+              stroke='#0d71ba'
+              strokeWidth='2'
+              activeDot={{ r: 6 }}
+            />
+          </LineChart>
         </ResponsiveContainer>
       </GraphWrapper>
     </ChartWrapper>
@@ -72,8 +72,8 @@ const GraphWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 1px 2px 3px #000;
-  margin-bottom: 50px;
-  height: 300px;
+  // margin-bottom: 50px;
+  height: 350px;
   width: 600px;
   h4 {
     background-color: #0d71ba;
@@ -83,13 +83,13 @@ const GraphWrapper = styled.div`
     margin-top: 0;
   }
 
-  @media screen and (max-width: 920px){
-    height: 300px;
+  @media screen and (max-width: 920px) {
+    // height: 300px;
     width: 90%;
   }
 
   @media screen and (max-width: 620px) {
-    height: 45%;
+    // height: 45%;
     width: 95%;
   }
 `;

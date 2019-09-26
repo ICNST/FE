@@ -46,12 +46,6 @@ function App() {
 
 export default App;
 
-const HeaderBar = styled.div`
-  width: 100%;
-  height: 20px;
-  background-color: #0d71ba;
-`;
-
 const Logo = styled.img`
   width: 90%;
   max-width: 700px;

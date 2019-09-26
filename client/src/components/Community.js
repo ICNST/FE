@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDataContext } from '../contexts/DataContext';
 
@@ -7,13 +7,30 @@ import AddChildForm from './AddChildForm';
 
 export default function Community(props) {
   const { data, dispatchData } = useDataContext();
-  // console.log(data);
+
+  console.log(data.hasData);
 
   useEffect(() => {
-    const communityName = props.match.params.id;
+    const communityName = props.match.params.id.split('-').join(' ');
     // console.log(communityName);
+
     dispatchData({ type: 'SET_COMMUNITY', payload: communityName });
+    const communityData = data.communities.filter(
+      el => el.community === communityName,
+    );
+    if (communityData[0]) {
+      const children = communityData[0].children;
+      dispatchData({ type: 'SET_CHILDREN', payload: children });
+    }
   }, []);
+
+  if (!data.hasData) {
+    if (localStorage.getItem('usertype') === 'admin') {
+      return <Redirect to='/admin' />;
+    } else {
+      return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
+    }
+  }
 
   return (
     <ChildDataWrapper>
@@ -24,24 +41,26 @@ export default function Community(props) {
         - {data.community}
       </h1>
       <PatientsTable>
-          <thead>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Parent</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.children.map(el => (
             <tr>
-              <th>Name</th>
-              <th>Gender</th>
-              <th>Parent</th>
-              <th>Contact</th>
+              <Link to={`/child/${el.id}`}>
+                <td>{el.name}</td>
+              </Link>
+              <td>{el.gender}</td>
+              <td>{el.parent_name}</td>
+              <td>{el.contact}</td>
             </tr>
-          </thead>
-          <tbody>
-            {data.children.map(el => (
-              <tr>
-              <Link to={`/child/${el.id}`}><td>{el.name}</td></Link>
-                  <td>{el.gender}</td>
-                  <td>{el.parentname}</td>
-                  <td>{el.parentcontact}</td>
-              </tr>
-        ))}
-          </tbody>
+          ))}
+        </tbody>
       </PatientsTable>
       <h3>Add New Patient:</h3>
       <AddChildForm />
@@ -50,11 +69,11 @@ export default function Community(props) {
 }
 
 const ChildDataWrapper = styled.section`
-a {
-  text-decoration: none; 
-  color: black;
-  :hover {
-    color: #0d71ba;
+  a {
+    text-decoration: none;
+    color: black;
+    :hover {
+      color: #0d71ba;
     }
   }
 `;
@@ -65,19 +84,19 @@ const PatientsTable = styled.table`
   margin: 0 auto;
   box-shadow: 1px 2px 3px #000;
   border-collapse: collapse;
-  
+
   tr:nth-child(even) {
     background: #e6e6e6;
-    }
+  }
 
-  th{
+  th {
     background-color: #0d71ba;
     color: white;
     padding: 10px 0;
   }
-  
-  td{
-     padding: 10px 0;
-     width: 25%;
+
+  td {
+    padding: 10px 0;
+    width: 25%;
   }
 `;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { testData } from '../testData';
 import styled from 'styled-components';
 
 import { useDataContext } from '../contexts/DataContext';
@@ -8,24 +9,34 @@ import { useDataContext } from '../contexts/DataContext';
 export default function Country(props) {
   const { data, dispatchData } = useDataContext();
   const [newCommunity, setNewCommunity] = useState('');
-  console.log('Country Component:', data);
-  // console.log(props);
 
   useEffect(() => {
+    dispatchData({ type: 'INITIALIZE_DATA' });
     const countryName = props.match.params.id;
-    // console.log(countryName);
+    dispatchData({ type: 'GET_DATA_SUCCESS', payload: testData });
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
+    // axiosWithAuth()
+    //   .get()
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    const countryData = testData.filter(el => el.country === countryName);
+    if (countryData[0]) {
+      const communities = countryData[0].communities;
+      dispatchData({ type: 'SET_COMMUNITIES', payload: communities });
+    }
   }, []);
 
   const handleChange = e => setNewCommunity(e.target.value);
-
-  // console.log(newCommunity);
 
   const handleClick = e => {
     e.preventDefault();
     console.log(newCommunity);
     // axiosWithAuth()
-    //   .get()
+    //   .post()
     //   .then(res => {
     //     console.log(res);
     //   })
@@ -40,8 +51,10 @@ export default function Country(props) {
       <CommunitiesWrapper>
         {data.communities.map(el => (
           <CommunityDiv>
-            <Link key={el} to={`/community/${el.split(' ').join('-')}`}>
-              <h3>{el}</h3>
+            <Link
+              key={el.id}
+              to={`/community/${el.community.split(' ').join('-')}`}>
+              <h3>{el.community}</h3>
             </Link>
             <button>✖️</button>
           </CommunityDiv>

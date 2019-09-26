@@ -29,11 +29,14 @@ function Nav(props) {
         {props.location.pathname === '/login' && (
           <NavLink to='/register'>Register</NavLink>
         )}
-        {user.usertype === 'admin' && <NavLink to='/admin'>Admin</NavLink>}
+        {localStorage.getItem('usertype') === 'admin' && (
+          <NavLink to='/admin'>Admin</NavLink>
+        )}
         {user.isLoggedIn && (
           <SignOutBtn
             onClick={() => {
               localStorage.removeItem('token');
+              localStorage.removeItem('usertype');
               dispatchData({ type: 'RESET_DATA' });
               dispatch({ type: 'LOGOUT' });
               props.history.push('/login');

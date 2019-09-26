@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { testData } from '../testData';
 import styled, { ThemeProvider } from 'styled-components';
 
 // Context
@@ -18,6 +19,9 @@ export default function Admin() {
     //   .get()
     //   .then(res => {console.log(res)})
     //   .catch(err => {console.log(err)});
+    dispatchData({ type: 'GET_DATA_SUCCESS', payload: testData });
+    console.log(testData);
+    dispatchData({ type: 'SET_COUNTRIES', payload: testData });
   }, []);
 
   const handleChange = e => setNewCountry(e.target.value);
@@ -36,8 +40,10 @@ export default function Admin() {
           <Countries>
             {data.countries.map(el => (
               <Country>
-                <Link key={el} to={`/country/${el.split(' ').join('-')}`}>
-                  <h3>{el}</h3>
+                <Link
+                  key={el.id}
+                  to={`/country/${el.country.split(' ').join('-')}`}>
+                  <h3>{el.country}</h3>
                 </Link>
                 <button>✖️</button>
               </Country>
