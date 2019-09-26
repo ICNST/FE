@@ -72,7 +72,7 @@ const NavBarColor = styled.div`
 
 const NavBar = styled.div`
   display: flex;
-  margin-right: 20px;
+  margin-right: 40px;
 
   @media screen and (max-width: 500px) {
     flex-direction: column;
