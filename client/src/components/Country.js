@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { testData } from '../testData';
 import styled from 'styled-components';
 
 import { useDataContext } from '../contexts/DataContext';
@@ -15,6 +16,8 @@ export default function Country(props) {
     const countryName = props.match.params.id;
     // console.log(countryName);
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
+
+    const countryData = testData.filter(el => el.country === countryName);
   }, []);
 
   const handleChange = e => setNewCommunity(e.target.value);

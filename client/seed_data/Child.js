@@ -105,7 +105,6 @@ exports.seed = function(knex) {
           community_id: 5,
           country: 'Bolivia',
         },
-
         {
           id: 11,
           name: 'Aliz',
