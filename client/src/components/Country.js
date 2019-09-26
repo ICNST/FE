@@ -13,7 +13,7 @@ export default function Country(props) {
   useEffect(() => {
     const countryName = props.match.params.id;
     // console.log(countryName);
-    dispatchData({ type: 'INITIALIZE_DATA' });
+    // dispatchData({ type: 'INITIALIZE_DATA' });
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
 
     // axiosWithAuth()
@@ -46,7 +46,10 @@ export default function Country(props) {
     //   .catch(err => {
     //     console.log(err);
     //   });
-    dispatchData({ type: 'ADD_COMMUNITY', payload: newCommunity });
+    dispatchData({
+      type: 'ADD_COMMUNITY',
+      payload: { newCommunity: newCommunity, country: data.country },
+    });
     setNewCommunity('');
   };
 
@@ -54,16 +57,17 @@ export default function Country(props) {
     <section className='country-communities'>
       <h1>{props.match.params.id}</h1>
       <CommunitiesWrapper>
-        {data.communities.map(el => (
-          <CommunityDiv>
-            <Link
-              key={el.id}
-              to={`/community/${el.community.split(' ').join('-')}`}>
-              <h3>{el.community}</h3>
-            </Link>
-            <button>✖️</button>
-          </CommunityDiv>
-        ))}
+        {data.communities &&
+          data.communities.map(el => (
+            <CommunityDiv>
+              <Link
+                key={el.id}
+                to={`/community/${el.community.split(' ').join('-')}`}>
+                <h3>{el.community}</h3>
+              </Link>
+              <button>✖️</button>
+            </CommunityDiv>
+          ))}
         <AddCommunity>
           <button type='submit' onClick={handleClick}>
             ➕
