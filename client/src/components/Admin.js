@@ -66,10 +66,15 @@ const AdminWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  @media screen and (max-width: 850px) {
+    flex-direction: column;
+  }
 `;
 
 const CountriesWrapper = styled.div`
-  width: 60%;
+  width: 90%;
+  max-width: 500px;
 `;
 
 const Countries = styled.div`

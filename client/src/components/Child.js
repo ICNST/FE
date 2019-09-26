@@ -99,6 +99,7 @@ const ChildWrapper = styled.div`
       color: #0d71ba;
     }
   }
+
   table {
     font-family: inherit;
     width: 90%;
@@ -130,9 +131,13 @@ const ChildWrapper = styled.div`
 
 const ChildInfo = styled.div`
   display: flex;
-  width: 95%;
+  width: 90%;
   justify-content: space-evenly;
   margin: 0 auto;
+
+  @media screen and (max-width: 620px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const ChildText = styled.div`
@@ -142,6 +147,11 @@ const ChildText = styled.div`
   align-items: flex-start;
   box-shadow: 1px 2px 3px #000;
   padding: 10px 20px;
+
+  @media screen and (max-width: 620px) {
+    width: 90%;
+    margin-top: 20px;
+  }
 `;
 
 const Avatar = styled.div`

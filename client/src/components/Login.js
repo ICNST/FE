@@ -37,26 +37,30 @@ export default function Login() {
   return (
     <ThemeProvider theme={theme}>
       <Form onSubmit={handleSubmit}>
-        <h3>Login:</h3>
+        <h2>Login:</h2>
         <span>
-          <label htmlFor='user'>User</label>
-          <input
-            type='radio'
-            id='user'
-            name='usertype'
-            value='user'
-            checked={credentials.usertype === 'user'}
-            onChange={handleChange}
-          />
-          <label htmlFor='admin'>Admin</label>
-          <input
-            type='radio'
-            id='admin'
-            name='usertype'
-            value='admin'
-            checked={credentials.usertype === 'admin'}
-            onChange={handleChange}
-          />
+          <div>
+            <label htmlFor='user'>User</label>
+            <input
+              type='radio'
+              id='user'
+              name='usertype'
+              value='user'
+              checked={credentials.usertype === 'user'}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor='admin'>Admin</label>
+            <input
+              type='radio'
+              id='admin'
+              name='usertype'
+              value='admin'
+              checked={credentials.usertype === 'admin'}
+              onChange={handleChange}
+            />
+          </div>
         </span>
 
         <label htmlFor='username'>Username</label>

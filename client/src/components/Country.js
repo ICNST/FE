@@ -57,8 +57,8 @@ export default function Country(props) {
 
 // Styles
 const CommunitiesWrapper = styled.div`
-  width: 60%;
-  max-width: 800px;
+  width: 90%;
+  max-width: 600px;
   margin: 0 auto;
   box-shadow: 1px 2px 3px #000;
 `;
