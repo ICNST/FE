@@ -48,16 +48,17 @@ export default function Community(props) {
           </tr>
         </thead>
         <tbody>
-          {data.children.map(el => (
-            <tr>
-              <Link to={`/child/${el.id}`}>
-                <td>{el.name}</td>
-              </Link>
-              <td>{el.gender}</td>
-              <td>{el.parent_name}</td>
-              <td>{el.contact}</td>
-            </tr>
-          ))}
+          {data.children &&
+            data.children.map(el => (
+              <tr>
+                <Link to={`/child/${el.id}`}>
+                  <td>{el.name}</td>
+                </Link>
+                <td>{el.gender}</td>
+                <td>{el.parent_name}</td>
+                <td>{el.contact}</td>
+              </tr>
+            ))}
         </tbody>
       </PatientsTable>
       <h3>Add New Patient:</h3>
