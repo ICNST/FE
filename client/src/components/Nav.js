@@ -7,11 +7,17 @@ import { useUserContext } from '../contexts/UserContext';
 function Nav(props) {
   const { user, dispatch } = useUserContext();
 
+  console.log(props.location.pathname);
+
   return (
     <NavBarColor>
       <NavBar>
-        <NavLink to='/login'>Login</NavLink>
-        <NavLink to='/register'>Register</NavLink>
+        {props.location.pathname === '/register' && (
+          <NavLink to='/login'>Login</NavLink>
+        )}
+        {props.location.pathname === '/login' && (
+          <NavLink to='/register'>Register</NavLink>
+        )}
         <NavLink to='/admin'>Admin</NavLink>
         <SignOutBtn
           onClick={() => {
