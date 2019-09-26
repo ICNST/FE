@@ -7,21 +7,19 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
+  ResponsiveContainer,
 } from 'recharts';
 
 export default function Graph(props) {
   console.log(props);
 
   return (
-    <div>
+    <ChartWrapper>
       <h3>Graphs:</h3>
-      <ChartWrapper>
-        <GraphWrapper>
-          <h4>Weight (kg)</h4>
+      <GraphWrapper>
+        <h4>Weight (kg)</h4>
+        <ResponsiveContainer width='95%' height={300}>
           <LineChart
-            width={350}
-            height={200}
             data={props.screenings.reverse()}
             margin={{ top: 10, right: 40, left: 0, bottom: 10 }}>
             <CartesianGrid stroke='#e6e6e6' strokeDasharray='5 5' />
@@ -35,14 +33,13 @@ export default function Graph(props) {
               strokeWidth='2'
               activeDot={{ r: 6 }}
             />
-            {/* <Legend /> */}
           </LineChart>
-        </GraphWrapper>
-        <GraphWrapper>
-          <h4>Height (cm)</h4>
+        </ResponsiveContainer>
+      </GraphWrapper>
+      <GraphWrapper>
+        <h4>Height (cm)</h4>
+        <ResponsiveContainer width='95%' height={300}>
           <LineChart
-            width={350}
-            height={200}
             data={props.screenings}
             margin={{ top: 10, right: 40, left: 0, bottom: 10 }}>
             <CartesianGrid stroke='#e6e6e6' strokeDasharray='5 5' />
@@ -56,24 +53,17 @@ export default function Graph(props) {
               strokeWidth='2'
               activeDot={{ r: 6 }}
             />
-            {/* <Legend /> */}
           </LineChart>
-        </GraphWrapper>
-      </ChartWrapper>
-    </div>
+        </ResponsiveContainer>
+      </GraphWrapper>
+    </ChartWrapper>
   );
 }
 
 const ChartWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  width: 95%;
-  margin: 0 auto;
-
-  @media screen and (max-width: 840px) {
-    flex-direction: column;
-  }
+  width: 100%;
 `;
 
 const GraphWrapper = styled.div`
@@ -82,13 +72,18 @@ const GraphWrapper = styled.div`
   align-items: center;
   box-shadow: 1px 2px 3px #000;
   margin-bottom: 20px;
-  max-width: 100%;
-
+  height: 300px;
+  width: 600px;
   h4 {
     background-color: #0d71ba;
     color: white;
     width: 100%;
     padding: 5px 0;
     margin-top: 0;
+  }
+
+  @media screen and (max-width: 620px) {
+    height: 45%;
+    width: 95%;
   }
 `;
