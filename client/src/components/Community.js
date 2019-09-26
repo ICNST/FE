@@ -10,9 +10,14 @@ export default function Community(props) {
   // console.log(data);
 
   useEffect(() => {
-    const communityName = props.match.params.id;
+    const communityName = props.match.params.id.split('-').join(' ');
     // console.log(communityName);
     dispatchData({ type: 'SET_COMMUNITY', payload: communityName });
+    const communityData = data.communities.filter(
+      el => el.community === communityName,
+    );
+    const children = communityData[0].children;
+    dispatchData({ type: 'SET_CHILDREN', payload: children });
   }, []);
 
   return (
@@ -24,24 +29,26 @@ export default function Community(props) {
         - {data.community}
       </h1>
       <PatientsTable>
-          <thead>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Parent</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.children.map(el => (
             <tr>
-              <th>Name</th>
-              <th>Gender</th>
-              <th>Parent</th>
-              <th>Contact</th>
+              <Link to={`/child/${el.id}`}>
+                <td>{el.name}</td>
+              </Link>
+              <td>{el.gender}</td>
+              <td>{el.parent_name}</td>
+              <td>{el.contact}</td>
             </tr>
-          </thead>
-          <tbody>
-            {data.children.map(el => (
-              <tr>
-              <Link to={`/child/${el.id}`}><td>{el.name}</td></Link>
-                  <td>{el.gender}</td>
-                  <td>{el.parentname}</td>
-                  <td>{el.parentcontact}</td>
-              </tr>
-        ))}
-          </tbody>
+          ))}
+        </tbody>
       </PatientsTable>
       <h3>Add New Patient:</h3>
       <AddChildForm />
@@ -50,11 +57,11 @@ export default function Community(props) {
 }
 
 const ChildDataWrapper = styled.section`
-a {
-  text-decoration: none; 
-  color: black;
-  :hover {
-    color: #0d71ba;
+  a {
+    text-decoration: none;
+    color: black;
+    :hover {
+      color: #0d71ba;
     }
   }
 `;
@@ -65,19 +72,19 @@ const PatientsTable = styled.table`
   margin: 0 auto;
   box-shadow: 1px 2px 3px #000;
   border-collapse: collapse;
-  
+
   tr:nth-child(even) {
     background: #e6e6e6;
-    }
+  }
 
-  th{
+  th {
     background-color: #0d71ba;
     color: white;
     padding: 10px 0;
   }
-  
-  td{
-     padding: 10px 0;
-     width: 25%;
+
+  td {
+    padding: 10px 0;
+    width: 25%;
   }
 `;

@@ -34,6 +34,7 @@ function Nav(props) {
           <SignOutBtn
             onClick={() => {
               localStorage.removeItem('token');
+              localStorage.removeItem('usertype');
               dispatchData({ type: 'RESET_DATA' });
               dispatch({ type: 'LOGOUT' });
               props.history.push('/login');

@@ -28,6 +28,7 @@ export default function Login(props) {
       .then(res => {
         console.log(res);
         localStorage.setItem('token', 'login' + res.data.id);
+        localStorage.setItem('usertype', res.data.usertype);
         dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
         if (credentials.usertype === 'admin') {
           props.history.push('/admin');
