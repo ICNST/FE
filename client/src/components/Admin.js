@@ -20,7 +20,7 @@ export default function Admin() {
     //   .then(res => {console.log(res)})
     //   .catch(err => {console.log(err)});
     dispatchData({ type: 'GET_DATA_SUCCESS', payload: testData });
-    console.log(testData);
+    // console.log(testData);
     dispatchData({ type: 'SET_COUNTRIES', payload: testData });
   }, []);
 
@@ -28,7 +28,13 @@ export default function Admin() {
 
   const handleClick = e => {
     e.preventDefault();
-    console.log(newCountry);
+    // console.log(newCountry);
+    // axiosWithAuth()
+    //   .post()
+    //   .then(res => {console.log(res)})
+    //   .catch(err => {console.log(err)});
+    dispatchData({ type: 'ADD_COUNTRY', payload: newCountry });
+    setNewCountry('');
   };
 
   return (

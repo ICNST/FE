@@ -258,6 +258,16 @@ export const dataReducer = (state = initialState, action) => {
         ...state,
         child: action.payload,
       };
+    case 'ADD_COUNTRY':
+      return {
+        ...state,
+        countries: [...state.countries, { country: action.payload }],
+      };
+    case 'ADD_COMMUNITY':
+      return {
+        ...state,
+        communities: [...state.communities, { community: action.payload }],
+      };
     case 'RESET_DATA':
       return {
         ...initialState,

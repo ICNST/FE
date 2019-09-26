@@ -8,6 +8,8 @@ export const initialUserState = {
   isLoading: false,
   error: '',
   isLoggedIn: false,
+  registeredUsers: [],
+  adminUsers: [],
 };
 
 // This reducer handles dispatches to update global user state

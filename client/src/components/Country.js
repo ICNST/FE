@@ -46,6 +46,8 @@ export default function Country(props) {
     //   .catch(err => {
     //     console.log(err);
     //   });
+    dispatchData({ type: 'ADD_COMMUNITY', payload: newCommunity });
+    setNewCommunity('');
   };
 
   return (
