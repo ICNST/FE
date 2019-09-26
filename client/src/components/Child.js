@@ -41,7 +41,7 @@ export default function Child(props) {
   }
 
   return (
-    <ChildWrapper>
+    <PageWrapper>
       <h2>
         <Link to={`/country/${data.country.split(' ').join('-')}`}>
           {data.country}
@@ -52,63 +52,69 @@ export default function Child(props) {
         </Link>{' '}
         - {data.child.name}
       </h2>
-      <ChildInfo>
-        <ChildText>
-          <p>
-            <strong>Age:</strong> {age}
-          </p>
-          <p>
-            <strong>Date of Birth:</strong> {data.child.dob}
-          </p>
-          <p>
-            <strong>Gender:</strong> {data.child.gender}
-          </p>
-          <p>
-            <strong>Parent:</strong> {data.child.parent_name}
-          </p>
-          <p>
-            <strong>Parent Contact:</strong> {data.child.contact}
-          </p>
-        </ChildText>
-        <Avatar>{avatar}</Avatar>
-      </ChildInfo>
-      <ChartsAndData>
-        <div>
-          <table>
-            <caption>
-              <h3>Screenings:</h3>
-            </caption>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Weight (kg)</th>
-                <th>Height (cm)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.child.screenings &&
-                data.child.screenings.map(el => (
-                  <tr key={el.date}>
-                    <td>{el.date}</td>
-                    <td>{el.weight}</td>
-                    <td>{el.height}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-          <AddRecord />
-        </div>
-        <div>
-          {data.child.screenings && (
-            <Graph screenings={data.child.screenings} />
-          )}
-        </div>
-      </ChartsAndData>
-    </ChildWrapper>
+
+      <ChildWrapper>
+        
+        <ChartsAndData>
+          <DivOne>
+            <Avatar>{avatar}</Avatar>
+            <ChildText>
+              <p>
+                <strong>Age:</strong> {age}
+              </p>
+              <p>
+                <strong>Date of Birth:</strong> {data.child.dob}
+              </p>
+              <p>
+                <strong>Gender:</strong> {data.child.gender}
+              </p>
+              <p>
+                <strong>Parent:</strong> {data.child.parent_name}
+              </p>
+              <p>
+                <strong>Parent Contact:</strong> {data.child.contact}
+              </p>
+            </ChildText>
+          </DivOne>
+          <div>
+            <table>
+              <caption>
+                <h3>Screenings:</h3>
+              </caption>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Weight (kg)</th>
+                  <th>Height (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.child.screenings &&
+                  data.child.screenings.map(el => (
+                    <tr key={el.date}>
+                      <td>{el.date}</td>
+                      <td>{el.weight}</td>
+                      <td>{el.height}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+            <AddRecord />
+          </div>
+          <div>
+            {data.child.screenings && (
+              <Graph screenings={data.child.screenings} />
+            )}
+          </div>
+        </ChartsAndData>
+      
+      </ChildWrapper>
+
+    </PageWrapper>
   );
 }
 
-const ChildWrapper = styled.div`
+const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 98%;
@@ -150,12 +156,19 @@ const ChildWrapper = styled.div`
     }
   }
 `;
-
-const ChildInfo = styled.div`
-  display: flex;
-  width: 90%;
-  justify-content: space-evenly;
+const ChildWrapper = styled.div`
+  display: flex
+  max-width: 95%;
   margin: 0 auto;
+  justify-content: space-between;
+`;
+
+const DivOne = styled.div`
+  display: flex;
+  width: 25%;
+  align-content: space-between;
+  margin: 0 auto;
+  flex-direction: column;
 
   @media screen and (max-width: 620px) {
     flex-direction: column-reverse;
@@ -164,12 +177,13 @@ const ChildInfo = styled.div`
 `;
 
 const ChildText = styled.div`
-  width: 40%;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  text-align: left;
   box-shadow: 1px 2px 3px #000;
   padding: 10px 20px;
+  margin-top: 20px;
 
   @media screen and (max-width: 620px) {
     width: 90%;
@@ -184,14 +198,15 @@ const Avatar = styled.div`
   font-size: 200px;
   background-color: #e6e6e6;
   border-radius: 20px;
+  margin: 20px auto;
 `;
 
 const ChartsAndData = styled.div`
   display: flex;
+  justify-content: space-between;
   margin: 0 auto;
   div {
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
   }
 
   @media screen and (max-width: 620px) {
