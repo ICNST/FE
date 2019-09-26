@@ -83,6 +83,11 @@ const GraphWrapper = styled.div`
     margin-top: 0;
   }
 
+  @media screen and (max-width: 920px){
+    height: 300px;
+    width: 90%;
+  }
+
   @media screen and (max-width: 620px) {
     height: 45%;
     width: 95%;

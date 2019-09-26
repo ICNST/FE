@@ -73,8 +73,7 @@ export default function AddRecord() {
 }
 
 const Component = styled.div`
-  // background: #83c441;
-  // color: red;
+  margin: 0 auto;
 `;
 
 const Form = styled.form`
@@ -83,25 +82,29 @@ const Form = styled.form`
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  margin: 10px auto;
-  box-sizing: border-box;
+  margin: 0 auto;
   box-shadow: 1px 2px 3px #000;
   background: #0d71ba;
   color: white;
   font-weight: bold;
+  div {
+    max-width: 25%;
+    input{
+      max-width: 100%;
+    }
+  }
 
   @media screen and (max-width: 920px) {
     flex-direction: column;
     align-items: center;
-    width: 300px;
+    width: 90%;
     padding-top: 10px;
-
-    input {
-      width: 230px;
-    }
 
     button {
       width: 40px;
+    }
+    div{
+      max-width: 100%;
     }
   }
 `;

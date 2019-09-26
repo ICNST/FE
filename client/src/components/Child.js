@@ -111,7 +111,6 @@ const ChildWrapper = styled.div`
   flex-direction: column;
   max-width: 98%;
   margin: 0 auto;
-
   a {
     text-decoration: none;
     color: black;
@@ -122,7 +121,8 @@ const ChildWrapper = styled.div`
 
   table {
     font-family: inherit;
-    width: 90%;
+    width: 85%;
+    max-height: 300px;
     max-width: 800px;
     margin: 0 auto;
     table-layout: fixed;
@@ -187,7 +187,11 @@ const Avatar = styled.div`
 const ChartsAndData = styled.div`
   display: flex;
   margin: 0 auto;
-  align-content: space-between;
+  div{
+    width: 90%;
+    
+  }
+  }
   @media screen and (max-width: 620px) {
     flex-direction: column;
     max-width: 90%;
