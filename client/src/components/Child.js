@@ -90,7 +90,7 @@ export default function Child(props) {
 const ChildWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 1000px;
+  max-width: 98%;
   margin: 0 auto;
 
   a {
@@ -138,6 +138,7 @@ const ChildInfo = styled.div`
 
   @media screen and (max-width: 620px) {
     flex-direction: column-reverse;
+    margin: 0 auto;
   }
 `;
 
@@ -152,6 +153,9 @@ const ChildText = styled.div`
   @media screen and (max-width: 620px) {
     width: 90%;
     margin-top: 20px;
+    p{
+      margin: 0.5em 0;
+    }
   }
 `;
 
