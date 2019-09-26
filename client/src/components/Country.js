@@ -13,7 +13,7 @@ export default function Country(props) {
   useEffect(() => {
     const countryName = props.match.params.id;
     // console.log(countryName);
-    // dispatchData({ type: 'INITIALIZE_DATA' });
+    dispatchData({ type: 'INITIALIZE_DATA' });
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
 
     // axiosWithAuth()
