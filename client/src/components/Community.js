@@ -8,11 +8,9 @@ import AddChildForm from './AddChildForm';
 export default function Community(props) {
   const { data, dispatchData } = useDataContext();
 
-  console.log(data.hasData);
-
   useEffect(() => {
     const communityName = props.match.params.id.split('-').join(' ');
-    // console.log(communityName);
+    console.log(communityName);
 
     dispatchData({ type: 'SET_COMMUNITY', payload: communityName });
     const communityData = data.communities.filter(

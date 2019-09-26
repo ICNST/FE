@@ -9,7 +9,7 @@ import { useDataContext } from '../contexts/DataContext';
 
 export default function Register(props) {
   const { user, dispatch } = useUserContext();
-  const { data, dispatchData } = useDataContext();
+  const { dispatchData } = useDataContext();
 
   const [registrationInfo, setRegistrationInfo] = useState({
     username: '',
@@ -31,7 +31,10 @@ export default function Register(props) {
       .then(res => {
         console.log(res);
         localStorage.setItem('token', 'register' + res.data.id);
+        localStorage.setItem('country', res.data.country);
+        localStorage.setItem('usertype', 'user');
         dispatch({ type: 'REGISTRATION_SUCCESS', payload: res.data });
+        dispatchData({ type: 'SET_COUNTRY', payload: res.data.country });
         props.history.push(`/country/${registrationInfo.country}`);
       })
       .catch(err => {
@@ -43,7 +46,7 @@ export default function Register(props) {
     if (user.usertype === 'admin') {
       return <Redirect to='/admin' />;
     } else {
-      return <Redirect to={`/country/${data.country}`} />;
+      return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
     }
   }
 
