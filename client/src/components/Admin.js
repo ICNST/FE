@@ -16,7 +16,7 @@ export default function Admin() {
   useEffect(() => {
     // axiosWithAuth()
     //   .get()
-    //   .then(res => console.log(res))
+    //   .then(res => {console.log(res)})
     //   .catch(err => console.log(err));
   }, []);
 

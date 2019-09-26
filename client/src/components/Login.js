@@ -12,9 +12,9 @@ export default function Login(props) {
   const { data, dispatchData } = useDataContext();
 
   const [credentials, setCredentials] = useState({
-    username: user.username,
-    password: user.password,
-    usertype: user.usertype,
+    username: '',
+    password: '',
+    usertype: 'user',
   });
 
   const handleChange = e =>
@@ -40,7 +40,13 @@ export default function Login(props) {
   };
 
   // Navigate to proper page given token and usertype
-  // if (localStorage.getItem('token')) return <Redirect to='/' />;
+  if (localStorage.getItem('token')) {
+    if (credentials.usertype === 'admin') {
+      return <Redirect to='/admin' />;
+    } else {
+      return <Redirect to={`/country/${data.country}`} />;
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
