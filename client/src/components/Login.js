@@ -26,7 +26,7 @@ export default function Login(props) {
     axiosWithAuth()
       .post('https://jsonplaceholder.typicode.com/users', credentials)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         localStorage.setItem('token', 'login' + res.data.id);
         localStorage.setItem('usertype', res.data.usertype);
         dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
@@ -39,7 +39,6 @@ export default function Login(props) {
       .catch(err => {
         console.log(err);
       });
-    console.log(credentials);
   };
 
   // Navigate to proper page given token and usertype

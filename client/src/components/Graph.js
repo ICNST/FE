@@ -62,6 +62,7 @@ export default function Graph(props) {
 
 const ChartWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
 `;

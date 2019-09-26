@@ -9,12 +9,9 @@ import { useDataContext } from '../contexts/DataContext';
 export default function Country(props) {
   const { data, dispatchData } = useDataContext();
   const [newCommunity, setNewCommunity] = useState('');
-  console.log('Country Component:', data);
-  // console.log(props);
 
   useEffect(() => {
     const countryName = props.match.params.id;
-    // console.log(countryName);
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
     // axiosWithAuth()
     //   .get()
@@ -25,13 +22,13 @@ export default function Country(props) {
     //     console.log(err);
     //   });
     const countryData = testData.filter(el => el.country === countryName);
-    const communities = countryData[0].communities;
-    dispatchData({ type: 'SET_COMMUNITIES', payload: communities });
+    if (countryData[0]) {
+      const communities = countryData[0].communities;
+      dispatchData({ type: 'SET_COMMUNITIES', payload: communities });
+    }
   }, []);
 
   const handleChange = e => setNewCommunity(e.target.value);
-
-  // console.log(newCommunity);
 
   const handleClick = e => {
     e.preventDefault();

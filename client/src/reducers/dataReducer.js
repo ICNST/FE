@@ -1,5 +1,6 @@
 // This object initializes the child nutrition records
 export const initialState = {
+  hasData: false,
   serverData: [],
   countries: [],
   country: '',
@@ -21,7 +22,7 @@ export const initialState = {
 //       id: 1,
 //       name: 'Jane Doe',
 //       parentname: 'Mrs. Doe',
-//       parentcontact: 'mrs.doe@gmail.com',
+//       parentcontact: 'mrs.doe@gmail.com',Haha
 //       dob: '09/28/2010',
 //       gender: 'F',
 //       screenings: [
@@ -216,6 +217,7 @@ export const dataReducer = (state = initialState, action) => {
         ...state,
         isGetting: false,
         serverData: action.payload,
+        hasData: true,
       };
     case 'GET_DATA_FAILURE':
       return {

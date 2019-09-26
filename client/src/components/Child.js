@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useDataContext } from '../contexts/DataContext';
@@ -19,14 +19,24 @@ export default function Child(props) {
     const childData = data.children.find(el => el.id === childId);
     dispatchData({ type: 'SET_CHILD', payload: childData });
 
+    const random = Math.floor(Math.random() * 5);
+    setAvatar(avatars[random]);
+  }, []);
+
+  useEffect(() => {
     const dobString = new Date(data.child.dob);
     const age =
       (Date.now() - dobString.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
     setAge(Math.floor(age));
+  }, [data.child.dob]);
 
-    const random = Math.floor(Math.random() * 5);
-    setAvatar(avatars[random]);
-  }, []);
+  if (!data.hasData) {
+    if (localStorage.getItem('usertype') === 'admin') {
+      return <Redirect to='/admin' />;
+    } else {
+      return <Redirect to={`/country/${data.country}`} />;
+    }
+  }
 
   return (
     <ChildWrapper>
@@ -52,42 +62,45 @@ export default function Child(props) {
             <strong>Gender:</strong> {data.child.gender}
           </p>
           <p>
-            <strong>Parent:</strong> {data.child.parentname}
+            <strong>Parent:</strong> {data.child.parent_name}
           </p>
           <p>
-            <strong>Parent Contact:</strong> {data.child.parentcontact}
+            <strong>Parent Contact:</strong> {data.child.contact}
           </p>
         </ChildText>
         <Avatar>{avatar}</Avatar>
       </ChildInfo>
       <ChartsAndData>
-      <div>
-        <table>
-          <caption>
-            <h3>Screenings:</h3>
-          </caption>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Weight (kg)</th>
-              <th>Height (cm)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.child.screenings.map(el => (
-              <tr key={el.date}>
-                <td>{el.date}</td>
-                <td>{el.weight}</td>
-                <td>{el.height}</td>
+        <div>
+          <table>
+            <caption>
+              <h3>Screenings:</h3>
+            </caption>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Weight (kg)</th>
+                <th>Height (cm)</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <AddRecord />
-      </div>
-      <div>
-        <Graph screenings={data.child.screenings} />
-      </div>
+            </thead>
+            <tbody>
+              {data.child.screenings &&
+                data.child.screenings.map(el => (
+                  <tr key={el.date}>
+                    <td>{el.date}</td>
+                    <td>{el.weight}</td>
+                    <td>{el.height}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+          <AddRecord />
+        </div>
+        <div>
+          {data.child.screenings && (
+            <Graph screenings={data.child.screenings} />
+          )}
+        </div>
       </ChartsAndData>
     </ChildWrapper>
   );
@@ -98,7 +111,6 @@ const ChildWrapper = styled.div`
   flex-direction: column;
   max-width: 98%;
   margin: 0 auto;
-  
 
   a {
     text-decoration: none;
@@ -160,7 +172,7 @@ const ChildText = styled.div`
   @media screen and (max-width: 620px) {
     width: 90%;
     margin-top: 20px;
-    p{
+    p {
       margin: 0.5em 0;
     }
   }

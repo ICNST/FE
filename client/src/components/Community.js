@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDataContext } from '../contexts/DataContext';
 
@@ -7,18 +7,30 @@ import AddChildForm from './AddChildForm';
 
 export default function Community(props) {
   const { data, dispatchData } = useDataContext();
-  // console.log(data);
+
+  console.log(data.hasData);
 
   useEffect(() => {
     const communityName = props.match.params.id.split('-').join(' ');
     // console.log(communityName);
+
     dispatchData({ type: 'SET_COMMUNITY', payload: communityName });
     const communityData = data.communities.filter(
       el => el.community === communityName,
     );
-    const children = communityData[0].children;
-    dispatchData({ type: 'SET_CHILDREN', payload: children });
+    if (communityData[0]) {
+      const children = communityData[0].children;
+      dispatchData({ type: 'SET_CHILDREN', payload: children });
+    }
   }, []);
+
+  if (!data.hasData) {
+    if (localStorage.getItem('usertype') === 'admin') {
+      return <Redirect to='/admin' />;
+    } else {
+      return <Redirect to={`/country/${data.country}`} />;
+    }
+  }
 
   return (
     <ChildDataWrapper>

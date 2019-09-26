@@ -29,7 +29,9 @@ function Nav(props) {
         {props.location.pathname === '/login' && (
           <NavLink to='/register'>Register</NavLink>
         )}
-        {user.usertype === 'admin' && <NavLink to='/admin'>Admin</NavLink>}
+        {localStorage.getItem('usertype') === 'admin' && (
+          <NavLink to='/admin'>Admin</NavLink>
+        )}
         {user.isLoggedIn && (
           <SignOutBtn
             onClick={() => {
