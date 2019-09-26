@@ -67,7 +67,7 @@ export default function Graph(props) {
 const ChartWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 95%;
   margin: 0 auto;
 
