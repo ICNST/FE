@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { testData } from '../testData';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 
 // Context
 import { useDataContext } from '../contexts/DataContext';
