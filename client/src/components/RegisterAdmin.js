@@ -10,7 +10,7 @@ export default function RegisterAdmin() {
   const [registrationInfo, setRegistrationInfo] = useState({
     username: '',
     password: '',
-    usertype: '',
+    usertype: 'user',
     country: '',
   });
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,10 +7,19 @@ import { useUserContext } from '../contexts/UserContext';
 function Nav(props) {
   const { user, dispatch } = useUserContext();
 
-  console.log(props.location.pathname);
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      dispatch({ type: 'LOGIN_TRUE' });
+    }
+  }, []);
 
   return (
     <NavBarColor>
+      {/* {user.isLoggedIn && (
+        <UserInfo>
+          <p>Hello, {user.username}!</p>
+        </UserInfo>
+      )} */}
       <NavBar>
         {props.location.pathname === '/register' && (
           <NavLink to='/login'>Login</NavLink>
@@ -18,15 +27,17 @@ function Nav(props) {
         {props.location.pathname === '/login' && (
           <NavLink to='/register'>Register</NavLink>
         )}
-        <NavLink to='/admin'>Admin</NavLink>
-        <SignOutBtn
-          onClick={() => {
-            localStorage.removeItem('token');
-            dispatch({ type: 'LOGOUT' });
-            props.history.push('/login');
-          }}>
-          Sign Out
-        </SignOutBtn>
+        {user.usertype === 'admin' && <NavLink to='/admin'>Admin</NavLink>}
+        {user.isLoggedIn && (
+          <SignOutBtn
+            onClick={() => {
+              localStorage.removeItem('token');
+              dispatch({ type: 'LOGOUT' });
+              props.history.push('/login');
+            }}>
+            Sign Out
+          </SignOutBtn>
+        )}
       </NavBar>
     </NavBarColor>
   );
@@ -36,17 +47,33 @@ const NavBarColor = styled.div`
   background-color: #0d71ba;
   padding: 5px;
   margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 40px;
+
+  @media screen and (max-width: 500px) {
+    justify-content: center;
+  }
 `;
 
+// const UserInfo = styled.div`
+//   margin-left: 10px;
+
+//   p {
+//     padding: 0;
+//     margin: 0;
+//     color: white;
+//   }
+// `;
+
 const NavBar = styled.div`
-  width: 90%;
-  max-width: 475px;
-  margin: 5px auto;
   display: flex;
-  justify-content: space-between;
+  margin-right: 20px;
 
   @media screen and (max-width: 500px) {
     flex-direction: column;
+    margin-right: 0px;
   }
 
   a {
@@ -69,9 +96,14 @@ const SignOutBtn = styled.button`
   font-size: 22px;
   font-weight: bold;
   cursor: pointer;
+  margin-left: 30px;
 
   :hover {
     color: #83c441;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-left: 0px;
   }
 `;
 

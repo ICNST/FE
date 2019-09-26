@@ -2,8 +2,8 @@
 export const initialUserState = {
   username: '',
   password: '',
-  usertype: '',
-  country: '',
+  usertype: 'user',
+  country: 'Brazil',
   isAdmin: false,
   isLoading: false,
   error: '',
@@ -29,6 +29,8 @@ export const userReducer = (state = initialUserState, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
+        usertype: action.payload.usertype,
+        username: action.payload.username,
       };
     case 'LOGIN_FAILURE':
       return {
@@ -38,10 +40,12 @@ export const userReducer = (state = initialUserState, action) => {
         isLoading: false,
         username: '',
         password: '',
-        usertype: '',
+        usertype: 'user',
         country: '',
         isAdmin: false,
       };
+    case 'LOGIN_TRUE':
+      return { ...state, isLoggedIn: true };
     case 'LOGOUT':
       return {
         ...initialUserState,

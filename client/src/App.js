@@ -18,6 +18,7 @@ import Admin from './components/Admin';
 import Country from './components/Country';
 import Community from './components/Community';
 import Child from './components/Child';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   // Wrap components in Context Providers so nested components can access state
@@ -32,13 +33,10 @@ function App() {
           <Route exact path='/' render={() => <Redirect to='/login' />} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
-          <Route path='/admin' component={Admin} />
-          {/* <Route path="/country" component={Country} /> */}
-          {/* <Route path="/community" component={Community} /> */}
-          {/* <Route path="/child" component={Child} /> */}
-          <Route path='/country/:id' component={Country} />
-          <Route path='/community/:id' component={Community} />
-          <Route path='/child/:id' component={Child} />
+          <PrivateRoute path='/admin' component={Admin} />
+          <PrivateRoute path='/country/:id' component={Country} />
+          <PrivateRoute path='/community/:id' component={Community} />
+          <PrivateRoute path='/child/:id' component={Child} />
           <Footer src={require('./image/ICN_blue_waves_double.png')} />
         </DataProvider>
       </UserProvider>

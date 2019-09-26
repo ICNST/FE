@@ -7,7 +7,7 @@ import { Form, Button, Input, theme } from '../styled-components/index';
 import { useUserContext } from '../contexts/UserContext';
 import { useDataContext } from '../contexts/DataContext';
 
-export default function Login() {
+export default function Login(props) {
   const { user, dispatch } = useUserContext();
   const { data, dispatchData } = useDataContext();
 
@@ -22,12 +22,20 @@ export default function Login() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // axiosWithAuth()
-    //   .post('', credentials)
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => console.log(err));
+    dispatch({ type: 'LOGIN_START' });
+    axiosWithAuth()
+      .post('https://jsonplaceholder.typicode.com/users', credentials)
+      .then(res => {
+        console.log(res);
+        localStorage.setItem('token', res.data.id);
+        dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
+        if (credentials.usertype === 'admin') {
+          props.history.push('/admin');
+        } else {
+          props.history.push(`/country/${data.country}`);
+        }
+      })
+      .catch(err => console.log(err));
     console.log(credentials);
   };
 
