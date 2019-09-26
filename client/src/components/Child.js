@@ -189,11 +189,11 @@ const Avatar = styled.div`
 const ChartsAndData = styled.div`
   display: flex;
   margin: 0 auto;
-  div{
+  div {
     width: 90%;
-    
+    margin: 0 auto;
   }
-  }
+
   @media screen and (max-width: 620px) {
     flex-direction: column;
     max-width: 90%;

@@ -72,8 +72,8 @@ const GraphWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 1px 2px 3px #000;
-  margin-bottom: 50px;
-  height: 300px;
+  // margin-bottom: 50px;
+  height: 350px;
   width: 600px;
   h4 {
     background-color: #0d71ba;
@@ -83,13 +83,13 @@ const GraphWrapper = styled.div`
     margin-top: 0;
   }
 
-  @media screen and (max-width: 920px){
-    height: 300px;
+  @media screen and (max-width: 920px) {
+    // height: 300px;
     width: 90%;
   }
 
   @media screen and (max-width: 620px) {
-    height: 45%;
+    // height: 45%;
     width: 95%;
   }
 `;
