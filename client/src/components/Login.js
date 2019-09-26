@@ -9,7 +9,6 @@ import { useDataContext } from '../contexts/DataContext';
 
 export default function Login(props) {
   const { user, dispatch } = useUserContext();
-  const { data, dispatchData } = useDataContext();
 
   const [credentials, setCredentials] = useState({
     username: '',
@@ -31,6 +30,7 @@ export default function Login(props) {
         localStorage.setItem('usertype', res.data.usertype);
         dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
         if (credentials.usertype === 'admin') {
+          dispatch({ type: 'LOGIN_ADMIN' });
           props.history.push('/admin');
         } else {
           localStorage.setItem('country', user.country);
@@ -47,7 +47,7 @@ export default function Login(props) {
     if (user.usertype === 'admin') {
       return <Redirect to='/admin' />;
     } else {
-      return <Redirect to={`/country/${data.country}`} />;
+      return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
     }
   }
 

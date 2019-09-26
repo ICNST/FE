@@ -47,6 +47,8 @@ export const userReducer = (state = initialUserState, action) => {
       };
     case 'LOGIN_TRUE':
       return { ...state, isLoggedIn: true };
+    case 'LOGIN_ADMIN':
+      return { ...state, isAdmin: true };
     case 'REGISTRATION_SUCCESS':
       return {
         ...state,

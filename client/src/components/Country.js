@@ -11,10 +11,11 @@ export default function Country(props) {
   const [newCommunity, setNewCommunity] = useState('');
 
   useEffect(() => {
-    dispatchData({ type: 'INITIALIZE_DATA' });
     const countryName = props.match.params.id;
-    dispatchData({ type: 'GET_DATA_SUCCESS', payload: testData });
+    console.log(countryName);
+    dispatchData({ type: 'INITIALIZE_DATA' });
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
+    dispatchData({ type: 'GET_DATA_SUCCESS', payload: testData });
     // axiosWithAuth()
     //   .get()
     //   .then(res => {
@@ -28,7 +29,7 @@ export default function Country(props) {
       const communities = countryData[0].communities;
       dispatchData({ type: 'SET_COMMUNITIES', payload: communities });
     }
-  }, []);
+  }, [data.country]);
 
   const handleChange = e => setNewCommunity(e.target.value);
 

@@ -7,7 +7,7 @@ import { useDataContext } from '../contexts/DataContext';
 
 function Nav(props) {
   const { user, dispatch } = useUserContext();
-  const { data, dispatchData } = useDataContext();
+  const { dispatchData } = useDataContext();
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -37,6 +37,7 @@ function Nav(props) {
             onClick={() => {
               localStorage.removeItem('token');
               localStorage.removeItem('usertype');
+              localStorage.removeItem('country');
               dispatchData({ type: 'RESET_DATA' });
               dispatch({ type: 'LOGOUT' });
               props.history.push('/login');
