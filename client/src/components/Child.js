@@ -76,36 +76,41 @@ export default function Child(props) {
               </p>
             </ChildText>
           </DivOne>
-          <div>
-            <table>
-              <caption>
-                <h3>Screenings:</h3>
-              </caption>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Weight (kg)</th>
-                  <th>Height (cm)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.child.screenings &&
-                  data.child.screenings.map(el => (
-                    <tr key={el.date}>
-                      <td>{el.date}</td>
-                      <td>{el.weight}</td>
-                      <td>{el.height}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-            <AddRecord />
-          </div>
-          <div>
-            {data.child.screenings && (
-              <Graph screenings={data.child.screenings} />
-            )}
-          </div>
+
+          <DivTwo>
+            <div>
+              <table>
+                <caption>
+                  <h3>Screenings:</h3>
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Weight (kg)</th>
+                    <th>Height (cm)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.child.screenings &&
+                    data.child.screenings.map(el => (
+                      <tr key={el.date}>
+                        <td>{el.date}</td>
+                        <td>{el.weight}</td>
+                        <td>{el.height}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+              <AddRecord />
+            </div>
+
+            <div>
+              {data.child.screenings && (
+                <Graph screenings={data.child.screenings} />
+              )}
+            </div>
+          </DivTwo>
+
         </ChartsAndData>
       
       </ChildWrapper>
@@ -131,7 +136,6 @@ const PageWrapper = styled.div`
     font-family: inherit;
     width: 85%;
     max-height: 300px;
-    max-width: 800px;
     margin: 0 auto;
     table-layout: fixed;
     border-collapse: collapse;
@@ -156,10 +160,11 @@ const PageWrapper = styled.div`
     }
   }
 `;
+
 const ChildWrapper = styled.div`
   display: flex
-  max-width: 95%;
   margin: 0 auto;
+  width: 100%;
   justify-content: space-between;
 `;
 
@@ -175,6 +180,23 @@ const DivOne = styled.div`
     margin: 0 auto;
   }
 `;
+const DivTwo = styled.div`
+  max-width: 70%;
+  display: flex;
+  div{
+    width: 45%;
+    div{
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 930px) {
+    flex-direction: column;
+    margin: 0 auto;
+    div{
+      width: 95%;
+    }
+  }
+  `;
 
 const ChildText = styled.div`
   max-width: 90%;
@@ -183,7 +205,7 @@ const ChildText = styled.div`
   text-align: left;
   box-shadow: 1px 2px 3px #000;
   padding: 10px 20px;
-  margin-top: 20px;
+  margin: 10px auto;
 
   @media screen and (max-width: 620px) {
     width: 90%;
@@ -195,7 +217,7 @@ const ChildText = styled.div`
 `;
 
 const Avatar = styled.div`
-  font-size: 200px;
+  font-size: 12rem;
   background-color: #e6e6e6;
   border-radius: 20px;
   margin: 20px auto;
@@ -205,10 +227,8 @@ const ChartsAndData = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  div {
-    width: 100%;
-  }
-
+  width: 100%;
+ 
   @media screen and (max-width: 620px) {
     flex-direction: column;
     max-width: 90%;
