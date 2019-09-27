@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import React, { useState, useEffect } from 'react';
+// import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
+import { useDataContext } from '../contexts/DataContext';
 
 export default function AddChildForm() {
-  const [addNewChild, setAddNewChild] = useState({
-    childName: '',
-    childDob: '',
-    parentName: '',
-    parentContact: '',
+  const { data, dispatchData } = useDataContext();
+
+  const [newChild, setNewChild] = useState({
+    name: '',
+    dob: '',
+    parent_name: '',
+    contact: '',
     gender: '',
+    community: data.community,
+    country: data.country,
+    id: Date.now(),
+    screenings: [],
   });
 
+  useEffect(() => setNewChild({ ...newChild, community: data.community }), [
+    data.community,
+  ]);
+
   const handleChange = e =>
-    setAddNewChild({
-      ...addNewChild,
+    setNewChild({
+      ...newChild,
       [e.target.name]: e.target.value,
     });
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(addNewChild);
+    // console.log(newChild);
     // axiosWithAuth()
     //   .post()
     //   .then(res => {
@@ -28,38 +39,55 @@ export default function AddChildForm() {
     //   .catch(err => {
     //     console.log(err);
     //   });
+    // dispatchData({
+    //   type: 'UPDATE_COMMUNITY',
+    //   payload: newChild,
+    // });
+    dispatchData({
+      type: 'ADD_CHILD',
+      payload: newChild,
+    });
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <input
         type='text'
-        id='childName'
-        name='childName'
-        placeholder='Full Name'
+        id='name'
+        name='name'
+        placeholder='Name'
+        onChange={handleChange}
+      />
+
+      <select id='gender' name='gender' onChange={handleChange}>
+        <option>Gender</option>
+        <option value='M'>Male</option>
+        <option value='F'>Female</option>
+      </select>
+
+      <input
+        type='text'
+        id='dob'
+        name='dob'
+        placeholder='DOB'
         onChange={handleChange}
       />
 
       <input
         type='text'
-        id='parentName'
-        name='parentName'
+        id='parent_name'
+        name='parent_name'
         placeholder='Parent Name'
         onChange={handleChange}
       />
 
       <input
         type='text'
-        id='parentContact'
-        name='parentContact'
+        id='contact'
+        name='contact'
         placeholder='Contact'
         onChange={handleChange}
       />
-
-      <select id='gender' name='gender' onChange={handleChange}>
-        <option value='M'>Male</option>
-        <option value='F'>Female</option>
-      </select>
 
       <button type='submit'>➕</button>
     </Form>

@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 
 export default function Graph(props) {
-  console.log(props);
+  // console.log(props);
 
   return (
     <ChartWrapper>
@@ -20,7 +20,7 @@ export default function Graph(props) {
         <h4>Weight (kg)</h4>
         <ResponsiveContainer width='95%' height={300}>
           <LineChart
-            data={props.screenings.reverse()}
+            data={props.screenings}
             margin={{ top: 10, right: 40, left: 0, bottom: 10 }}>
             <CartesianGrid stroke='#e6e6e6' strokeDasharray='5 5' />
             <XAxis dataKey='date' />
@@ -81,7 +81,7 @@ const GraphWrapper = styled.div`
     padding: 5px 0;
     margin-top: 0;
   }
-  div.recharts-tooltip-wrapper{
+  div.recharts-tooltip-wrapper {
     max-width: 20%;
   }
 

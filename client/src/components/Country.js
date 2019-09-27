@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { testData } from '../testData';
+import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useDataContext } from '../contexts/DataContext';
@@ -12,26 +10,15 @@ export default function Country(props) {
 
   useEffect(() => {
     const countryName = props.match.params.id;
-    // console.log(countryName);
-    // dispatchData({ type: 'INITIALIZE_DATA' });
     dispatchData({ type: 'SET_COUNTRY', payload: countryName });
 
-    // axiosWithAuth()
-    //   .get()
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    dispatchData({ type: 'GET_DATA_SUCCESS', payload: testData });
-
-    const countryData = testData.filter(el => el.country === countryName);
-    if (countryData[0]) {
-      const communities = countryData[0].communities;
-      dispatchData({ type: 'SET_COMMUNITIES', payload: communities });
-    }
-  }, [data.country]);
+    const communityList = data.childrenData
+      .filter(obj => obj.country === props.match.params.id)
+      .map(obj => obj.community);
+    const uniqueCommunities = new Set(communityList);
+    const communities = [...uniqueCommunities];
+    dispatchData({ type: 'SET_COMMUNITIES', payload: communities });
+  }, []);
 
   const handleChange = e => setNewCommunity(e.target.value);
 
@@ -48,10 +35,18 @@ export default function Country(props) {
     //   });
     dispatchData({
       type: 'ADD_COMMUNITY',
-      payload: { newCommunity: newCommunity, country: data.country },
+      payload: newCommunity,
     });
     setNewCommunity('');
   };
+
+  const handleDelete = id => {
+    dispatchData({ type: 'DELETE_COMMUNITY', payload: id });
+  };
+
+  if (!data.hasData) {
+    return <Redirect to='/login' />;
+  }
 
   return (
     <section className='country-communities'>
@@ -59,13 +54,13 @@ export default function Country(props) {
       <CommunitiesWrapper>
         {data.communities &&
           data.communities.map(el => (
-            <CommunityDiv>
-              <Link
-                key={el.id}
-                to={`/community/${el.community.split(' ').join('-')}`}>
-                <h3>{el.community}</h3>
+            <CommunityDiv key={el}>
+              <Link to={`/community/${el.split(' ').join('-')}`}>
+                <h3>{el}</h3>
               </Link>
-              <button>✖️</button>
+              {localStorage.getItem('usertype') === 'admin' && (
+                <button onClick={() => handleDelete(el)}>✖️</button>
+              )}
             </CommunityDiv>
           ))}
         <AddCommunity>

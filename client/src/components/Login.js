@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import React, { useState, useEffect } from 'react';
+// import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Form, Button, Input, theme } from '../styled-components/index';
+
+import { testData } from '../testData2';
 
 import { useUserContext } from '../contexts/UserContext';
 import { useDataContext } from '../contexts/DataContext';
 
 export default function Login(props) {
   const { user, dispatch } = useUserContext();
+  const { data, dispatchData } = useDataContext();
 
   const [credentials, setCredentials] = useState({
     username: '',
@@ -16,35 +19,62 @@ export default function Login(props) {
     usertype: 'user',
   });
 
+  useEffect(() => {
+    dispatchData({ type: 'IMPORT_DATA', payload: testData });
+    dispatchData({ type: 'SET_CHILDREN', payload: testData });
+  }, []);
+
+  useEffect(() => {
+    const countryList = data.childrenData.map(obj => obj.country);
+    const uniqueCountries = new Set(countryList);
+    const countries = [...uniqueCountries];
+    dispatchData({ type: 'SET_COUNTRIES', payload: countries });
+  }, [data.childrenData]);
+
   const handleChange = e =>
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
 
   const handleSubmit = e => {
     e.preventDefault();
+    localStorage.setItem('token', 'login' + credentials.usertype);
+    localStorage.setItem('usertype', credentials.usertype);
+    dispatch({
+      type: 'LOGIN_SUCCESS',
+      usertype: credentials.usertype,
+      username: credentials.username,
+    });
+    if (credentials.usertype === 'admin') {
+      dispatch({ type: 'LOGIN_ADMIN' });
+      props.history.push('/admin');
+    } else {
+      localStorage.setItem('country', user.country);
+      props.history.push(`/country/${user.country}`);
+    }
+
     // dispatch({ type: 'LOGIN_START' });
-    axiosWithAuth()
-      .post('https://jsonplaceholder.typicode.com/users', credentials)
-      .then(res => {
-        // console.log(res);
-        localStorage.setItem('token', 'login' + res.data.id);
-        localStorage.setItem('usertype', res.data.usertype);
-        dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
-        if (credentials.usertype === 'admin') {
-          dispatch({ type: 'LOGIN_ADMIN' });
-          props.history.push('/admin');
-        } else {
-          localStorage.setItem('country', user.country);
-          props.history.push(`/country/${user.country}`);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // axiosWithAuth()
+    //   .post('https://jsonplaceholder.typicode.com/users', credentials)
+    //   .then(res => {
+    //     // console.log(res);
+    //     localStorage.setItem('token', 'login' + res.data.id);
+    //     localStorage.setItem('usertype', res.data.usertype);
+    //     dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
+    //     if (credentials.usertype === 'admin') {
+    //       dispatch({ type: 'LOGIN_ADMIN' });
+    //       props.history.push('/admin');
+    //     } else {
+    //       localStorage.setItem('country', user.country);
+    //       props.history.push(`/country/${user.country}`);
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   // Navigate to proper page given token and usertype
   if (localStorage.getItem('token')) {
-    if (user.usertype === 'admin') {
+    if (localStorage.getItem('usertype') === 'admin') {
       return <Redirect to='/admin' />;
     } else {
       return <Redirect to={`/country/${localStorage.getItem('country')}`} />;

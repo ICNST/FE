@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { testData } from '../testData';
+import React, { useState, useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Context
@@ -15,13 +13,10 @@ export default function Admin() {
   const [newCountry, setNewCountry] = useState('');
 
   useEffect(() => {
-    // axiosWithAuth()
-    //   .get()
-    //   .then(res => {console.log(res)})
-    //   .catch(err => {console.log(err)});
-    dispatchData({ type: 'GET_DATA_SUCCESS', payload: testData });
-    // console.log(testData);
-    dispatchData({ type: 'SET_COUNTRIES', payload: testData });
+    const countryList = data.childrenData.map(obj => obj.country);
+    const uniqueCountries = new Set(countryList);
+    const countries = [...uniqueCountries];
+    dispatchData({ type: 'SET_COUNTRIES', payload: countries });
   }, []);
 
   const handleChange = e => setNewCountry(e.target.value);
@@ -37,6 +32,14 @@ export default function Admin() {
     setNewCountry('');
   };
 
+  const handleDelete = id => {
+    dispatchData({ type: 'DELETE_COUNTRY', payload: id });
+  };
+
+  if (!data.hasData) {
+    return <Redirect to='/login' />;
+  }
+
   return (
     <div>
       <h2>Admin Page</h2>
@@ -44,16 +47,15 @@ export default function Admin() {
         <CountriesWrapper>
           <h3>Countries:</h3>
           <Countries>
-            {data.countries.map(el => (
-              <Country>
-                <Link
-                  key={el.id}
-                  to={`/country/${el.country.split(' ').join('-')}`}>
-                  <h3>{el.country}</h3>
-                </Link>
-                <button>✖️</button>
-              </Country>
-            ))}
+            {data.countries &&
+              data.countries.map(el => (
+                <Country>
+                  <Link key={el} to={`/country/${el.split(' ').join('-')}`}>
+                    <h3>{el}</h3>
+                  </Link>
+                  <button onClick={() => handleDelete(el)}>✖️</button>
+                </Country>
+              ))}
             <AddCountry>
               <button onClick={handleClick}>➕</button>
               <input

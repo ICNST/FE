@@ -33,11 +33,12 @@ export default function Child(props) {
   }, [data.child]);
 
   if (!data.hasData) {
-    if (localStorage.getItem('usertype') === 'admin') {
-      return <Redirect to='/admin' />;
-    } else {
-      return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
-    }
+    return <Redirect to='/login' />;
+    // if (localStorage.getItem('usertype') === 'admin') {
+    //   return <Redirect to='/admin' />;
+    // } else {
+    //   return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
+    // }
   }
 
   return (
@@ -54,7 +55,6 @@ export default function Child(props) {
       </h2>
 
       <ChildWrapper>
-        
         <ChartsAndData>
           <DivOne>
             <Avatar>{avatar}</Avatar>
@@ -110,11 +110,8 @@ export default function Child(props) {
               )}
             </div>
           </DivTwo>
-
         </ChartsAndData>
-      
       </ChildWrapper>
-
     </PageWrapper>
   );
 }
@@ -186,9 +183,9 @@ const DivTwo = styled.div`
   max-width: 70%;
   display: flex;
   justify-content: space-evenly;
-  div{
+  div {
     width: 45%;
-    div{
+    div {
       width: 100%;
     }
   }
@@ -197,7 +194,7 @@ const DivTwo = styled.div`
     flex-direction: column;
     margin: 0 auto;
     max-width: 95%;
-    div{
+    div {
       max-width: 100%;
     }
   }
@@ -206,11 +203,11 @@ const DivTwo = styled.div`
     flex-direction: column;
     max-width: 95%;
     margin: 0 auto;
-    div{
+    div {
       width: 100%;
     }
   }
-  `;
+`;
 
 const ChildText = styled.div`
   max-width: 90%;
@@ -242,7 +239,7 @@ const ChartsAndData = styled.div`
   justify-content: space-between;
   margin: 0 auto;
   width: 100%;
- 
+
   @media screen and (max-width: 620px) {
     flex-direction: column;
     max-width: 100%;
