@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+// import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { Input } from '../styled-components';
 
 import { useDataContext } from '../contexts/DataContext';
 
-export default function AddRecord() {
-  const { data, dispatchData } = useDataContext();
-
-  const [addNewRecord, setAddNewRecord] = useState({
+function AddRecord(props) {
+  const { dispatchData } = useDataContext();
+  const [newRecord, setNewRecord] = useState({
     date: '',
     weight: '',
     height: '',
   });
 
+  console.log(props);
+
   const handleChange = e =>
-    setAddNewRecord({
-      ...addNewRecord,
+    setNewRecord({
+      ...newRecord,
       [e.target.name]: e.target.value,
     });
 
   const handleClick = e => {
     e.preventDefault();
-    console.log(addNewRecord);
+    console.log(newRecord);
     // axiosWithAuth()
     //   .post()
     //   .then(res => {
@@ -31,6 +33,11 @@ export default function AddRecord() {
     //   .catch(err => {
     //     console.log(err);
     //   });
+    dispatchData({
+      type: 'ADD_RECORD',
+      payload: newRecord,
+      id: props.match.params.id,
+    });
   };
 
   return (
@@ -123,3 +130,5 @@ const Button = styled.button`
     color: white;
   }
 `;
+
+export default withRouter(AddRecord);

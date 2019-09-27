@@ -10,24 +10,21 @@ export default function Community(props) {
 
   useEffect(() => {
     const communityName = props.match.params.id.split('-').join(' ');
-    console.log(communityName);
-
     dispatchData({ type: 'SET_COMMUNITY', payload: communityName });
-    const communityData = data.communities.filter(
-      el => el.community === communityName,
+
+    const children = data.childrenData.filter(
+      obj => obj.community === props.match.params.id,
     );
-    if (communityData[0]) {
-      const children = communityData[0].children;
-      dispatchData({ type: 'SET_CHILDREN', payload: children });
-    }
+    dispatchData({ type: 'SET_CHILDREN', payload: children });
   }, []);
 
   if (!data.hasData) {
-    if (localStorage.getItem('usertype') === 'admin') {
-      return <Redirect to='/admin' />;
-    } else {
-      return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
-    }
+    return <Redirect to='/login' />;
+    // if (localStorage.getItem('usertype') === 'admin') {
+    //   return <Redirect to='/admin' />;
+    // } else {
+    //   return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
+    // }
   }
 
   return (
@@ -48,17 +45,16 @@ export default function Community(props) {
           </tr>
         </thead>
         <tbody>
-          {data.children &&
-            data.children.map(el => (
-              <tr>
-                <Link to={`/child/${el.id}`}>
-                  <td>{el.name}</td>
-                </Link>
-                <td>{el.gender}</td>
-                <td>{el.parent_name}</td>
-                <td>{el.contact}</td>
-              </tr>
-            ))}
+          {data.children.map(el => (
+            <tr>
+              <Link to={`/child/${el.id}`}>
+                <td>{el.name}</td>
+              </Link>
+              <td>{el.gender}</td>
+              <td>{el.parent_name}</td>
+              <td>{el.contact}</td>
+            </tr>
+          ))}
         </tbody>
       </PatientsTable>
       <h3>Add New Patient:</h3>

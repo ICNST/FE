@@ -38,7 +38,7 @@ function Nav(props) {
               localStorage.removeItem('token');
               localStorage.removeItem('usertype');
               localStorage.removeItem('country');
-              dispatchData({ type: 'RESET_DATA' });
+              // dispatchData({ type: 'RESET_DATA' });
               dispatch({ type: 'LOGOUT' });
               props.history.push('/login');
             }}>

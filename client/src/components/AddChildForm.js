@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 import { useDataContext } from '../contexts/DataContext';
 
 export default function AddChildForm() {
-  const { dispatchData } = useDataContext();
+  const { data, dispatchData } = useDataContext();
+
+  console.log('community', data.community);
 
   const [newChild, setNewChild] = useState({
-    childName: '',
-    childDob: '',
-    parentName: '',
-    parentContact: '',
+    name: '',
+    dob: '',
+    parent_name: '',
+    contact: '',
     gender: '',
+    community: data.community,
+    country: data.country,
+    id: Date.now(),
+    screenings: [],
   });
+
+  useEffect(() => setNewChild({ ...newChild, community: data.community }), [
+    data.community,
+  ]);
 
   const handleChange = e =>
     setNewChild({
@@ -31,16 +41,13 @@ export default function AddChildForm() {
     //   .catch(err => {
     //     console.log(err);
     //   });
+    // dispatchData({
+    //   type: 'UPDATE_COMMUNITY',
+    //   payload: newChild,
+    // });
     dispatchData({
       type: 'ADD_CHILD',
       payload: newChild,
-    });
-    setNewChild({
-      childName: '',
-      childDob: '',
-      parentName: '',
-      parentContact: '',
-      gender: '',
     });
   };
 
@@ -48,8 +55,8 @@ export default function AddChildForm() {
     <Form onSubmit={handleSubmit}>
       <input
         type='text'
-        id='childName'
-        name='childName'
+        id='name'
+        name='name'
         placeholder='Name'
         onChange={handleChange}
       />
@@ -62,16 +69,24 @@ export default function AddChildForm() {
 
       <input
         type='text'
-        id='parentName'
-        name='parentName'
+        id='dob'
+        name='dob'
+        placeholder='DOB'
+        onChange={handleChange}
+      />
+
+      <input
+        type='text'
+        id='parent_name'
+        name='parent_name'
         placeholder='Parent Name'
         onChange={handleChange}
       />
 
       <input
         type='text'
-        id='parentContact'
-        name='parentContact'
+        id='contact'
+        name='contact'
         placeholder='Contact'
         onChange={handleChange}
       />
