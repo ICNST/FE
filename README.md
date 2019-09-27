@@ -29,12 +29,12 @@ Jonathan Ho
 **State Management System:** Context API + React Hooks
 
 ## Project Status
-The app is currently awaiting data from the backend. A prototype can be accessed in the development deployment linked below. As the prototype does not yet have access to a server, it is using dummy data; any changes and additions made in the app with not be saved upon a page refresh or logout.
+The app is currently awaiting data from the backend. A prototype can be accessed in the development deployment linked below. As the prototype does not yet have access to a server, it is using dummy data; any changes and additions made in the app will not be saved upon a page refresh or logout.
 
 ## Deployment
 **Marketing Site:** https://youthful-wiles-abdce8.netlify.com/index.html
 
-**App:** https://icnst-development.netlify.com/login
+**React App:** https://icnst-development.netlify.com/login
 
 ## App Login Credentials
 
