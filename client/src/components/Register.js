@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+// import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Form, Button, Input, theme } from '../styled-components/index';
@@ -26,20 +26,31 @@ export default function Register(props) {
   const handleSubmit = e => {
     e.preventDefault();
     // console.log(registrationInfo);
-    axiosWithAuth()
-      .post('https://jsonplaceholder.typicode.com/users', registrationInfo)
-      .then(res => {
-        console.log(res);
-        localStorage.setItem('token', 'register' + res.data.id);
-        localStorage.setItem('country', res.data.country);
-        localStorage.setItem('usertype', 'user');
-        dispatch({ type: 'REGISTRATION_SUCCESS', payload: res.data });
-        dispatchData({ type: 'SET_COUNTRY', payload: res.data.country });
-        props.history.push(`/country/${registrationInfo.country}`);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    localStorage.setItem('token', 'register' + registrationInfo.username);
+    localStorage.setItem('country', registrationInfo.country);
+    localStorage.setItem('usertype', 'user');
+    dispatch({
+      type: 'REGISTRATION_SUCCESS',
+      username: registrationInfo.username,
+      country: registrationInfo.country,
+    });
+    dispatchData({ type: 'SET_COUNTRY', payload: registrationInfo.country });
+    props.history.push(`/country/${registrationInfo.country}`);
+
+    // axiosWithAuth()
+    // .post('https://jsonplaceholder.typicode.com/users', registrationInfo)
+    // .then(res => {
+    //   console.log(res);
+    //   localStorage.setItem('token', 'register' + res.data.id);
+    //   localStorage.setItem('country', res.data.country);
+    //   localStorage.setItem('usertype', 'user');
+    //   dispatch({ type: 'REGISTRATION_SUCCESS', payload: res.data });
+    //   dispatchData({ type: 'SET_COUNTRY', payload: res.data.country });
+    //   props.history.push(`/country/${registrationInfo.country}`);
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // });
   };
 
   if (localStorage.getItem('token')) {

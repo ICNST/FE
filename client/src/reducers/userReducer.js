@@ -56,8 +56,8 @@ export const userReducer = (state = initialUserState, action) => {
         isLoggedIn: true,
         isLoading: false,
         usertype: 'user',
-        username: action.payload.username,
-        country: action.payload.country,
+        username: action.username,
+        country: action.country,
       };
     case 'LOGOUT':
       return {

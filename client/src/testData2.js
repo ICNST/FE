@@ -1,3 +1,7 @@
+export const testUsers = [];
+
+export const testAdminUsers = [];
+
 export const testData = [
   {
     id: 1,
