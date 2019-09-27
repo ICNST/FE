@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Form, Button, Input, theme } from '../styled-components/index';
 
-import { testData } from '../testData2';
+import { testData, testUsers, testAdminUsers } from '../testData2';
 
 import { useUserContext } from '../contexts/UserContext';
 import { useDataContext } from '../contexts/DataContext';
@@ -36,19 +36,44 @@ export default function Login(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    localStorage.setItem('token', 'login' + credentials.usertype);
-    localStorage.setItem('usertype', credentials.usertype);
-    dispatch({
-      type: 'LOGIN_SUCCESS',
-      usertype: credentials.usertype,
-      username: credentials.username,
-    });
-    if (credentials.usertype === 'admin') {
+
+    if (
+      testUsers.find(
+        obj =>
+          obj.username === credentials.username &&
+          obj.password === credentials.password,
+      )
+    ) {
+      const countryObj = testUsers.find(
+        obj => obj.username === credentials.username,
+      );
+      localStorage.setItem('token', 'login' + credentials.username);
+      localStorage.setItem('usertype', credentials.usertype);
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        usertype: credentials.usertype,
+        username: credentials.username,
+      });
+      localStorage.setItem('country', countryObj.country_name);
+      props.history.push(`/country/${countryObj.country_name}`);
+    } else if (
+      testAdminUsers.find(
+        obj =>
+          obj.username === credentials.username &&
+          obj.password === credentials.password,
+      )
+    ) {
+      localStorage.setItem('token', 'admin' + credentials.username);
+      localStorage.setItem('usertype', 'admin');
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        usertype: 'admin',
+        username: credentials.username,
+      });
       dispatch({ type: 'LOGIN_ADMIN' });
       props.history.push('/admin');
     } else {
-      localStorage.setItem('country', user.country);
-      props.history.push(`/country/${user.country}`);
+      dispatch({ type: 'LOGIN_FAILURE' });
     }
 
     // dispatch({ type: 'LOGIN_START' });
@@ -85,7 +110,7 @@ export default function Login(props) {
     <ThemeProvider theme={theme}>
       <Form onSubmit={handleSubmit}>
         <h2>Login:</h2>
-        <span>
+        {/* <span>
           <div>
             <label htmlFor='user'>User</label>
             <input
@@ -108,7 +133,7 @@ export default function Login(props) {
               onChange={handleChange}
             />
           </div>
-        </span>
+        </span> */}
 
         <label htmlFor='username'>Username</label>
         <Input
@@ -129,7 +154,7 @@ export default function Login(props) {
           value={credentials.password}
           onChange={handleChange}
         />
-
+        {user.error && <p>{user.error}</p>}
         <Button type='submit'>Login</Button>
       </Form>
     </ThemeProvider>

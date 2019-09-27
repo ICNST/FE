@@ -14,7 +14,7 @@ function AddRecord(props) {
     height: '',
   });
 
-  console.log(props);
+  // console.log(props);
 
   const handleChange = e =>
     setNewRecord({

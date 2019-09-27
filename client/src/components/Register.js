@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Form, Button, Input, theme } from '../styled-components/index';
 
+import { testUsers, testAdminUsers } from '../testData2';
+
 import { useUserContext } from '../contexts/UserContext';
 import { useDataContext } from '../contexts/DataContext';
 
@@ -17,25 +19,31 @@ export default function Register(props) {
     country: '',
   });
 
-  const handleChange = e =>
+  const handleChange = e => {
     setRegistrationInfo({
       ...registrationInfo,
       [e.target.name]: e.target.value,
     });
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    // console.log(registrationInfo);
-    localStorage.setItem('token', 'register' + registrationInfo.username);
-    localStorage.setItem('country', registrationInfo.country);
-    localStorage.setItem('usertype', 'user');
-    dispatch({
-      type: 'REGISTRATION_SUCCESS',
-      username: registrationInfo.username,
-      country: registrationInfo.country,
-    });
-    dispatchData({ type: 'SET_COUNTRY', payload: registrationInfo.country });
-    props.history.push(`/country/${registrationInfo.country}`);
+
+    const users = [...testUsers, ...testAdminUsers];
+    if (users.map(obj => obj.username).includes(registrationInfo.username)) {
+      dispatch({ type: 'REGISTRATION_FAILURE' });
+    } else {
+      localStorage.setItem('token', 'register' + registrationInfo.username);
+      localStorage.setItem('country', registrationInfo.country);
+      localStorage.setItem('usertype', 'user');
+      dispatch({
+        type: 'REGISTRATION_SUCCESS',
+        username: registrationInfo.username,
+        country: registrationInfo.country,
+      });
+      dispatchData({ type: 'SET_COUNTRY', payload: registrationInfo.country });
+      props.history.push(`/country/${registrationInfo.country}`);
+    }
 
     // axiosWithAuth()
     // .post('https://jsonplaceholder.typicode.com/users', registrationInfo)
@@ -94,6 +102,8 @@ export default function Register(props) {
           value={registrationInfo.country}
           onChange={handleChange}
         />
+
+        {user.error && <p>{user.error}</p>}
 
         <Button type='submit'>Register</Button>
       </Form>

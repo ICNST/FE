@@ -3,7 +3,7 @@ export const initialUserState = {
   username: '',
   password: '',
   usertype: 'user',
-  country: 'Brazil',
+  country: '',
   isAdmin: false,
   isLoading: false,
   error: '',
@@ -58,6 +58,18 @@ export const userReducer = (state = initialUserState, action) => {
         usertype: 'user',
         username: action.username,
         country: action.country,
+      };
+    case 'REGISTRATION_FAILURE':
+      return {
+        ...state,
+        error: 'That username is already taken!',
+        isLoggedIn: false,
+        isLoading: false,
+        username: '',
+        password: '',
+        usertype: 'user',
+        country: '',
+        isAdmin: false,
       };
     case 'LOGOUT':
       return {

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { theme, Form, Button, Input } from '../styled-components';
 
+import { testUsers, testAdminUsers } from '../testData2';
+
 import { useUserContext } from '../contexts/UserContext';
 
 export default function RegisterAdmin() {
@@ -28,6 +30,10 @@ export default function RegisterAdmin() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const users = [...testUsers, ...testAdminUsers];
+    if (users.map(obj => obj.username).includes(registrationInfo.username)) {
+      dispatch({ type: 'REGISTRATION_FAILURE' });
+    }
     console.log(registrationInfo);
     // axiosWithAuth()
     //   .post()
@@ -94,7 +100,7 @@ export default function RegisterAdmin() {
               <label htmlFor='country'>Country</label>
               <Input
                 type='text'
-                id='password'
+                id='country'
                 name='country'
                 placeholder='Country'
                 value={registrationInfo.country}
@@ -102,6 +108,8 @@ export default function RegisterAdmin() {
               />
             </>
           )}
+
+          {user.error && <p>{user.error}</p>}
 
           <Button type='submit'>Register</Button>
         </Form>

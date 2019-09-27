@@ -49,15 +49,23 @@ export default function Admin() {
           <Countries>
             {data.countries &&
               data.countries.map(el => (
-                <Country>
-                  <Link key={el} to={`/country/${el.split(' ').join('-')}`}>
+                <Country key={el}>
+                  <Link to={`/country/${el.split(' ').join('-')}`}>
                     <h3>{el}</h3>
                   </Link>
-                  <button onClick={() => handleDelete(el)}>✖️</button>
+                  <button onClick={() => handleDelete(el)}>
+                    <span role='img' aria-label='delete country'>
+                      ✖️
+                    </span>
+                  </button>
                 </Country>
               ))}
             <AddCountry>
-              <button onClick={handleClick}>➕</button>
+              <button onClick={handleClick}>
+                <span role='img' aria-label='add country'>
+                  ➕
+                </span>
+              </button>
               <input
                 type='text'
                 placeholder='Add a new country'

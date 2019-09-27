@@ -89,7 +89,11 @@ export default function AddChildForm() {
         onChange={handleChange}
       />
 
-      <button type='submit'>➕</button>
+      <button type='submit'>
+        <span role='img' aria-label='add child'>
+          ➕
+        </span>
+      </button>
     </Form>
   );
 }

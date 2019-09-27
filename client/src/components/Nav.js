@@ -3,11 +3,9 @@ import { NavLink, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useUserContext } from '../contexts/UserContext';
-import { useDataContext } from '../contexts/DataContext';
 
 function Nav(props) {
   const { user, dispatch } = useUserContext();
-  const { dispatchData } = useDataContext();
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
