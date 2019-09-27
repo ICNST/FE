@@ -1,6 +1,34 @@
-export const testUsers = [];
+export const testUsers = [
+  {
+    id: 1,
+    country_name: 'Brazil',
+    country_id: 1,
+    username: 'braziluser',
+    password: 'braziluser',
+  },
+  {
+    id: 2,
+    country_name: 'Bolivia',
+    country_id: 2,
+    username: 'boliviauser',
+    password: 'boliviauser',
+  },
+  {
+    id: 3,
+    country_name: 'Cambodia',
+    country_id: 3,
+    username: 'cambodiauser',
+    password: 'cambodiauser',
+  },
+];
 
-export const testAdminUsers = [];
+export const testAdminUsers = [
+  { id: 1, isAdmin: true, username: 'zeleke', password: 'zeleke' },
+  { id: 2, isAdmin: true, username: 'sandy', password: 'sandy' },
+  { id: 3, isAdmin: true, username: 'jonathan', password: 'jonathan' },
+  { id: 4, isAdmin: true, username: 'zach', password: 'zach' },
+  { id: 5, isAdmin: true, username: 'anna', password: 'anna' },
+];
 
 export const testData = [
   {

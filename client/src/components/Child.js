@@ -167,22 +167,29 @@ const ChildWrapper = styled.div`
 
 const DivOne = styled.div`
   display: flex;
-  width: 25%;
-  align-content: space-between;
+  width: 30%;
+  align-content: space-around;
   margin: 0 auto;
   flex-direction: column;
 
-  @media screen and (max-width: 620px) {
+  @media screen and (max-width: 1200px) {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 780px) {
     flex-direction: column-reverse;
     margin: 0 auto;
     max-width: 100%;
     width: 100%;
   }
 `;
+
 const DivTwo = styled.div`
   max-width: 70%;
   display: flex;
   justify-content: space-evenly;
+
   div {
     width: 45%;
     div {
@@ -190,8 +197,9 @@ const DivTwo = styled.div`
     }
   }
 
-  @media screen and (max-width: 930px) {
-    flex-direction: column;
+  @media screen and (max-width: 1200px) {
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 0 auto;
     max-width: 95%;
     div {
@@ -199,7 +207,7 @@ const DivTwo = styled.div`
     }
   }
 
-  @media screen and (max-width: 620px) {
+  @media screen and (max-width: 780px) {
     flex-direction: column;
     max-width: 95%;
     margin: 0 auto;
@@ -210,7 +218,7 @@ const DivTwo = styled.div`
 `;
 
 const ChildText = styled.div`
-  max-width: 90%;
+  width: 300px;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -218,8 +226,8 @@ const ChildText = styled.div`
   padding: 10px 20px;
   margin: 10px auto;
 
-  @media screen and (max-width: 620px) {
-    maxt-width: 100%;
+  @media screen and (max-width: 780px) {
+    max-width: 100%;
     margin-top: 20px;
     p {
       margin: 0.5em 0;
@@ -228,7 +236,7 @@ const ChildText = styled.div`
 `;
 
 const Avatar = styled.div`
-  font-size: 12rem;
+  font-size: 15rem;
   background-color: #e6e6e6;
   border-radius: 20px;
   margin: 20px auto;
@@ -240,7 +248,11 @@ const ChartsAndData = styled.div`
   margin: 0 auto;
   width: 100%;
 
-  @media screen and (max-width: 620px) {
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
+
+  @media screen and (max-width: 780px) {
     flex-direction: column;
     max-width: 100%;
     margin: 0 auto;

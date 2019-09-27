@@ -59,13 +59,19 @@ export default function Country(props) {
                 <h3>{el}</h3>
               </Link>
               {localStorage.getItem('usertype') === 'admin' && (
-                <button onClick={() => handleDelete(el)}>✖️</button>
+                <button onClick={() => handleDelete(el)}>
+                  <span role='img' aria-label='delete community'>
+                    ✖️
+                  </span>
+                </button>
               )}
             </CommunityDiv>
           ))}
         <AddCommunity>
           <button type='submit' onClick={handleClick}>
-            ➕
+            <span role='img' aria-label='add community'>
+              ➕
+            </span>
           </button>
           <input
             type='text'
@@ -138,19 +144,3 @@ const AddCommunity = styled.div`
     border: none;
   }
 `;
-
-{
-  /* <CommunityWrapper>
-<section className='all-communities'>
-  {props.communities.map(community=>{ return(
-    <div className='community-card' key={community.id}>
-      <h2>Village: {community.name}</h2>
-      <Link to={`/country/${community.id}`}>
-        <p>Local Health Records</p>
-      </Link>
-    </div>
-  )})}
-
-</section>    
-</CommunityWrapper>  */
-}

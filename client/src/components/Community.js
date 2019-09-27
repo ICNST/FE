@@ -74,7 +74,7 @@ const ChildDataWrapper = styled.section`
 `;
 
 const PatientsTable = styled.table`
-  width: 90%;
+  width: 95%;
   max-width: 800px;
   margin: 0 auto;
   box-shadow: 1px 2px 3px #000;
