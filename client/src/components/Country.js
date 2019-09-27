@@ -40,7 +40,9 @@ export default function Country(props) {
     setNewCommunity('');
   };
 
-  const handleDelete = () => {};
+  const handleDelete = id => {
+    dispatchData({ type: 'DELETE_COMMUNITY', payload: id });
+  };
 
   if (!data.hasData) {
     return <Redirect to='/login' />;
@@ -57,7 +59,7 @@ export default function Country(props) {
                 <h3>{el}</h3>
               </Link>
               {localStorage.getItem('usertype') === 'admin' && (
-                <button onClick={handleDelete}>✖️</button>
+                <button onClick={() => handleDelete(el)}>✖️</button>
               )}
             </CommunityDiv>
           ))}

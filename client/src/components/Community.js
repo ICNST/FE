@@ -46,7 +46,7 @@ export default function Community(props) {
         </thead>
         <tbody>
           {data.children.map(el => (
-            <tr>
+            <tr key={el.id}>
               <Link to={`/child/${el.id}`}>
                 <td>{el.name}</td>
               </Link>

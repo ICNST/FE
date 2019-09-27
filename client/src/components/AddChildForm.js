@@ -6,8 +6,6 @@ import { useDataContext } from '../contexts/DataContext';
 export default function AddChildForm() {
   const { data, dispatchData } = useDataContext();
 
-  console.log('community', data.community);
-
   const [newChild, setNewChild] = useState({
     name: '',
     dob: '',
@@ -32,7 +30,7 @@ export default function AddChildForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(newChild);
+    // console.log(newChild);
     // axiosWithAuth()
     //   .post()
     //   .then(res => {

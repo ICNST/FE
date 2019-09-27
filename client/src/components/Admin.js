@@ -32,6 +32,10 @@ export default function Admin() {
     setNewCountry('');
   };
 
+  const handleDelete = id => {
+    dispatchData({ type: 'DELETE_COUNTRY', payload: id });
+  };
+
   if (!data.hasData) {
     return <Redirect to='/login' />;
   }
@@ -49,7 +53,7 @@ export default function Admin() {
                   <Link key={el} to={`/country/${el.split(' ').join('-')}`}>
                     <h3>{el}</h3>
                   </Link>
-                  <button>✖️</button>
+                  <button onClick={() => handleDelete(el)}>✖️</button>
                 </Country>
               ))}
             <AddCountry>

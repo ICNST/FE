@@ -222,7 +222,6 @@ export const dataReducer = (state = initialState, action) => {
         ...state,
         isGetting: false,
         serverData: action.payload,
-        hasData: true,
       };
     case 'GET_DATA_FAILURE':
       return {
@@ -270,10 +269,26 @@ export const dataReducer = (state = initialState, action) => {
         ...state,
         countries: [...state.countries, action.payload],
       };
+    case 'DELETE_COUNTRY':
+      return {
+        ...state,
+        countries: state.countries.filter(el => el !== action.payload),
+        childrenData: state.childrenData.filter(
+          obj => obj.country !== action.payload,
+        ),
+      };
     case 'ADD_COMMUNITY':
       return {
         ...state,
         communities: [...state.communities, action.payload],
+      };
+    case 'DELETE_COMMUNITY':
+      return {
+        ...state,
+        communities: state.communities.filter(el => el !== action.payload),
+        childrenData: state.childrenData.filter(
+          obj => obj.community !== action.payload,
+        ),
       };
     case 'ADD_CHILD':
       return {
