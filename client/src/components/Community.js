@@ -1,51 +1,97 @@
-import React, {useContext} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import { useDataContext } from '../contexts/DataContext';
 
-import { DataContext } from '../contexts/DataContext';
+import AddChildForm from './AddChildForm';
 
-export default function Community() {
-  const { data, dispatchData } = useContext(DataContext);
-  console.log(data);
+export default function Community(props) {
+  const { data, dispatchData } = useDataContext();
+
+  useEffect(() => {
+    const communityName = props.match.params.id.split('-').join(' ');
+    dispatchData({ type: 'SET_COMMUNITY', payload: communityName });
+
+    const children = data.childrenData.filter(
+      obj => obj.community === props.match.params.id,
+    );
+    dispatchData({ type: 'SET_CHILDREN', payload: children });
+  }, []);
+
+  if (!data.hasData) {
+    return <Redirect to='/login' />;
+    // if (localStorage.getItem('usertype') === 'admin') {
+    //   return <Redirect to='/admin' />;
+    // } else {
+    //   return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
+    // }
+  }
 
   return (
-    <section className='child-data-wrapper'>
-      <h1>{data.community}</h1>
-      <RecordsWrapper>
-        <TR>
-          <th>Name</th>
-          <th>DOB</th>
-          <th>Gender</th>
-          <th>Parent</th>
-        </TR>
-        {data.children.map(el=> (
-          <Link>
-            <TR>
-              <td>{el.name}</td>
-              <td>{el.dob}</td>
+    <ChildDataWrapper>
+      <h1>
+        <Link to={`/country/${data.country.split(' ').join('-')}`}>
+          {data.country}
+        </Link>{' '}
+        - {data.community}
+      </h1>
+      <PatientsTable>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Parent</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.children.map(el => (
+            <tr key={el.id}>
+              <Link to={`/child/${el.id}`}>
+                <td>{el.name}</td>
+              </Link>
               <td>{el.gender}</td>
-              <td>{el.parentname}</td>
-            </TR>
-          </Link>
-        ))}
-      </RecordsWrapper>
-    </section>
+              <td>{el.parent_name}</td>
+              <td>{el.contact}</td>
+            </tr>
+          ))}
+        </tbody>
+      </PatientsTable>
+      <h3>Add New Patient:</h3>
+      <AddChildForm />
+    </ChildDataWrapper>
   );
 }
 
-const RecordsWrapper = styled.table`
-  width: 90%;
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column
-  box-shadow: 1px 2px 3px #000;
+const ChildDataWrapper = styled.section`
+  a {
+    text-decoration: none;
+    color: black;
+    :hover {
+      color: #0d71ba;
+    }
+  }
 `;
 
-const TR = styled.tr`
-display: flex;
-justify-content: space-between;
-text-align: left;
-padding: 10px;
-border: 1px solid grey;
+const PatientsTable = styled.table`
+  width: 95%;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 1px 2px 3px #000;
+  border-collapse: collapse;
+
+  tr:nth-child(even) {
+    background: #e6e6e6;
+  }
+
+  th {
+    background-color: #0d71ba;
+    color: white;
+    padding: 10px 0;
+  }
+
+  td {
+    padding: 10px 0;
+    width: 25%;
+  }
 `;

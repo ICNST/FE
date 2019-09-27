@@ -1,60 +1,112 @@
-import React from 'react';
-import styled from "styled-components";
+import React, { useState } from 'react';
+// import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { Redirect } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { Form, Button, Input, theme } from '../styled-components/index';
 
-const Component = styled.div`
-  background: #83c441;
-  color: red;
-`;
-const Form = styled.form`
-  height: 300px;
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  margin: 50px auto;
-  box-sizing: border-box;
-  box-shadow: 1px 2px 3px #000;
-`;
+import { testUsers, testAdminUsers } from '../testData2';
 
-const Button = styled.button`
-  display: inline-block;
-  color: palevioletred;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-  display: block;
-  :hover {
-    background: #83c441;
-    color: white;
+import { useUserContext } from '../contexts/UserContext';
+import { useDataContext } from '../contexts/DataContext';
+
+export default function Register(props) {
+  const { user, dispatch } = useUserContext();
+  const { dispatchData } = useDataContext();
+
+  const [registrationInfo, setRegistrationInfo] = useState({
+    username: '',
+    password: '',
+    country: '',
+  });
+
+  const handleChange = e => {
+    setRegistrationInfo({
+      ...registrationInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    const users = [...testUsers, ...testAdminUsers];
+    if (users.map(obj => obj.username).includes(registrationInfo.username)) {
+      dispatch({ type: 'REGISTRATION_FAILURE' });
+    } else {
+      localStorage.setItem('token', 'register' + registrationInfo.username);
+      localStorage.setItem('country', registrationInfo.country);
+      localStorage.setItem('usertype', 'user');
+      dispatch({
+        type: 'REGISTRATION_SUCCESS',
+        username: registrationInfo.username,
+        country: registrationInfo.country,
+      });
+      dispatchData({ type: 'SET_COUNTRY', payload: registrationInfo.country });
+      props.history.push(`/country/${registrationInfo.country}`);
+    }
+
+    // axiosWithAuth()
+    // .post('https://jsonplaceholder.typicode.com/users', registrationInfo)
+    // .then(res => {
+    //   console.log(res);
+    //   localStorage.setItem('token', 'register' + res.data.id);
+    //   localStorage.setItem('country', res.data.country);
+    //   localStorage.setItem('usertype', 'user');
+    //   dispatch({ type: 'REGISTRATION_SUCCESS', payload: res.data });
+    //   dispatchData({ type: 'SET_COUNTRY', payload: res.data.country });
+    //   props.history.push(`/country/${registrationInfo.country}`);
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // });
+  };
+
+  if (localStorage.getItem('token')) {
+    if (user.usertype === 'admin') {
+      return <Redirect to='/admin' />;
+    } else {
+      return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
+    }
   }
-`;
-const Input = styled.input`
-  padding: 0.5em;
-  margin: 0.5em;
-  color: ${props => props.inputColor || "palevioletred"};
-  background: papayawhip;
-  border: none;
-  border-radius: 3px;
-`;
 
-
-export default function Register() {
   return (
-    <Component>
-      <Form>
-        <label>Username</label>
-        <Input type="text" id="username" name="username" />
+    <ThemeProvider theme={theme}>
+      <Form onSubmit={handleSubmit}>
+        <h2>Register:</h2>
+        <label htmlFor='username'>Username</label>
+        <Input
+          type='text'
+          id='username'
+          name='username'
+          placeholder='Username'
+          value={registrationInfo.username}
+          onChange={handleChange}
+        />
 
-        <label>Password</label>
-        <Input type="text" id="password" name="password" />
+        <label htmlFor='password'>Password</label>
+        <Input
+          type='password'
+          id='password'
+          name='password'
+          placeholder='Password'
+          value={registrationInfo.password}
+          onChange={handleChange}
+        />
 
-        <label>Countery</label>
-        <Input type="text" id="conteryname" name="conteryrname" />
+        <label htmlFor='country'>Country</label>
+        <Input
+          type='text'
+          id='country'
+          name='country'
+          placeholder='Country'
+          value={registrationInfo.country}
+          onChange={handleChange}
+        />
 
-        <Button type="submit">Register</Button>
+        {user.error && <p>{user.error}</p>}
+
+        <Button type='submit'>Register</Button>
       </Form>
-    </Component>
+    </ThemeProvider>
   );
 }
