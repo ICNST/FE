@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
 import { useDataContext } from '../contexts/DataContext';
@@ -9,6 +10,7 @@ import Graph from './Graph';
 
 export default function Child(props) {
   const { data, dispatchData } = useDataContext();
+  const [dob, setDob] = useState();
   const [age, setAge] = useState();
   const [avatar, setAvatar] = useState('');
 
@@ -16,8 +18,34 @@ export default function Child(props) {
 
   useEffect(() => {
     const childId = Number(props.match.params.id);
-    const childData = data.children.find(el => el.id === childId);
-    dispatchData({ type: 'SET_CHILD', payload: childData });
+
+    axiosWithAuth()
+      .get(`/children/${childId}`)
+      .then(res => {
+        // console.log(res.data);
+        dispatchData({ type: 'SET_CHILD', payload: res.data });
+        axiosWithAuth()
+          .get(`/countries/${res.data.country_id}`)
+          .then(res => {
+            // console.log(res.data);
+            dispatchData({ type: 'SET_COUNTRY', payload: res.data });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        axiosWithAuth()
+          .get(`/communities/${res.data.community_id}`)
+          .then(res => {
+            // console.log(res.data);
+            dispatchData({ type: 'SET_COMMUNITY', payload: res.data });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
     const random = Math.floor(Math.random() * 5);
     setAvatar(avatars[random]);
@@ -25,31 +53,37 @@ export default function Child(props) {
 
   useEffect(() => {
     if (data.child) {
-      const dobString = new Date(data.child.dob);
+      const dobObj = new Date(data.child.DOB);
+
+      const day = dobObj.getDate();
+      const month = dobObj.getMonth();
+      const year = dobObj.getFullYear();
+
+      setDob(`${month}/${day}/${year}`);
+
       const age =
-        (Date.now() - dobString.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
+        (Date.now() - dobObj.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
       setAge(Math.floor(age));
     }
-  }, [data.child]);
 
-  if (!data.hasData) {
-    return <Redirect to='/login' />;
-    // if (localStorage.getItem('usertype') === 'admin') {
-    //   return <Redirect to='/admin' />;
-    // } else {
-    //   return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
-    // }
-  }
+    if (data.child.screenings) {
+      const screenings = data.child.screenings.map(obj => {
+        const date = new Date(obj.date);
+        const day = date.getDate();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        return { ...obj, date: `${month}/${day}/${year}` };
+      });
+      dispatchData({ type: 'SET_SCREENINGS', payload: screenings });
+    }
+  }, [data.child]);
 
   return (
     <PageWrapper>
       <h2>
-        <Link to={`/country/${data.country.split(' ').join('-')}`}>
-          {data.country}
-        </Link>{' '}
-        -{' '}
-        <Link to={`/community/${data.community.split(' ').join('-')}`}>
-          {data.community}
+        <Link to={`/country/${data.country.id}`}>{data.country.country}</Link> -{' '}
+        <Link to={`/community/${data.community.id}`}>
+          {data.community.community}
         </Link>{' '}
         - {data.child.name}
       </h2>
@@ -63,7 +97,7 @@ export default function Child(props) {
                 <strong>Age:</strong> {age}
               </p>
               <p>
-                <strong>Date of Birth:</strong> {data.child.dob}
+                <strong>Date of Birth:</strong> {dob}
               </p>
               <p>
                 <strong>Gender:</strong> {data.child.gender}
@@ -91,8 +125,8 @@ export default function Child(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.child.screenings &&
-                    data.child.screenings.map(el => (
+                  {data.screenings &&
+                    data.screenings.map(el => (
                       <tr key={el.date}>
                         <td>{el.date}</td>
                         <td>{el.weight}</td>
@@ -105,9 +139,7 @@ export default function Child(props) {
             </div>
 
             <div>
-              {data.child.screenings && (
-                <Graph screenings={data.child.screenings} />
-              )}
+              <Graph screenings={data.screenings} />
             </div>
           </DivTwo>
         </ChartsAndData>

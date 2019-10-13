@@ -19,17 +19,17 @@ export default function Login(props) {
     usertype: 'user',
   });
 
-  useEffect(() => {
-    dispatchData({ type: 'IMPORT_DATA', payload: testData });
-    dispatchData({ type: 'SET_CHILDREN', payload: testData });
-  }, []);
+  // useEffect(() => {
+  //   dispatchData({ type: 'IMPORT_DATA', payload: testData });
+  //   dispatchData({ type: 'SET_CHILDREN', payload: testData });
+  // }, []);
 
-  useEffect(() => {
-    const countryList = data.childrenData.map(obj => obj.country);
-    const uniqueCountries = new Set(countryList);
-    const countries = [...uniqueCountries];
-    dispatchData({ type: 'SET_COUNTRIES', payload: countries });
-  }, [data.childrenData]);
+  // useEffect(() => {
+  //   const countryList = data.childrenData.map(obj => obj.country);
+  //   const uniqueCountries = new Set(countryList);
+  //   const countries = [...uniqueCountries];
+  //   dispatchData({ type: 'SET_COUNTRIES', payload: countries });
+  // }, [data.childrenData]);
 
   const handleChange = e =>
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
