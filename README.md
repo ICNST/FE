@@ -64,8 +64,3 @@ Jonathan Ho
 
 **u:** cambodiauser  
 **p:** cambodiauser
-
-### Admin accounts:
-
-**u:** jonathan  
-**p:** jonathan
