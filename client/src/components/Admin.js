@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
@@ -23,32 +23,37 @@ export default function Admin() {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }, [data.countries]);
 
   const handleChange = e => setNewCountry(e.target.value);
 
   const handleClick = e => {
     e.preventDefault();
-    console.log(newCountry);
+    // console.log(newCountry);
     axiosWithAuth()
-      .post()
+      .post('/countries', { country: newCountry })
       .then(res => {
         console.log(res);
+        dispatchData({ type: 'ADD_COUNTRY', payload: res.data.added });
+        setNewCountry('');
       })
       .catch(err => {
         console.log(err);
       });
-    dispatchData({ type: 'ADD_COUNTRY', payload: newCountry });
-    setNewCountry('');
   };
 
   const handleDelete = id => {
-    dispatchData({ type: 'DELETE_COUNTRY', payload: id });
+    // console.log(id);
+    axiosWithAuth()
+      .delete(`/countries/${id}`)
+      .then(res => {
+        console.log(res);
+        dispatchData({ type: 'DELETE_COUNTRY', payload: id });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
-
-  // if (!data.hasData) {
-  //   return <Redirect to='/login' />;
-  // }
 
   return (
     <div>
@@ -60,7 +65,6 @@ export default function Admin() {
             {data.countries &&
               data.countries.map(el => (
                 <Country key={el.id}>
-                  {/* <Link to={`/country/${el.country.split(' ').join('-')}`}> */}
                   <Link to={`/country/${el.id}`}>
                     <h3>{el.country}</h3>
                   </Link>

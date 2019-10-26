@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
-// import { axiosWithAuth } from '../utils/axiosWithAuth';
+import React, { useState, useEffect } from 'react';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { Form, Button, Input, theme } from '../styled-components/index';
-
-import { testUsers, testAdminUsers } from '../testData2';
+import {
+  Form,
+  Button,
+  Input,
+  Select,
+  Error,
+  theme,
+} from '../styled-components/index';
 
 import { useUserContext } from '../contexts/UserContext';
-import { useDataContext } from '../contexts/DataContext';
 
 export default function Register(props) {
   const { user, dispatch } = useUserContext();
-  const { dispatchData } = useDataContext();
+
+  const [countries, setCountries] = useState([]);
 
   const [registrationInfo, setRegistrationInfo] = useState({
     username: '',
     password: '',
-    country: '',
+    role: 'user',
+    country_id: '',
   });
+
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get('/countries')
+      .then(res => {
+        // console.log(res.data);
+        setCountries(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   const handleChange = e => {
     setRegistrationInfo({
@@ -26,46 +46,40 @@ export default function Register(props) {
     });
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    const users = [...testUsers, ...testAdminUsers];
-    if (users.map(obj => obj.username).includes(registrationInfo.username)) {
-      dispatch({ type: 'REGISTRATION_FAILURE' });
-    } else {
-      localStorage.setItem('token', 'register' + registrationInfo.username);
-      localStorage.setItem('country', registrationInfo.country);
-      localStorage.setItem('usertype', 'user');
-      dispatch({
-        type: 'REGISTRATION_SUCCESS',
-        username: registrationInfo.username,
-        country: registrationInfo.country,
-      });
-      dispatchData({ type: 'SET_COUNTRY', payload: registrationInfo.country });
-      props.history.push(`/country/${registrationInfo.country}`);
-    }
-
-    // axiosWithAuth()
-    // .post('https://jsonplaceholder.typicode.com/users', registrationInfo)
-    // .then(res => {
-    //   console.log(res);
-    //   localStorage.setItem('token', 'register' + res.data.id);
-    //   localStorage.setItem('country', res.data.country);
-    //   localStorage.setItem('usertype', 'user');
-    //   dispatch({ type: 'REGISTRATION_SUCCESS', payload: res.data });
-    //   dispatchData({ type: 'SET_COUNTRY', payload: res.data.country });
-    //   props.history.push(`/country/${registrationInfo.country}`);
-    // })
-    // .catch(err => {
-    //   console.log(err);
-    // });
+  const handleSelect = e => {
+    setRegistrationInfo({ ...registrationInfo, country_id: e.target.value });
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    // console.log(registrationInfo);
+
+    axiosWithAuth()
+      .post('/auth/register', registrationInfo)
+      .then(res => {
+        // console.log(res);
+        localStorage.setItem('token', res.data.token);
+        dispatch({
+          type: 'LOGIN_SUCCESS',
+          role: res.data.user.role,
+          username: res.data.user.username,
+          country_id: res.data.user.country_id,
+          isAdmin: false,
+        });
+        props.history.push(`/country/${res.data.user.country_id}`);
+      })
+      .catch(err => {
+        console.log(err);
+        setError('Error registering!');
+      });
+  };
+
+  // Navigate to proper page given token and usertype
   if (localStorage.getItem('token')) {
     if (user.usertype === 'admin') {
       return <Redirect to='/admin' />;
     } else {
-      return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
+      return <Redirect to={`/country/${user.country_id}`} />;
     }
   }
 
@@ -94,16 +108,24 @@ export default function Register(props) {
         />
 
         <label htmlFor='country'>Country</label>
-        <Input
+        <Select onChange={handleSelect}>
+          <option>Select a country...</option>
+          {countries.map(country => (
+            <option key={country.id} name='country_id' value={country.id}>
+              {country.country}
+            </option>
+          ))}
+        </Select>
+        {/* <Input
           type='text'
           id='country'
           name='country'
           placeholder='Country'
           value={registrationInfo.country}
           onChange={handleChange}
-        />
+        /> */}
 
-        {user.error && <p>{user.error}</p>}
+        {error && <Error>{error}</Error>}
 
         <Button type='submit'>Register</Button>
       </Form>

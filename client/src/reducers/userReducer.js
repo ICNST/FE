@@ -1,10 +1,9 @@
 // This object initializes login data
 export const initialUserState = {
   username: '',
-  password: '',
-  usertype: 'user',
+  usertype: '',
+  country_id: null,
   country: '',
-  isAdmin: false,
   isLoading: false,
   error: '',
   isLoggedIn: false,
@@ -31,8 +30,9 @@ export const userReducer = (state = initialUserState, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
-        usertype: action.usertype,
+        usertype: action.role,
         username: action.username,
+        country_id: action.country_id,
       };
     case 'LOGIN_FAILURE':
       return {
@@ -44,12 +44,11 @@ export const userReducer = (state = initialUserState, action) => {
         password: '',
         usertype: 'user',
         country: '',
+        country_id: null,
         isAdmin: false,
       };
     case 'LOGIN_TRUE':
       return { ...state, isLoggedIn: true };
-    case 'LOGIN_ADMIN':
-      return { ...state, isAdmin: true };
     case 'REGISTRATION_SUCCESS':
       return {
         ...state,
@@ -57,7 +56,7 @@ export const userReducer = (state = initialUserState, action) => {
         isLoading: false,
         usertype: 'user',
         username: action.username,
-        country: action.country,
+        country_id: action.country_id,
       };
     case 'REGISTRATION_FAILURE':
       return {
@@ -67,9 +66,16 @@ export const userReducer = (state = initialUserState, action) => {
         isLoading: false,
         username: '',
         password: '',
-        usertype: 'user',
+        usertype: '',
         country: '',
-        isAdmin: false,
+        country_id: null,
+      };
+    case 'SET_TOKEN':
+      return {
+        ...state,
+        username: action.username,
+        usertype: action.role,
+        country_id: action.country_id,
       };
     case 'LOGOUT':
       return {

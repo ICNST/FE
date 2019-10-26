@@ -1,26 +1,37 @@
 import React, { useState, useEffect } from 'react';
-// import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { ThemeProvider } from 'styled-components';
-import { theme, Form, Button, Input } from '../styled-components';
-
-import { testUsers, testAdminUsers } from '../testData2';
+import {
+  theme,
+  Form,
+  Button,
+  Input,
+  Select,
+  Error,
+} from '../styled-components';
 
 import { useUserContext } from '../contexts/UserContext';
+import { useDataContext } from '../contexts/DataContext';
 
 export default function RegisterAdmin() {
-  const { user, dispatch } = useUserContext();
+  const { dispatch } = useUserContext();
+  const { data } = useDataContext();
+
   const [registrationInfo, setRegistrationInfo] = useState({
     username: '',
     password: '',
-    usertype: 'user',
-    country: '',
+    role: 'user',
+    country_id: null,
   });
 
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+
   useEffect(() => {
-    if (registrationInfo.usertype === 'admin') {
-      setRegistrationInfo({ ...registrationInfo, country: '' });
+    if (registrationInfo.role === 'admin') {
+      setRegistrationInfo({ ...registrationInfo, country_id: null });
     }
-  }, [registrationInfo.usertype]);
+  }, [registrationInfo.role]);
 
   const handleChange = e =>
     setRegistrationInfo({
@@ -28,21 +39,24 @@ export default function RegisterAdmin() {
       [e.target.name]: e.target.value,
     });
 
+  const handleSelect = e => {
+    setRegistrationInfo({ ...registrationInfo, country_id: e.target.value });
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    const users = [...testUsers, ...testAdminUsers];
-    if (users.map(obj => obj.username).includes(registrationInfo.username)) {
-      dispatch({ type: 'REGISTRATION_FAILURE' });
-    }
     console.log(registrationInfo);
-    // axiosWithAuth()
-    //   .post()
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+
+    axiosWithAuth()
+      .post('/auth/register', registrationInfo)
+      .then(res => {
+        // console.log(res);
+        setMessage('User registered!');
+      })
+      .catch(err => {
+        console.log(err);
+        setError('Error registering!');
+      });
   };
 
   return (
@@ -56,9 +70,9 @@ export default function RegisterAdmin() {
               <input
                 type='radio'
                 id='user'
-                name='usertype'
+                name='role'
                 value='user'
-                checked={registrationInfo.usertype === 'user'}
+                checked={registrationInfo.role === 'user'}
                 onChange={handleChange}
               />
             </div>
@@ -67,9 +81,9 @@ export default function RegisterAdmin() {
               <input
                 type='radio'
                 id='admin'
-                name='usertype'
+                name='role'
                 value='admin'
-                checked={registrationInfo.usertype === 'admin'}
+                checked={registrationInfo.role === 'admin'}
                 onChange={handleChange}
               />
             </div>
@@ -95,21 +109,30 @@ export default function RegisterAdmin() {
             onChange={handleChange}
           />
 
-          {registrationInfo.usertype === 'user' && (
+          {registrationInfo.role === 'user' && (
             <>
               <label htmlFor='country'>Country</label>
-              <Input
+              <Select onChange={handleSelect}>
+                <option>Select a country...</option>
+                {data.countries.map(country => (
+                  <option key={country.id} name='country_id' value={country.id}>
+                    {country.country}
+                  </option>
+                ))}
+              </Select>
+              {/* <Input
                 type='text'
                 id='country'
                 name='country'
                 placeholder='Country'
                 value={registrationInfo.country}
                 onChange={handleChange}
-              />
+              /> */}
             </>
           )}
 
-          {user.error && <p>{user.error}</p>}
+          {message && <p>{message}</p>}
+          {error && <Error>{error}</Error>}
 
           <Button type='submit'>Register</Button>
         </Form>

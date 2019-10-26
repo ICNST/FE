@@ -59,6 +59,25 @@ export const Input = styled.input`
   font-size: 15px;
 `;
 
+export const Select = styled.select`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: black;
+  background: papayawhip;
+  border: none;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 15px;
+`;
+
+export const Error = styled.p`
+  color: red;
+  background-color: pink;
+  padding: 0.2em;
+  margin: 0.5em;
+  text-transform: uppercase;
+`;
+
 export const Countries = styled.div`
   width: 90%;
   max-width: 800px;

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { decode } from '../utils/decode';
 
 import { useUserContext } from '../contexts/UserContext';
 
@@ -9,9 +10,13 @@ function Nav(props) {
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
+      const { username, role, country_id } = decode(
+        localStorage.getItem('token'),
+      );
       dispatch({ type: 'LOGIN_TRUE' });
+      dispatch({ type: 'SET_TOKEN', username, role, country_id });
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <NavBarColor>
@@ -27,16 +32,11 @@ function Nav(props) {
         {props.location.pathname === '/login' && (
           <NavLink to='/register'>Register</NavLink>
         )}
-        {localStorage.getItem('usertype') === 'admin' && (
-          <NavLink to='/admin'>Admin</NavLink>
-        )}
+        {user.usertype === 'admin' && <NavLink to='/admin'>Admin</NavLink>}
         {user.isLoggedIn && (
           <SignOutBtn
             onClick={() => {
               localStorage.removeItem('token');
-              localStorage.removeItem('usertype');
-              localStorage.removeItem('country');
-              // dispatchData({ type: 'RESET_DATA' });
               dispatch({ type: 'LOGOUT' });
               props.history.push('/login');
             }}>

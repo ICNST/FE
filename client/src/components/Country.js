@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
 import { useDataContext } from '../contexts/DataContext';
+import { useUserContext } from '../contexts/UserContext';
 
 export default function Country(props) {
   const { data, dispatchData } = useDataContext();
+  const { user } = useUserContext();
   const [newCommunity, setNewCommunity] = useState('');
 
-  useEffect(() => {
-    const countryId = props.match.params.id;
+  const countryId = props.match.params.id;
 
+  useEffect(() => {
     axiosWithAuth()
       .get(`/countries/${countryId}`)
       .then(res => {
@@ -28,30 +30,36 @@ export default function Country(props) {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }, [data.communities]);
 
   const handleChange = e => setNewCommunity(e.target.value);
 
   const handleClick = e => {
     e.preventDefault();
     console.log(newCommunity);
-    // axiosWithAuth()
-    //   .post()
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    dispatchData({
-      type: 'ADD_COMMUNITY',
-      payload: newCommunity,
-    });
-    setNewCommunity('');
+    axiosWithAuth()
+      .post(`/countries/${countryId}/communities`, { community: newCommunity })
+      .then(res => {
+        console.log(res);
+        dispatchData({ type: 'ADD_COMMUNITY', payload: res.data.added });
+        setNewCommunity('');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
-  const handleDelete = id => {
-    dispatchData({ type: 'DELETE_COMMUNITY', payload: id });
+  const handleDelete = country => {
+    console.log(country.id);
+    axiosWithAuth()
+      .delete(`/communities/${country.id}`)
+      .then(res => {
+        console.log(res);
+        dispatchData({ type: 'DELETE_COMMUNITY', payload: country.id });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
@@ -64,7 +72,7 @@ export default function Country(props) {
               <Link to={`/community/${el.id}`}>
                 <h3>{el.community}</h3>
               </Link>
-              {localStorage.getItem('usertype') === 'admin' && (
+              {user.usertype === 'admin' && (
                 <button onClick={() => handleDelete(el)}>
                   <span role='img' aria-label='delete community'>
                     ✖️

@@ -127,8 +127,8 @@ exports.seed = function(knex) {
         },
         {
           id: 13,
-          name: 'Mrs. Salvatori',
-          parent_name: 'Ms. Moreno',
+          name: 'Lea',
+          parent_name: 'Ms. Salvatori',
           contact: 'salvatori@email.com',
           gender: 'F',
           location: 'Krassang',

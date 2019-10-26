@@ -16,17 +16,12 @@ export default function Community(props) {
     axiosWithAuth()
       .get(`/communities/${communityId}`)
       .then(res => {
-        // console.log(res);
+        console.log(res);
         dispatchData({ type: 'SET_COMMUNITY', payload: res.data });
-        axiosWithAuth()
-          .get(`/countries/${res.data.country_id}`)
-          .then(res => {
-            // console.log(res);
-            dispatchData({ type: 'SET_COUNTRY', payload: res.data });
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        dispatchData({
+          type: 'SET_COUNTRY',
+          payload: { country: res.data.country, id: res.data.country_id },
+        });
       })
       .catch(err => {
         console.log(err);
