@@ -27,6 +27,21 @@ Jonathan Ho
 - Styled-Components
 - Recharts
 
+## Back End Tech Stack
+
+- NodeJS
+- Express
+- bcryptjs
+- cors
+- dotenv
+- helmet
+- jsonwebtoken
+- knex
+- knex-cleaner
+- pg
+- sqlite3
+- nodemon
+
 **State Management System:** Context API + React Hooks
 
 ## Deployment
