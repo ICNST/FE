@@ -48,7 +48,7 @@ Jonathan Ho
 
 **Marketing Site:** https://youthful-wiles-abdce8.netlify.com/index.html
 
-**React App:** https://icnst-development.netlify.com/login
+**React App:** https://icnst.netlify.com/
 
 **Back End API:** https://bw3-icnst-backend.herokuapp.com/
 
