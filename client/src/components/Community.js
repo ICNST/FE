@@ -16,7 +16,7 @@ export default function Community(props) {
     axiosWithAuth()
       .get(`/communities/${communityId}`)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         dispatchData({ type: 'SET_COMMUNITY', payload: res.data });
         dispatchData({
           type: 'SET_COUNTRY',

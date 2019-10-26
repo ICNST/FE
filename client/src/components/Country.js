@@ -36,11 +36,11 @@ export default function Country(props) {
 
   const handleClick = e => {
     e.preventDefault();
-    console.log(newCommunity);
+    // console.log(newCommunity);
     axiosWithAuth()
       .post(`/countries/${countryId}/communities`, { community: newCommunity })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         dispatchData({ type: 'ADD_COMMUNITY', payload: res.data.added });
         setNewCommunity('');
       })

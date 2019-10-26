@@ -33,7 +33,7 @@ export default function Admin() {
     axiosWithAuth()
       .post('/countries', { country: newCountry })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         dispatchData({ type: 'ADD_COUNTRY', payload: res.data.added });
         setNewCountry('');
       })

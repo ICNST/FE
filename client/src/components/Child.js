@@ -62,13 +62,15 @@ export default function Child(props) {
     }
 
     if (data.child.screenings) {
+      console.log(data.child.screenings);
       const screenings = data.child.screenings.map(obj => {
         const date = new Date(obj.date);
-        const day = date.getDate();
-        const month = date.getMonth();
+        const day = date.getDate() + 1;
+        const month = date.getMonth() + 1;
         const year = date.getFullYear();
         return { ...obj, date: `${month}/${day}/${year}` };
       });
+      console.log(screenings);
       dispatchData({ type: 'SET_SCREENINGS', payload: screenings });
     }
   }, [data.child]);
@@ -122,7 +124,7 @@ export default function Child(props) {
                 <tbody>
                   {data.screenings &&
                     data.screenings.map(el => (
-                      <tr key={el.date}>
+                      <tr key={el.id}>
                         <td>{el.date}</td>
                         <td>{el.weight}</td>
                         <td>{el.height}</td>
