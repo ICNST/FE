@@ -1,7 +1,6 @@
 # ICNST App Project
 
 ## Project Name
-
 International Child Nutrition Status Tracking
 
 ## Pitch
@@ -21,7 +20,6 @@ There are a lot of child malnutrition nonprofits around the globe. It’s diffic
 Jonathan Ho
 
 ## Front End Tech Stack
-
 - ReactJS
 - React Router
 - Styled-Components
@@ -55,7 +53,6 @@ Jonathan Ho
 ## App Login Credentials
 
 ### Country-specific accounts:
-
 **u:** braziluser  
 **p:** braziluser
 
