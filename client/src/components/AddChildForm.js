@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-// import { axiosWithAuth } from '../utils/axiosWithAuth';
+import React, { useState } from 'react';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 import { useDataContext } from '../contexts/DataContext';
 
@@ -8,19 +8,12 @@ export default function AddChildForm() {
 
   const [newChild, setNewChild] = useState({
     name: '',
-    dob: '',
+    DOB: '',
     parent_name: '',
     contact: '',
     gender: '',
-    community: data.community,
-    country: data.country,
-    id: Date.now(),
-    screenings: [],
+    country_id: data.country.id,
   });
-
-  useEffect(() => setNewChild({ ...newChild, community: data.community }), [
-    data.community,
-  ]);
 
   const handleChange = e =>
     setNewChild({
@@ -31,22 +24,26 @@ export default function AddChildForm() {
   const handleSubmit = e => {
     e.preventDefault();
     // console.log(newChild);
-    // axiosWithAuth()
-    //   .post()
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    // dispatchData({
-    //   type: 'UPDATE_COMMUNITY',
-    //   payload: newChild,
-    // });
-    dispatchData({
-      type: 'ADD_CHILD',
-      payload: newChild,
-    });
+    axiosWithAuth()
+      .post(`/communities/${data.community.id}/children`, newChild)
+      .then(res => {
+        // console.log(res);
+        dispatchData({
+          type: 'ADD_CHILD',
+          payload: res.data.added,
+        });
+        setNewChild({
+          name: '',
+          DOB: '',
+          parent_name: '',
+          contact: '',
+          gender: '',
+          country_id: data.country.id,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
@@ -55,11 +52,16 @@ export default function AddChildForm() {
         type='text'
         id='name'
         name='name'
+        value={newChild.name}
         placeholder='Name'
         onChange={handleChange}
       />
 
-      <select id='gender' name='gender' onChange={handleChange}>
+      <select
+        id='gender'
+        name='gender'
+        onChange={handleChange}
+        value={newChild.gender}>
         <option>Gender</option>
         <option value='M'>Male</option>
         <option value='F'>Female</option>
@@ -67,8 +69,9 @@ export default function AddChildForm() {
 
       <input
         type='text'
-        id='dob'
-        name='dob'
+        id='DOB'
+        name='DOB'
+        value={newChild.DOB}
         placeholder='DOB'
         onChange={handleChange}
       />
@@ -77,6 +80,7 @@ export default function AddChildForm() {
         type='text'
         id='parent_name'
         name='parent_name'
+        value={newChild.parent_name}
         placeholder='Parent Name'
         onChange={handleChange}
       />
@@ -85,6 +89,7 @@ export default function AddChildForm() {
         type='text'
         id='contact'
         name='contact'
+        value={newChild.contact}
         placeholder='Contact'
         onChange={handleChange}
       />

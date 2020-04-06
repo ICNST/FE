@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { Input } from '../styled-components';
@@ -14,7 +14,7 @@ function AddRecord(props) {
     height: '',
   });
 
-  // console.log(props);
+  const childId = props.match.params.id;
 
   const handleChange = e =>
     setNewRecord({
@@ -25,19 +25,25 @@ function AddRecord(props) {
   const handleClick = e => {
     e.preventDefault();
     console.log(newRecord);
-    // axiosWithAuth()
-    //   .post()
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    dispatchData({
-      type: 'ADD_RECORD',
-      payload: newRecord,
-      id: props.match.params.id,
-    });
+    console.log(childId);
+    axiosWithAuth()
+      .post(`/children/${childId}/screenings`, newRecord)
+      .then(res => {
+        console.log(res);
+        dispatchData({
+          type: 'ADD_RECORD',
+          payload: newRecord,
+          id: props.match.params.id,
+        });
+        setNewRecord({
+          date: '',
+          weight: '',
+          height: '',
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (

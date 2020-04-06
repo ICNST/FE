@@ -4,37 +4,51 @@
 International Child Nutrition Status Tracking
 
 ## Pitch
+
 There are a lot of child malnutrition nonprofits around the globe. It’s difficult to keep track of all the data for thousands of kids who are screened. This app allows their data to be entered, saved, and tracked over time. It keeps records organized by both country name and community name.
 
 ## Team
+
 **Web UI Developer:** Zac Higgins
 
-**Frontend Developers:**  
-- Sandy Kimball  
-- Zeleke Dema  
+**Frontend Developers:**
 
-**Frontend Framework Developer:**
+- Sandy Kimball
+- Zeleke Dema
+
+**Node Backend Developer and Frontend Framework Developer:**
 Jonathan Ho
 
-**Backend Developers (Node):**  
-- Anna Townsend  
-- Zachary Overhulser (Project Lead)
-
-## Tech Stack
+## Front End Tech Stack
 - ReactJS
 - React Router
 - Styled-Components
 - Recharts
 
+## Back End Tech Stack
+
+- NodeJS
+- Express
+- bcryptjs
+- cors
+- dotenv
+- helmet
+- jsonwebtoken
+- knex
+- knex-cleaner
+- pg
+- sqlite3
+- nodemon
+
 **State Management System:** Context API + React Hooks
 
-## Project Status
-The app is currently awaiting data from the backend. A prototype can be accessed in the development deployment linked below. As the prototype does not yet have access to a server, it is using dummy data; any changes and additions made in the app will not be saved upon a page refresh or logout.
-
 ## Deployment
+
 **Marketing Site:** https://youthful-wiles-abdce8.netlify.com/index.html
 
-**React App:** https://icnst-development.netlify.com/login
+**React App:** https://icnst.netlify.com/
+
+**Back End API:** https://bw3-icnst-backend.herokuapp.com/
 
 ## App Login Credentials
 
@@ -47,7 +61,3 @@ The app is currently awaiting data from the backend. A prototype can be accessed
 
 **u:** cambodiauser  
 **p:** cambodiauser
-
-### Admin accounts:
-**u:** jonathan  
-**p:** jonathan
