@@ -1,64 +1,78 @@
-import React, { useEffect, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
 import { useDataContext } from '../contexts/DataContext';
+import { useUserContext } from '../contexts/UserContext';
 
 export default function Country(props) {
   const { data, dispatchData } = useDataContext();
+  const { user } = useUserContext();
   const [newCommunity, setNewCommunity] = useState('');
 
-  useEffect(() => {
-    const countryName = props.match.params.id;
-    dispatchData({ type: 'SET_COUNTRY', payload: countryName });
+  const countryId = props.match.params.id;
 
-    const communityList = data.childrenData
-      .filter(obj => obj.country === props.match.params.id)
-      .map(obj => obj.community);
-    const uniqueCommunities = new Set(communityList);
-    const communities = [...uniqueCommunities];
-    dispatchData({ type: 'SET_COMMUNITIES', payload: communities });
-  }, []);
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/countries/${countryId}`)
+      .then(res => {
+        // console.log(res.data);
+        dispatchData({ type: 'SET_COUNTRY', payload: res.data });
+      });
+
+    axiosWithAuth()
+      .get(`/countries/${countryId}/communities`)
+      .then(res => {
+        // console.log(res.data);
+        dispatchData({ type: 'SET_COMMUNITIES', payload: res.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [data.communities]);
 
   const handleChange = e => setNewCommunity(e.target.value);
 
   const handleClick = e => {
     e.preventDefault();
-    console.log(newCommunity);
-    // axiosWithAuth()
-    //   .post()
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    dispatchData({
-      type: 'ADD_COMMUNITY',
-      payload: newCommunity,
-    });
-    setNewCommunity('');
+    // console.log(newCommunity);
+    axiosWithAuth()
+      .post(`/countries/${countryId}/communities`, { community: newCommunity })
+      .then(res => {
+        // console.log(res);
+        dispatchData({ type: 'ADD_COMMUNITY', payload: res.data.added });
+        setNewCommunity('');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
-  const handleDelete = id => {
-    dispatchData({ type: 'DELETE_COMMUNITY', payload: id });
+  const handleDelete = country => {
+    console.log(country.id);
+    axiosWithAuth()
+      .delete(`/communities/${country.id}`)
+      .then(res => {
+        console.log(res);
+        dispatchData({ type: 'DELETE_COMMUNITY', payload: country.id });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
-
-  if (!data.hasData) {
-    return <Redirect to='/login' />;
-  }
 
   return (
     <section className='country-communities'>
-      <h1>{props.match.params.id}</h1>
+      <h1>{data.country.country}</h1>
       <CommunitiesWrapper>
         {data.communities &&
           data.communities.map(el => (
-            <CommunityDiv key={el}>
-              <Link to={`/community/${el.split(' ').join('-')}`}>
-                <h3>{el}</h3>
+            <CommunityDiv key={el.id}>
+              <Link to={`/community/${el.id}`}>
+                <h3>{el.community}</h3>
               </Link>
-              {localStorage.getItem('usertype') === 'admin' && (
+              {user.usertype === 'admin' && (
                 <button onClick={() => handleDelete(el)}>
                   <span role='img' aria-label='delete community'>
                     ✖️

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
 // Context
@@ -13,32 +14,46 @@ export default function Admin() {
   const [newCountry, setNewCountry] = useState('');
 
   useEffect(() => {
-    const countryList = data.childrenData.map(obj => obj.country);
-    const uniqueCountries = new Set(countryList);
-    const countries = [...uniqueCountries];
-    dispatchData({ type: 'SET_COUNTRIES', payload: countries });
-  }, []);
+    axiosWithAuth()
+      .get('/countries')
+      .then(res => {
+        // console.log(res.data);
+        dispatchData({ type: 'SET_COUNTRIES', payload: res.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [data.countries]);
 
   const handleChange = e => setNewCountry(e.target.value);
 
   const handleClick = e => {
     e.preventDefault();
     // console.log(newCountry);
-    // axiosWithAuth()
-    //   .post()
-    //   .then(res => {console.log(res)})
-    //   .catch(err => {console.log(err)});
-    dispatchData({ type: 'ADD_COUNTRY', payload: newCountry });
-    setNewCountry('');
+    axiosWithAuth()
+      .post('/countries', { country: newCountry })
+      .then(res => {
+        // console.log(res);
+        dispatchData({ type: 'ADD_COUNTRY', payload: res.data.added });
+        setNewCountry('');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   const handleDelete = id => {
-    dispatchData({ type: 'DELETE_COUNTRY', payload: id });
+    // console.log(id);
+    axiosWithAuth()
+      .delete(`/countries/${id}`)
+      .then(res => {
+        console.log(res);
+        dispatchData({ type: 'DELETE_COUNTRY', payload: id });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
-
-  if (!data.hasData) {
-    return <Redirect to='/login' />;
-  }
 
   return (
     <div>
@@ -49,11 +64,11 @@ export default function Admin() {
           <Countries>
             {data.countries &&
               data.countries.map(el => (
-                <Country key={el}>
-                  <Link to={`/country/${el.split(' ').join('-')}`}>
-                    <h3>{el}</h3>
+                <Country key={el.id}>
+                  <Link to={`/country/${el.id}`}>
+                    <h3>{el.country}</h3>
                   </Link>
-                  <button onClick={() => handleDelete(el)}>
+                  <button onClick={() => handleDelete(el.id)}>
                     <span role='img' aria-label='delete country'>
                       ✖️
                     </span>

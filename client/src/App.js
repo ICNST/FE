@@ -30,7 +30,9 @@ function App() {
           <Logo src={require('./image/ICN_Secondary_Alt.png')} />
           <LogoSmall src={require('./image/ICN_Primary.png')} />
           <Nav />
-          <Route exact path='/' render={() => <Redirect to='/login' />} />
+          <Route exact path='/'>
+            <Redirect to='/login' />
+          </Route>
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <PrivateRoute path='/admin' component={Admin} />

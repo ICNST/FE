@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
+
 import { useDataContext } from '../contexts/DataContext';
 
 import AddChildForm from './AddChildForm';
@@ -9,31 +11,38 @@ export default function Community(props) {
   const { data, dispatchData } = useDataContext();
 
   useEffect(() => {
-    const communityName = props.match.params.id.split('-').join(' ');
-    dispatchData({ type: 'SET_COMMUNITY', payload: communityName });
+    const communityId = props.match.params.id;
 
-    const children = data.childrenData.filter(
-      obj => obj.community === props.match.params.id,
-    );
-    dispatchData({ type: 'SET_CHILDREN', payload: children });
+    axiosWithAuth()
+      .get(`/communities/${communityId}`)
+      .then(res => {
+        // console.log(res);
+        dispatchData({ type: 'SET_COMMUNITY', payload: res.data });
+        dispatchData({
+          type: 'SET_COUNTRY',
+          payload: { country: res.data.country, id: res.data.country_id },
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    axiosWithAuth()
+      .get(`/communities/${communityId}/children`)
+      .then(res => {
+        // console.log(res.data);
+        dispatchData({ type: 'SET_CHILDREN', payload: res.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
-
-  if (!data.hasData) {
-    return <Redirect to='/login' />;
-    // if (localStorage.getItem('usertype') === 'admin') {
-    //   return <Redirect to='/admin' />;
-    // } else {
-    //   return <Redirect to={`/country/${localStorage.getItem('country')}`} />;
-    // }
-  }
 
   return (
     <ChildDataWrapper>
       <h1>
-        <Link to={`/country/${data.country.split(' ').join('-')}`}>
-          {data.country}
-        </Link>{' '}
-        - {data.community}
+        <Link to={`/country/${data.country.id}`}>{data.country.country}</Link> -{' '}
+        {data.community.community}
       </h1>
       <PatientsTable>
         <thead>
